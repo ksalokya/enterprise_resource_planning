@@ -1,19 +1,72 @@
-.bar-chart{
+.bar-chart {
     display: flex;
     justify-content: space-between;
     flex: 2;
+    flex-direction: column;
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
-    height: 58vh;
+    height: 65vh;
 }
 
-.pie-chart{
+.pie-chart {
     display: flex;
     justify-content: space-between;
     flex: 1;
+    flex-direction: column;
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
-    height: 58vh;
+    height: 65vh;
+}
+
+.chart-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: gray;
+}
+
+.chart-title {
+    font-size: 22px;
+    padding: 0 12px;
+    font-weight: bold;
+}
+
+.chart-bottom {
+    text-align: center;
+    color: grey;
+}
+
+.summary {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.item {
+    text-align: center;
+}
+
+.itemTitle {
+    font-size: 18px;
+    color: gray;
+    padding: 0 20px;
+}
+
+.itemResult {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    font-size: 14px;
+    padding: 0 25px;
+}
+
+.positive {
+    color: green !important;
+}
+
+.negative {
+    color: red !important;
 }

@@ -1,4 +1,7 @@
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "./chart.css"
 
 const data = [
@@ -27,9 +30,13 @@ function CustomPieChart() {
 
   return (
     <div className="pie-chart">
+      <div className="chart-top">
+        <p className="chart-title">Total Revenue</p>
+        <MoreVertIcon />
+      </div>
       <ResponsiveContainer width="100%" height="100%">
         <div>
-          <PieChart width={400} height={400}>
+          <PieChart width={420} height={400}>
             <Pie
               data={data}
               cx="50%"
@@ -45,6 +52,29 @@ function CustomPieChart() {
               ))}
             </Pie>
           </PieChart>
+          <div className="summary">
+            <div className="item">
+              <div className="itemTitle">Last Week</div>
+              <div className="itemResult positive">
+                <KeyboardArrowUpOutlinedIcon fontSize="small" />
+                <div className="resultAmount">$12.4k</div>
+              </div>
+            </div>
+            <div className="item">
+              <div className="itemTitle">Target</div>
+              <div className="itemResult negative">
+                <KeyboardArrowDownIcon fontSize="small" />
+                <div className="resultAmount">$12.4k</div>
+              </div>
+            </div>
+            <div className="item">
+              <div className="itemTitle">Last Month</div>
+              <div className="itemResult positive">
+                <KeyboardArrowUpOutlinedIcon fontSize="small" />
+                <div className="resultAmount">$12.4k</div>
+              </div>
+            </div>
+          </div>
         </div>
       </ResponsiveContainer>
     </div>

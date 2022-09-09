@@ -16,19 +16,21 @@ import './sidebar.css'
 function Sidebar() {
   return (
     <div className='sidebar'>
-        <div className="top">
-            <span className="logo">
-                DashBoard
-            </span>
-        </div>
-        <hr />
-        <div className="center">
+      <div className="top">
+        <span className="logo">
+          DashBoard
+        </span>
+      </div>
+      <hr />
+      <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <li>
-            <DashboardIcon className="icon" />
-            <span>Dashboard</span>
-          </li>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <li>
+              <DashboardIcon className="icon" />
+              <span>Dashboard</span>
+            </li>
+          </Link>
           <p className="title">LISTS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>

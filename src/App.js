@@ -22,6 +22,9 @@ function App() {
           <Routes>
             <Route path="/">
               <Route index element={<Home handle={handle} />} />
+              <Route path="users">
+                <Route index element={<List handle={handle}/>} />
+              </Route>
             </Route>
           </Routes>
         </BrowserRouter>

@@ -1,0 +1,8 @@
+.list {
+    display: flex;
+}
+
+.list-container {
+    background-color: white;
+    flex: 6;
+}

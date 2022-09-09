@@ -1,5 +1,5 @@
-import CustomBarChart from '../../components/chart/CustomBarChart'
-import CustomPieChart from '../../components/chart/CustomPieChart'
+import BarChart from '../../components/chart/BarChart'
+import PieChart from '../../components/chart/PieChart'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Widget from '../../components/widgets/Widget'
@@ -18,8 +18,8 @@ function Home(props) {
           <Widget type="balance" />
         </div>
         <div className="chart">
-          <CustomBarChart />
-          <CustomPieChart />
+          <BarChart />
+          <PieChart />
         </div>
       </div>
     </div>

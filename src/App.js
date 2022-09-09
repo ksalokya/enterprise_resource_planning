@@ -2,10 +2,8 @@ import React, { useCallback } from 'react';
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
-import List from "./pages/list/List";
-import Single from "./pages/single/Single";
-import New from "./pages/new/New";
+import Users from "./pages/users/Users";
+import Products from './pages/orders/Orders'
 
 import {
   BrowserRouter,
@@ -23,7 +21,10 @@ function App() {
             <Route path="/">
               <Route index element={<Home handle={handle} />} />
               <Route path="users">
-                <Route index element={<List handle={handle}/>} />
+                <Route index element={<Users handle={handle}/>} />
+              </Route>
+              <Route path="orders">
+                <Route index element={<Products handle={handle}/>} />
               </Route>
             </Route>
           </Routes>

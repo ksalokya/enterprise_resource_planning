@@ -38,16 +38,18 @@ function Sidebar() {
               <span>Users</span>
             </li>
           </Link>
-          <Link to="/products" style={{ textDecoration: "none" }}>
+          {/* <Link to="/products" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
               <span>Products</span>
             </li>
+          </Link> */}
+          <Link to="/orders" style={{ textDecoration: "none" }}>
+            <li>
+              <CreditCardIcon className="icon" />
+              <span>Orders</span>
+            </li>
           </Link>
-          <li>
-            <CreditCardIcon className="icon" />
-            <span>Orders</span>
-          </li>
           <li>
             <LocalShippingIcon className="icon" />
             <span>Delivery</span>

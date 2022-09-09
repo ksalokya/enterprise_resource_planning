@@ -1,5 +1,5 @@
 .navbar {
-    height: 65px;
+    height: 9%;
     border-bottom: 0.5px solid rgb(231, 228, 228);
     display: flex;
     align-items: center;
@@ -25,6 +25,7 @@
 .navbar .wrapper .items {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .navbar .wrapper .items .item {

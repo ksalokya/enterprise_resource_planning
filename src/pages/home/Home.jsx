@@ -3,12 +3,12 @@ import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import "./home.css"
 
-function Home() {
+function Home(props) {
   return (
     <div className="home">
       <Sidebar />
       <div className="home-container">
-        <Navbar />
+        <Navbar handle={props.handle} />
       </div>
     </div>
   )

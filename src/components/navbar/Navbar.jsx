@@ -1,4 +1,4 @@
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import React from "react";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
@@ -9,8 +9,8 @@ import TextField from '@mui/material/TextField';
 import "./navbar.css"
 
 
+function Navbar(props) {
 
-function Navbar() {
     return (
         <div className="navbar">
             <div className="wrapper">
@@ -29,7 +29,7 @@ function Navbar() {
                         />
                     </div>
                     <div className="item">
-                        <FullscreenExitOutlinedIcon className="icon" />
+                        <FullscreenExitOutlinedIcon onClick={props.handle.enter} className="icon" />
                     </div>
                     <div className="item">
                         <NotificationsNoneOutlinedIcon className="icon" />

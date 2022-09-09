@@ -1,14 +1,20 @@
-.home{
+.home {
     display: flex;
 }
 
-.home-container{
+.home-container {
     background-color: white;
     flex: 6;
 }
 
-.widgets{
+.widgets {
     display: flex;
     padding: 20px;
+    gap: 20px;
+}
+
+.chart {
+    display: flex;
+    padding: 10px 20px 0 20px;
     gap: 20px;
 }

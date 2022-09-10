@@ -1,0 +1,12 @@
+.kanban {
+    display: flex;
+}
+
+.kanban-container {
+    background-color: white;
+    flex: 6;
+}
+
+.kanban-container-board{
+    padding: 20px 20px 0 20px;
+}

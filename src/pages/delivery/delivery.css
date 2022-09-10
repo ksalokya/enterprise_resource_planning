@@ -1,0 +1,8 @@
+.delivery {
+    display: flex;
+}
+
+.delivery-container {
+    background-color: white;
+    flex: 6;
+}

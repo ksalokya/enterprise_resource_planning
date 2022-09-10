@@ -11,6 +11,10 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+
+import ContentPasteIcon from '@mui/icons-material/ContentPaste';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+
 import './sidebar.css'
 
 function Sidebar() {
@@ -50,19 +54,25 @@ function Sidebar() {
               <span>Orders</span>
             </li>
           </Link>
-          <li>
-            <LocalShippingIcon className="icon" />
-            <span>Delivery</span>
-          </li>
-          <p className="title">USEFUL</p>
-          <li>
-            <InsertChartIcon className="icon" />
-            <span>Stats</span>
-          </li>
-          <li>
-            <NotificationsNoneIcon className="icon" />
-            <span>Notifications</span>
-          </li>
+          <Link to="/delivery" style={{ textDecoration: "none" }}>
+            <li>
+              <LocalShippingIcon className="icon" />
+              <span>Delivery</span>
+            </li>
+          </Link>
+          <p className="title">APPLICATIONS</p>
+          <Link to="/kanban" style={{ textDecoration: "none" }}>
+            <li>
+              <ContentPasteIcon className="icon" />
+              <span>Kanban</span>
+            </li>
+          </Link>
+          <Link to="/calendar" style={{ textDecoration: "none" }}>
+            <li>
+              <CalendarMonthIcon className="icon" />
+              <span>Calendar</span>
+            </li>
+          </Link>
           <p className="title">SERVICE</p>
           <li>
             <SettingsSystemDaydreamOutlinedIcon className="icon" />

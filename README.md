@@ -10,3 +10,9 @@
 
 ### Order
 <img src="https://github.com/ksalokya/enterprise_resource_planning/blob/main/misc/03-orders.jpg"/>
+
+### Kanban
+<img src="https://github.com/ksalokya/enterprise_resource_planning/blob/main/misc/05-kanban.jpg"/>
+
+### Calendar
+<img src="https://github.com/ksalokya/enterprise_resource_planning/blob/main/misc/06-calendar.jpg"/>

@@ -16,3 +16,9 @@
 
 ### Calendar
 <img src="https://github.com/ksalokya/enterprise_resource_planning/blob/main/misc/06-calendar.jpg"/>
+
+### Spreedsheet
+<img src="https://github.com/ksalokya/enterprise_resource_planning/blob/main/misc/07-spreedsheet.jpg"/>
+
+### Editor
+<img src="https://github.com/ksalokya/enterprise_resource_planning/blob/main/misc/08-editor.jpg"/>

@@ -390,5 +390,5 @@ export const kanbanData = [
         RankId: 2,
         Color: '#E64A19',
         ClassName: 'e-bug, e-release, e-nancy-davloio',
-    },
+    }
 ];

@@ -14,6 +14,8 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 import './sidebar.css'
 
@@ -73,19 +75,31 @@ function Sidebar() {
               <span>Calendar</span>
             </li>
           </Link>
+          <Link to="/sheet" style={{ textDecoration: "none" }}>
+            <li>
+              <CreateNewFolderIcon className="icon" />
+              <span>Spreedsheet</span>
+            </li>
+          </Link>
+          <Link to="/editor" style={{ textDecoration: "none" }}>
+            <li>
+              <MenuBookIcon className="icon" />
+              <span>Editor</span>
+            </li>
+          </Link>
           <p className="title">SERVICE</p>
           <li>
             <SettingsSystemDaydreamOutlinedIcon className="icon" />
             <span>System Health</span>
           </li>
-          <li>
+          {/* <li>
             <PsychologyOutlinedIcon className="icon" />
             <span>Logs</span>
           </li>
           <li>
             <SettingsApplicationsIcon className="icon" />
             <span>Settings</span>
-          </li>
+          </li> */}
           <p className="title">USER</p>
           <li>
             <AccountCircleOutlinedIcon className="icon" />

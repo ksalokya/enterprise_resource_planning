@@ -11,6 +11,7 @@ function Kanban() {
             <KanbanComponent
                 id="kanban"
                 keyField="Status"
+                height="83%"
                 dataSource={kanbanData}
                 cardSettings={{ contentField: "Summary", headerField: "Id" }}>
                 <ColumnsDirective>

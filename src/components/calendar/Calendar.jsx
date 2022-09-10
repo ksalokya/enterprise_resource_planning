@@ -25,7 +25,7 @@ function Calendar() {
         <div className="scheduler">
             <Header title="Calendar" />
             <ScheduleComponent
-                height="490px"
+                height="75%"
                 ref={(schedule) => setScheduleObj(schedule)}
                 selectedDate={new Date(2021, 0, 10)}
                 eventSettings={{ dataSource: scheduleData }}

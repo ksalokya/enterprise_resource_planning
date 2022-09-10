@@ -1,0 +1,13 @@
+.editor {
+    display: flex;
+}
+
+.editor-container {
+    background-color: white;
+    flex: 6;
+}
+
+.editor-component {
+    padding: 0 20px;
+    width: 83vw !important;
+}

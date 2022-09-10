@@ -1,0 +1,12 @@
+.sheet {
+    display: flex;
+}
+
+.sheet-container {
+    background-color: white;
+    flex: 6;
+}
+
+.sheet-component {
+    padding: 10px 20px 0 20px;
+}

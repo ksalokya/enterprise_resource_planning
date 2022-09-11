@@ -11,6 +11,9 @@
 ### Order
 <img src="https://github.com/ksalokya/enterprise_resource_planning/blob/main/misc/03-orders.jpg"/>
 
+### Delivery
+<img src="https://github.com/ksalokya/enterprise_resource_planning/blob/main/misc/04-delivery.jpg"/>
+
 ### Kanban
 <img src="https://github.com/ksalokya/enterprise_resource_planning/blob/main/misc/05-kanban.jpg"/>
 

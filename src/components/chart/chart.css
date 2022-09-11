@@ -53,6 +53,17 @@
     height: 35vh;
 }
 
+.sparkline {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    flex-direction: row;
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    border-radius: 15px;
+    height: 43vh;
+}
+
 .chart-top {
     display: flex;
     align-items: center;

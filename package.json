@@ -11,6 +11,7 @@
     "@syncfusion/ej2": "^20.2.48",
     "@syncfusion/ej2-base": "^20.2.48",
     "@syncfusion/ej2-react-calendars": "^20.2.46",
+    "@syncfusion/ej2-react-charts": "^20.2.48",
     "@syncfusion/ej2-react-documenteditor": "^20.2.48",
     "@syncfusion/ej2-react-kanban": "^20.2.45",
     "@syncfusion/ej2-react-maps": "^20.2.45",
@@ -24,6 +25,7 @@
     "react-full-screen": "^1.1.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-spring": "^9.5.2",
     "react-transition-group": "^4.4.5",
     "recharts": "^2.1.14",
     "web-vitals": "^2.1.4"

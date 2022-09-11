@@ -1,4 +1,9 @@
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 
 import Home from "./pages/home/Home";
 import Users from "./pages/users/Users";
@@ -9,11 +14,6 @@ import Calendar from './pages/calendar/Calendar';
 import Sheet from './pages/sheet/Sheet';
 import Editor from './pages/editor/Editor'
 
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
 
 function App() {
   const handle = useFullScreenHandle();

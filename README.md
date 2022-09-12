@@ -25,3 +25,6 @@
 
 ### Editor
 <img src="https://github.com/ksalokya/enterprise_resource_planning/blob/main/misc/08-editor.jpg"/>
+
+### System Health
+<img src="https://github.com/ksalokya/enterprise_resource_planning/blob/main/misc/09-system.jpg"/>

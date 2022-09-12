@@ -6,7 +6,7 @@ import './map.css'
 function Worldmap() {
   return (
     <div className="worldmap">
-      <MapsComponent id="maps" height='100%'>
+      <MapsComponent height='100%'>
         <LayersDirective>
           <LayerDirective shapeData={world_map} shapeDataPath='name' shapePropertyPath='name' dataSource={population_density} shapeSettings={{
             colorValuePath: 'density',

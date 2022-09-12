@@ -11,7 +11,6 @@
     "@syncfusion/ej2": "^20.2.48",
     "@syncfusion/ej2-base": "^20.2.48",
     "@syncfusion/ej2-react-calendars": "^20.2.46",
-    "@syncfusion/ej2-react-charts": "^20.2.48",
     "@syncfusion/ej2-react-documenteditor": "^20.2.48",
     "@syncfusion/ej2-react-kanban": "^20.2.45",
     "@syncfusion/ej2-react-maps": "^20.2.45",

@@ -88,10 +88,12 @@ function Sidebar() {
             </li>
           </Link>
           <p className="title">SERVICE</p>
-          <li>
-            <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>System Health</span>
-          </li>
+          <Link to="/health" style={{ textDecoration: "none" }}>
+            <li>
+              <SettingsSystemDaydreamOutlinedIcon className="icon" />
+              <span>System Health</span>
+            </li>
+          </Link>
           {/* <li>
             <PsychologyOutlinedIcon className="icon" />
             <span>Logs</span>

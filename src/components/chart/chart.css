@@ -114,3 +114,8 @@
 .negative {
     color: red !important;
 }
+
+.featuredChart {
+    width: 100px;
+    height: 100px;
+}

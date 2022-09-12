@@ -13,7 +13,7 @@ import Kanban from './pages/kanban/Kanban';
 import Calendar from './pages/calendar/Calendar';
 import Sheet from './pages/sheet/Sheet';
 import Editor from './pages/editor/Editor'
-
+import Health from './pages/health/Health'
 
 function App() {
   const handle = useFullScreenHandle();
@@ -45,6 +45,9 @@ function App() {
               </Route>
               <Route path="editor">
                 <Route index element={<Editor handle={handle} />} />
+              </Route>
+              <Route path="health">
+                <Route index element={<Health handle={handle} />} />
               </Route>
             </Route>
           </Routes>

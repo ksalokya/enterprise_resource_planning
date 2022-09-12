@@ -1,0 +1,16 @@
+.health {
+    display: flex;
+}
+
+.health-container {
+    background-color: white;
+    flex: 6;
+}
+
+.health-progress{
+    display: inline-flex;
+    flex-direction: column;
+    padding: 10px 20px 0 20px !important;
+    gap: 35px;
+    margin-top: 2%;
+}

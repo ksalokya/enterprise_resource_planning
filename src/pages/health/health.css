@@ -7,10 +7,24 @@
     flex: 6;
 }
 
-.health-progress{
-    display: inline-flex;
+.health-column {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1%;
+    padding-top: 3%;
+}
+
+.health-progress {
+    display: flex;
+    flex: 1;
     flex-direction: column;
     padding: 10px 20px 0 20px !important;
     gap: 35px;
-    margin-top: 2%;
+}
+
+.health-chart {
+    display: flex;
+    flex: 3;
+    flex-direction: column;
+    padding: 0 20px;
 }

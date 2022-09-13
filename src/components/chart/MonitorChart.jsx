@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import './chart.css'
 
+import CustomActiveShapePieChart from './CustomActiveShapePieChart';
+
 function MonitorChart() {
 
     const [data, setData] = useState([{
@@ -25,28 +27,33 @@ function MonitorChart() {
     }, [])
 
     return (
-        <div className="area-chart">
-            <ResponsiveContainer width="100%" height="100%">
-                <AreaChart
-                    width={500}
-                    height={400}
-                    data={data}
-                    margin={{
-                        top: 10,
-                        right: 30,
-                        left: 0,
-                        bottom: 0,
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <YAxis />
-                    <Tooltip />
-                    <Area type="monotone" dataKey="cpu" stackId="1" stroke="rgb(5, 157, 227)" fill="rgb(5, 157, 227)" />
-                    <Area type="monotone" dataKey="mem" stackId="1" stroke="rgb(202, 142, 255)" fill="rgb(202, 142, 255)" />
-                    <Area type="monotone" dataKey="net" stackId="1" stroke="rgb(27, 185, 52)" fill="rgb(27, 185, 52)" />
-                    <Area type="monotone" dataKey="disk" stackId="1" stroke="rgb(247, 191, 71)" fill="rgb(247, 191, 71)" />
-                </AreaChart>
-            </ResponsiveContainer>
+        <div className='monitor-custom-chart'>
+            <div className="monitor-custom-left">
+                <ResponsiveContainer width="100%" height="95%">
+                    <AreaChart
+                        width={500}
+                        height={400}
+                        data={data}
+                        margin={{
+                            top: 10,
+                            right: 30,
+                            left: 0,
+                            bottom: 0,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <YAxis />
+                        <Tooltip />
+                        <Area type="monotone" dataKey="cpu" stackId="1" stroke="rgb(5, 157, 227)" fill="rgb(5, 157, 227)" />
+                        <Area type="monotone" dataKey="mem" stackId="1" stroke="rgb(202, 142, 255)" fill="rgb(202, 142, 255)" />
+                        <Area type="monotone" dataKey="net" stackId="1" stroke="rgb(27, 185, 52)" fill="rgb(27, 185, 52)" />
+                        <Area type="monotone" dataKey="disk" stackId="1" stroke="rgb(247, 191, 71)" fill="rgb(247, 191, 71)" />
+                    </AreaChart>
+                </ResponsiveContainer>
+            </div>
+            <div className="monitor-custom-right">
+                <CustomActiveShapePieChart />
+            </div>
         </div>
     )
 }

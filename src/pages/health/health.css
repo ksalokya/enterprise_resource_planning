@@ -10,8 +10,7 @@
 .health-column {
     display: flex;
     flex-direction: row;
-    margin-top: 1%;
-    padding-top: 2%;
+    margin-top: 2%;
 }
 
 .health-progress {
@@ -19,12 +18,12 @@
     flex: 1;
     flex-direction: column;
     padding: 10px 20px 0 20px !important;
-    gap: 44px;
+    gap: 10px;
 }
 
 @media(min-height: 760px) {
     .health-progress {
-        gap: 70px;
+        gap: 45px;
     }
 }
 

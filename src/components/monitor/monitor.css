@@ -6,7 +6,6 @@
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
-    height: 120px;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -22,7 +21,7 @@
 .monitor-title {
     font-weight: bold;
     font-size: 32px;
-    margin-bottom: 8px;
+    margin-bottom: 2px;
 }
 
 .monitor-unit {

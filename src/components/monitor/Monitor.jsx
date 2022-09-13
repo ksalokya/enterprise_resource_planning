@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import TinyChart from '../../components/chart/TinyChart'
+import TinyBarChart from '../chart/TinyBarChart'
 import './monitor.css'
 
 function Monitor(props) {
@@ -17,6 +18,7 @@ function Monitor(props) {
             <div className="monitor-left">
                 <span className="monitor-title">{props.title}</span>
                 <span className="monitor-unit">{props.unit}</span>
+                <TinyBarChart color={props.color} />
             </div>
             <div className="monitor-right">
                 <TinyChart

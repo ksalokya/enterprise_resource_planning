@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import './chart.css'
 
-
 function MultipleChart() {
 
     const [data, setData] = useState([{
-        cpu: 4000,
-        mem: 2400,
-        net: 2400,
-        disk: 2000
+        CPU: 4000,
+        Memory: 2400,
+        Traffic: 2400,
+        Disk: 2000
     },]);
 
     useEffect(() => {
@@ -19,9 +18,9 @@ function MultipleChart() {
             let c = Math.floor(Math.random() * (800 - 500 + 1) + 500)
             let d = Math.floor(Math.random() * (500 - 300 + 1) + 300)
 
-            setData([{ cpu: a, mem: b, net: c, disk: d }, { cpu: 1.2 * a, mem: 1.5 * b, net: 0.8 * c, disk: 0.5 * d },
-            { cpu: 1.5 * a, mem: 0.8 * b, net: 0.5 * c, disk: 2 * d }, { cpu: a, mem: 1.3 * b, net: 0.5 * c, disk: 0.8 * d },
-            { cpu: 1.2 * a, mem: 0.5 * b, net: 0.6 * c, disk: d }, { cpu: 1.5 * a, mem: 1.1 * b, net: 0.7 * c, disk: 0.4 * d }])
+            setData([{ CPU: a, Memory: b, Traffic: c, Disk: d }, { CPU: 1.2 * a, Memory: 1.5 * b, Traffic: 0.8 * c, Disk: 0.5 * d },
+            { CPU: 1.5 * a, Memory: 0.8 * b, Traffic: 0.5 * c, Disk: 2 * d }, { CPU: a, Memory: 1.3 * b, Traffic: 0.5 * c, Disk: 0.8 * d },
+            { CPU: 1.2 * a, Memory: 0.5 * b, Traffic: 0.6 * c, Disk: d }, { CPU: 1.5 * a, Memory: 1.1 * b, Traffic: 0.7 * c, Disk: 0.4 * d }])
         }, 4000)
     }, [])
 
@@ -30,24 +29,28 @@ function MultipleChart() {
             <div className="multi-chart-row1">
                 <LineChart className='small-charts' width={200} height={100} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <Line type="monotone" dataKey="cpu" stroke="#8884d8" activeDot={{ r: 8 }} />
+                    <Legend />
+                    <Line type="monotone" dataKey="CPU" stroke="rgb(30, 183, 255)" activeDot={{ r: 8 }} />
                 </LineChart>
 
                 <LineChart className='small-charts' width={200} height={100} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <Line type="monotone" dataKey="mem" stroke="#8884d8" activeDot={{ r: 8 }} />
+                    <Legend />
+                    <Line type="monotone" dataKey="Memory" stroke="rgb(202, 142, 255)" activeDot={{ r: 8 }} />
                 </LineChart>
             </div>
 
             <div className="multi-chart-row2">
                 <LineChart className='small-charts' width={200} height={100} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <Line type="monotone" dataKey="net" stroke="#8884d8" activeDot={{ r: 8 }} />
+                    <Legend />
+                    <Line type="monotone" dataKey="Traffic" stroke="rgb(27, 185, 52)" activeDot={{ r: 8 }} />
                 </LineChart>
 
                 <LineChart className='small-charts' width={200} height={100} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <Line type="monotone" dataKey="disk" stroke="#8884d8" activeDot={{ r: 8 }} />
+                    <Legend />
+                    <Line type="monotone" dataKey="Disk" stroke="rgb(247, 191, 71)" activeDot={{ r: 8 }} />
                 </LineChart>
             </div>
         </div>
@@ -55,3 +58,4 @@ function MultipleChart() {
 }
 
 export default MultipleChart
+

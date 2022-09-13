@@ -13,58 +13,14 @@ import {
     ResponsiveContainer,
 } from 'recharts';
 
-// const data = [
-//     {
-//         name: 'Page A',
-//         uv: 590,
-//         pv: 800,
-//         amt: 1400,
-//         cnt: 490,
-//     },
-//     {
-//         name: 'Page B',
-//         uv: 868,
-//         pv: 967,
-//         amt: 1506,
-//         cnt: 590,
-//     },
-//     {
-//         name: 'Page C',
-//         uv: 1397,
-//         pv: 1098,
-//         amt: 989,
-//         cnt: 350,
-//     },
-//     {
-//         name: 'Page D',
-//         uv: 1480,
-//         pv: 1200,
-//         amt: 1228,
-//         cnt: 480,
-//     },
-//     {
-//         name: 'Page E',
-//         uv: 1520,
-//         pv: 1108,
-//         amt: 1100,
-//         cnt: 460,
-//     },
-//     {
-//         name: 'Page F',
-//         uv: 1400,
-//         pv: 680,
-//         amt: 1700,
-//         cnt: 380,
-//     },
-// ];
 
 function LineBarArea() {
 
     const [data, setData] = useState([{
-        cpu: 4000,
-        mem: 2400,
-        net: 2400,
-        disk: 2000
+        CPU: 4000,
+        Memory: 2400,
+        Traffic: 2400,
+        Disk: 2000
     },]);
 
     useEffect(() => {
@@ -74,10 +30,10 @@ function LineBarArea() {
             let c = Math.floor(Math.random() * (800 - 500 + 1) + 500)
             let d = Math.floor(Math.random() * (500 - 300 + 1) + 300)
 
-            setData([{ cpu: a, mem: b, net: c, disk: d }, { cpu: 1.2 * a, mem: 1.5 * b, net: 0.8 * c, disk: 0.5 * d },
-            { cpu: 1.5 * a, mem: 0.8 * b, net: 0.5 * c, disk: 2 * d }, { cpu: a, mem: 1.3 * b, net: 0.5 * c, disk: 0.8 * d },
-            { cpu: 1.2 * a, mem: 0.5 * b, net: 0.6 * c, disk: d }, { cpu: 1.5 * a, mem: 1.1 * b, net: 0.7 * c, disk: 0.4 * d }])
-        }, 4000)
+            setData([{ CPU: a, Memory: b, Traffic: c, Disk: d }, { CPU: 1.2 * a, Memory: 1.5 * b, Traffic: 0.8 * c, Disk: 0.5 * d },
+            { CPU: 1.5 * a, Memory: 0.8 * b, Traffic: 0.5 * c, Disk: 2 * d }, { CPU: a, Memory: 1.3 * b, Traffic: 0.5 * c, Disk: 0.8 * d },
+            { CPU: 1.2 * a, Memory: 0.5 * b, Traffic: 0.6 * c, Disk: d }, { CPU: 1.5 * a, Memory: 1.1 * b, Traffic: 0.7 * c, Disk: 0.4 * d }])
+        }, 6000)
     }, [])
 
     return (
@@ -97,10 +53,10 @@ function LineBarArea() {
                     <CartesianGrid stroke="#f5f5f5" />
                     <Tooltip />
                     <Legend />
-                    <Area type="monotone" dataKey="cpu" fill="#8884d8" stroke="#8884d8" />
-                    <Bar dataKey="mem" barSize={20} fill="#413ea0" />
-                    <Line type="monotone" dataKey="net" stroke="#ff7300" />
-                    <Scatter dataKey="disk" fill="red" />
+                    <Area type="monotone" dataKey="CPU" fill="#8884d8" stroke="#8884d8" />
+                    <Bar dataKey="Memory" barSize={20} fill="#413ea0" />
+                    <Line type="monotone" dataKey="Traffic" stroke="rgb(27, 185, 52)" />
+                    <Scatter dataKey="Disk" fill="rgb(247, 191, 71)" />
                 </ComposedChart>
             </ResponsiveContainer>
         </div>

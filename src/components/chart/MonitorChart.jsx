@@ -41,7 +41,7 @@ function MonitorChart() {
                     <CartesianGrid strokeDasharray="3 3" />
                     <YAxis />
                     <Tooltip />
-                    <Area type="monotone" dataKey="cpu" stackId="1" stroke="rgb(30, 183, 255)" fill="rgb(30, 183, 255)" />
+                    <Area type="monotone" dataKey="cpu" stackId="1" stroke="rgb(5, 157, 227)" fill="rgb(5, 157, 227)" />
                     <Area type="monotone" dataKey="mem" stackId="1" stroke="rgb(202, 142, 255)" fill="rgb(202, 142, 255)" />
                     <Area type="monotone" dataKey="net" stackId="1" stroke="rgb(27, 185, 52)" fill="rgb(27, 185, 52)" />
                     <Area type="monotone" dataKey="disk" stackId="1" stroke="rgb(247, 191, 71)" fill="rgb(247, 191, 71)" />

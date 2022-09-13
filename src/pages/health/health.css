@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: row;
     margin-top: 1%;
-    padding-top: 3%;
+    padding-top: 2%;
 }
 
 .health-progress {
@@ -19,7 +19,13 @@
     flex: 1;
     flex-direction: column;
     padding: 10px 20px 0 20px !important;
-    gap: 35px;
+    gap: 44px;
+}
+
+@media(min-height: 760px) {
+    .health-progress {
+        gap: 70px;
+    }
 }
 
 .health-chart {
@@ -27,4 +33,14 @@
     flex: 3;
     flex-direction: column;
     padding: 0 20px;
+}
+
+.multi-charts {
+    display: flex;
+    margin-top: 3%;
+    gap: 10px;
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    border-radius: 15px;
+    padding: 20px 12px;
 }

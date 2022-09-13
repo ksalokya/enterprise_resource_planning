@@ -2,6 +2,8 @@ import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Monitor from '../../components/monitor/Monitor'
 import MonitorChart from '../../components/chart/MonitorChart'
+import MultipleChart from '../../components/chart/MultipleChart'
+import LineBarArea from '../../components/chart/LineBarArea'
 import './health.css'
 
 function Health(props) {
@@ -35,6 +37,10 @@ function Health(props) {
           </div>
           <div className="health-chart">
             <MonitorChart />
+            <div className="multi-charts">
+              <MultipleChart />
+              <LineBarArea />
+            </div>
           </div>
         </div>
       </div>

@@ -14,6 +14,7 @@ import Calendar from './pages/calendar/Calendar';
 import Sheet from './pages/sheet/Sheet';
 import Editor from './pages/editor/Editor'
 import Health from './pages/health/Health'
+import Profile from './pages/profile/Profile'
 
 function App() {
   const handle = useFullScreenHandle();
@@ -48,6 +49,9 @@ function App() {
               </Route>
               <Route path="health">
                 <Route index element={<Health handle={handle} />} />
+              </Route>
+              <Route path="profile">
+                <Route index element={<Profile handle={handle} />} />
               </Route>
             </Route>
           </Routes>

@@ -1,4 +1,4 @@
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import "./chart.css"
 
 const data = [

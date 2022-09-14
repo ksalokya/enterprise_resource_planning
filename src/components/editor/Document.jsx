@@ -12,7 +12,6 @@ function Document() {
         <div className='document'>
             <Header title='Editor' />
             <DocumentEditorContainerComponent
-                id="container"
                 height={'84%'}
                 serviceUrl="https://ej2services.syncfusion.com/production/web-services/api/documenteditor/"
                 enableToolbar={true}

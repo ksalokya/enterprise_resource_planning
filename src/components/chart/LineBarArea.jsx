@@ -4,8 +4,6 @@ import {
     Line,
     Area,
     Bar,
-    XAxis,
-    YAxis,
     CartesianGrid,
     Tooltip,
     Legend,

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, CartesianGrid, Legend } from 'recharts';
 import './chart.css'
 
 function MultipleChart() {

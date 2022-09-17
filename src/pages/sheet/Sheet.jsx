@@ -1,7 +1,7 @@
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 
-import Spreedsheet from '../../components/sheet/Spreedsheet'
+import Spreadsheet from '../../components/sheet/Spreadsheet'
 
 import './sheet.css'
 
@@ -12,7 +12,7 @@ function Sheet(props) {
             <div className="sheet-container">
                 <Navbar handle={props.handle} />
                 <div className="sheet-component">
-                    <Spreedsheet />
+                    <Spreadsheet />
                 </div>
             </div>
         </div>

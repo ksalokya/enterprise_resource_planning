@@ -90,7 +90,7 @@ function Sidebar() {
           <Link to="/sheet" style={{ textDecoration: "none" }}>
             <li className={location.pathname === "/sheet" ? "current-selected" : ""}>
               <CreateNewFolderIcon className="icon" />
-              <span>Spreedsheet</span>
+              <span>Spreadsheet</span>
             </li>
           </Link>
           <Link to="/editor" style={{ textDecoration: "none" }}>

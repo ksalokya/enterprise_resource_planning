@@ -6,7 +6,6 @@
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
-    height: 65vh;
 }
 
 .pie-chart {
@@ -17,7 +16,6 @@
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
-    height: 65vh;
 }
 
 .stacked-chart {
@@ -95,6 +93,7 @@
 }
 
 .multi-chart-row1 {
+    flex: 1;
     padding: 25px 0;
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
@@ -141,7 +140,7 @@
 }
 
 .chart-title {
-    font-size: 22px;
+    font-size: 20px;
     padding: 0 12px;
     font-weight: bold;
 }
@@ -155,7 +154,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .item {
@@ -163,7 +162,7 @@
 }
 
 .itemTitle {
-    font-size: 18px;
+    font-size: 16px;
     color: gray;
     padding: 0 20px;
 }

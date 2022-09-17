@@ -88,8 +88,6 @@ function Widget({ type }) {
       break;
   }
 
-  //{`list ${todo.isdone ? "mark-done" : ""}
-
   return (
     <div className="widget">
       <div className="left">

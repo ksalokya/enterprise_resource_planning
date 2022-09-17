@@ -18,7 +18,6 @@ function Datatable() {
                         </Link>
                         <div
                             className="deleteButton"
-                            // onClick={() => handleDelete(params.row.id)}
                         >
                             Delete
                         </div>

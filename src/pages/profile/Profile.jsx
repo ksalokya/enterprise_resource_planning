@@ -59,7 +59,7 @@ function Profile(props) {
             <h1 className="profile-title">Information</h1>
             <div className="profile-item">
               <img
-                src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750w=1260"
+                src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
                 alt=""
                 className="profile-itemImg"
               />

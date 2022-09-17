@@ -20,6 +20,17 @@
     align-items: center;
     margin-left: 25%;
     border: 0.5px solid lightgray;
+    height: 50px !important;
+    width: 400px !important;
+}
+
+.css-i44wyl {
+    height: 50px !important;
+    width: 400px !important;
+}
+
+.css-igs3ac{
+    bottom: 5px !important;
 }
 
 .navbar .wrapper .items {
@@ -61,7 +72,7 @@
     right: -5px;
 }
 
-.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
     width: 400px;
     height: 50px;
 }

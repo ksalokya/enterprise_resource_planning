@@ -30,3 +30,11 @@
     border-radius: 15px;
     height: 43vh;
 }
+
+#maps {
+    width: 40vw !important;
+}
+
+#element {
+    width: 40vw !important;
+}

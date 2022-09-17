@@ -36,7 +36,7 @@ function CustomPieChart() {
       </div>
       <ResponsiveContainer width="100%" height="100%">
         <div>
-          <PieChart width={420} height={400}>
+          <PieChart width={400} height={400}>
             <Pie
               data={data}
               cx="50%"

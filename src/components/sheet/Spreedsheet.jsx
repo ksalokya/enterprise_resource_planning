@@ -9,7 +9,7 @@ function Spreedsheet() {
         <div className='spreedsheet'>
             <Header title="Spreedsheet" />
             <SpreadsheetComponent
-                height="83%"
+                height="82%"
                 allowOpen={true}
                 openUrl='https://ej2services.syncfusion.com/production/web-services/api/spreadsheet/open'
                 allowSave={true}

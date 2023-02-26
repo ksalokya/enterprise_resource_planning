@@ -41,7 +41,7 @@ export default function Signin() {
                                 </Typography>
                             </div>
                             <form />
-                            <Grid container spacing={3} sx={{ marginTop: 4 }}>
+                            <Grid container spacing={3} sx={{ marginTop: 6 }}>
                                 <Grid item xs={12}>
                                     <TextField
                                         style={{ color: "#ffffff" }}
@@ -66,25 +66,29 @@ export default function Signin() {
                                         autoComplete="off"
                                     />
                                 </Grid>
+                                <Grid item xs={12}>
+                                    <input type="checkbox" />
+                                    <span>&nbsp; Remember me.</span>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Button
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        color="primary"
+                                        className='register-btn'
+                                    >
+                                        Sign In
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <div className="forgot-password">
+                                        <Typography>
+                                            <Link to="/reset">Forgot Password?</Link>
+                                        </Typography>
+                                    </div>
+                                </Grid>
                             </Grid>
-                            <div className="agreement">
-                                <input type="checkbox" />
-                                <span>&nbsp; Remember me</span>
-                            </div>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className='register-btn'
-                            >
-                                Sign In
-                            </Button>
-                            <div className="forgot-password">
-                                <Typography>
-                                    <Link to="/reset">Forgot Password?</Link>
-                                </Typography>
-                            </div>
                         </Grid>
                     </Grid>
                 </Box >

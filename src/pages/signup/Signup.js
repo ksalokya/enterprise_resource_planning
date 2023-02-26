@@ -42,7 +42,7 @@ export default function Signup() {
                                 </Typography>
                             </div>
                             <form />
-                            <Grid container spacing={2} sx={{ marginTop: 2 }}>
+                            <Grid container spacing={3} sx={{ marginTop: 2 }}>
                                 <Grid item xs={12}>
                                     <TextField
                                         style={{ color: "#ffffff" }}
@@ -95,29 +95,31 @@ export default function Signup() {
                                         defaultValue="12345678"
                                     />
                                 </Grid>
+                                <Grid item xs={12} className="agreement">
+                                    <input type="checkbox" checked />
+                                    <span>&nbsp; I agree to Plataform's &nbsp;
+                                        <a href="#">Terms of Service</a> and&nbsp;
+                                        <a href="#">Privacy Policy.</a>
+                                    </span>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Link to="/home" style={{ textDecoration: "none", color: "#ffffff" }}>
+                                        <Button
+                                            type="submit"
+                                            fullWidth
+                                            variant="contained"
+                                            color="primary"
+                                            className='register-btn'
+                                        >
+                                            Sign Up
+                                        </Button>
+                                    </Link>
+                                </Grid>
                             </Grid>
-                            <div className="agreement">
-                                <input type="checkbox" checked />
-                                <span>I agree to Plataform's &nbsp;
-                                    <a href="#">Terms of Service</a> and&nbsp;
-                                    <a href="#">Privacy Policy.</a>
-                                </span>
-                            </div>
-                            <Link to="/home" style={{ textDecoration: "none", color: "#ffffff" }}>
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    color="primary"
-                                    className='register-btn'
-                                >
-                                    Sign Up
-                                </Button>
-                            </Link>
                         </Grid>
                     </Grid>
                 </Box >
             </Container>
-        </div>
+        </div >
     )
 }

@@ -42,7 +42,7 @@ export default function ResetPassword() {
                                 </Typography>
                             </div>
                             <form />
-                            <Grid container spacing={2} sx={{ marginTop: 2 }}>
+                            <Grid container spacing={3} sx={{ marginTop: 3 }}>
                                 <Grid item xs={12}>
                                     <TextField
                                         style={{ color: "#ffffff" }}
@@ -91,16 +91,18 @@ export default function ResetPassword() {
                                         autoComplete="off"
                                     />
                                 </Grid>
+                                <Grid item xs={12}>
+                                    <Button
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        color="primary"
+                                        className='register-btn'
+                                    >
+                                        Reset
+                                    </Button>
+                                </Grid>
                             </Grid>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className='register-btn'
-                            >
-                                Reset
-                            </Button>
                         </Grid>
                     </Grid>
                 </Box >

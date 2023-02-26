@@ -44,12 +44,7 @@
   color: #323537;
 }
 
-.agreement {
-  margin-top: 4%;
-}
-
 .forgot-password {
-  margin-top: 9%;
   text-align: center;
 }
 
@@ -74,7 +69,6 @@
   background-color: #1a73e8 !important;
   cursor: pointer;
   border-radius: 0.8rem !important;
-  top: 4%;
 }
 
 .register-btn:hover {

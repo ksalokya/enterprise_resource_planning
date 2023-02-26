@@ -11,6 +11,7 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import LogoutIcon from '@mui/icons-material/Logout';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -39,7 +40,7 @@ function Sidebar() {
   return (
     <div className='sidebar'>
       <div className="top">
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link to="/home" style={{ textDecoration: "none" }}>
           <span className="logo">
             DashBoard
           </span>
@@ -49,7 +50,7 @@ function Sidebar() {
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/home" style={{ textDecoration: "none" }}>
             <li className={location.pathname === "/" ? "current-selected" : ""}>
               <DashboardIcon className="icon" />
               <span>Dashboard</span>
@@ -111,6 +112,12 @@ function Sidebar() {
             <li className={location.pathname === "/profile" ? "current-selected" : ""}>
               <AccountCircleOutlinedIcon className="icon" />
               <span>Profile</span>
+            </li>
+          </Link>
+          <Link to="/signin" style={{ textDecoration: "none" }}>
+            <li>
+              <LogoutIcon className="icon" />
+              <span>Logout</span>
             </li>
           </Link>
           <Modal

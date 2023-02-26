@@ -69,7 +69,7 @@ export default function Signin() {
                             </Grid>
                             <div className="agreement">
                                 <input type="checkbox" />
-                                <span>Remember me</span>
+                                <span>&nbsp; Remember me</span>
                             </div>
                             <Button
                                 type="submit"
@@ -80,9 +80,11 @@ export default function Signin() {
                             >
                                 Sign In
                             </Button>
-                            <Typography className="forgot-password">
-                                <Link to="/reset">Forgot Password?</Link>
-                            </Typography>
+                            <div className="forgot-password">
+                                <Typography>
+                                    <Link to="/reset">Forgot Password?</Link>
+                                </Typography>
+                            </div>
                         </Grid>
                     </Grid>
                 </Box >

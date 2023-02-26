@@ -1,4 +1,4 @@
-# Enterprise Resource Planning
+# Enterprise Resource Planning 🧾
 
 ## Screens
 

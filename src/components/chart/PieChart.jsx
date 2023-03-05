@@ -1,14 +1,15 @@
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import React from 'react';
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "./chart.css"
 
 const data = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
+  { name: 'Wholesale', value: 400 },
+  { name: 'Retail', value: 300 },
+  { name: 'B2B', value: 300 },
+  { name: 'DTC', value: 200 },
 ];
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
@@ -27,55 +28,30 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 };
 
 function CustomPieChart() {
-
   return (
     <div className="pie-chart">
       <div className="chart-top">
         <p className="chart-title">Total Revenue</p>
         <MoreVertIcon />
       </div>
-      <ResponsiveContainer width="100%" height="100%">
-        <div>
-          <PieChart width={400} height={400}>
-            <Pie
-              data={data}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              label={renderCustomizedLabel}
-              outerRadius={180}
-              fill="#8884d8"
-              dataKey="value"
-            >
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-          </PieChart>
-          <div className="summary">
-            <div className="item">
-              <div className="itemTitle">Last Week</div>
-              <div className="itemResult positive">
-                <KeyboardArrowUpOutlinedIcon fontSize="small" />
-                <div className="resultAmount">$12.4k</div>
-              </div>
-            </div>
-            <div className="item">
-              <div className="itemTitle">Target</div>
-              <div className="itemResult negative">
-                <KeyboardArrowDownIcon fontSize="small" />
-                <div className="resultAmount">$12.4k</div>
-              </div>
-            </div>
-            <div className="item">
-              <div className="itemTitle">Last Month</div>
-              <div className="itemResult positive">
-                <KeyboardArrowUpOutlinedIcon fontSize="small" />
-                <div className="resultAmount">$12.4k</div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <ResponsiveContainer>
+        <PieChart>
+          <Pie
+            data={data}
+            cx="50%"
+            cy="50%"
+            labelLine={false}
+            label={renderCustomizedLabel}
+            outerRadius={180}
+            fill="#8884d8"
+            dataKey="value"
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          <Legend verticalAlign="bottom" height={36} />
+        </PieChart>
       </ResponsiveContainer>
     </div>
   )

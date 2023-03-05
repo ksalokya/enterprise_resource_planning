@@ -1,54 +1,225 @@
+import * as React from 'react';
+import { styled, alpha } from '@mui/material/styles';
 import { Link } from "react-router-dom";
-import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Avatar from '@mui/material/Avatar';
+import InputBase from '@mui/material/InputBase';
+import Badge from '@mui/material/Badge';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import LanguageIcon from '@mui/icons-material/Language';
 import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
-import TextField from '@mui/material/TextField';
-import "./navbar.css"
+import MailIcon from '@mui/icons-material/Mail';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import MoreIcon from '@mui/icons-material/MoreVert';
 
+const Search = styled('div')(({ theme }) => ({
+    position: 'absolute',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    '&:hover': {
+        backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+        marginLeft: theme.spacing(3),
+        width: 'auto',
+    },
+    border: "solid",
+    top: "50%",
+    left: "45%",
+    transform: "translate(-50%, -50%)"
+}));
 
-function Navbar(props) {
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: 'inherit',
+    '& .MuiInputBase-input': {
+        padding: theme.spacing(1, 1, 1, 0),
+        // vertical padding + font size from searchIcon
+        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+        transition: theme.transitions.create('width'),
+        width: '100%',
+        [theme.breakpoints.up("sm")]: {
+            width: "50ch",
+            "&:focus": {
+                width: "55ch"
+            }
+        }
+    },
+}));
+
+export default function Navbar(props) {
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+    const handleMobileMenuClose = () => {
+        setMobileMoreAnchorEl(null);
+    };
+
+    const handleMobileMenuOpen = (event) => {
+        setMobileMoreAnchorEl(event.currentTarget);
+    };
+
+    const mobileMenuId = 'primary-search-account-menu-mobile';
+    const renderMobileMenu = (
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            id={mobileMenuId}
+            keepMounted
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
+        >
+            <MenuItem>
+                <IconButton size="large" aria-label="language" color="inherit">
+                    <LanguageIcon />
+                </IconButton>
+                <p>Languages</p>
+            </MenuItem>
+            <MenuItem>
+                <IconButton size="large" aria-label="full screen" color="inherit">
+                    <FullscreenExitOutlinedIcon onClick={props.handle.enter} className="icon" />
+                </IconButton>
+                <p>Full Screen</p>
+            </MenuItem>
+            <MenuItem>
+                <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                    <Badge badgeContent={4} color="error">
+                        <MailIcon />
+                    </Badge>
+                </IconButton>
+                <p>Messages</p>
+            </MenuItem>
+            <MenuItem>
+                <IconButton
+                    size="large"
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                >
+                    <Badge badgeContent={17} color="error">
+                        <NotificationsIcon />
+                    </Badge>
+                </IconButton>
+                <p>Notifications</p>
+            </MenuItem>
+            <MenuItem>
+                <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    <AccountCircle />
+                </IconButton>
+                <p>Profile</p>
+            </MenuItem>
+        </Menu>
+    );
 
     return (
-        <div className="navbar">
-            <div className="wrapper">
-                <div className="search">
-                    <TextField id="outlined-basic" label="Search..."
-                        variant="outlined" />
-                </div>
-                <div className="items">
-                    <div className="item">
-                        <LanguageOutlinedIcon className="icon" />
-                        English
-                    </div>
-                    <div className="item">
-                        <FullscreenExitOutlinedIcon onClick={props.handle.enter} className="icon" />
-                    </div>
-                    <div className="item">
-                        <NotificationsNoneOutlinedIcon className="icon" />
-                        <div className="counter">1</div>
-                    </div>
-                    <div className="item">
-                        <ChatBubbleOutlineOutlinedIcon className="icon" />
-                        <div className="counter">2</div>
-                    </div>
-                    <div className="item">
-                        <ListOutlinedIcon className="icon" />
-                    </div>
-                    <Link to="/profile" style={{ textDecoration: "none" }}>
-                        <div className="item">
-                            <img
-                                src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                                alt=""
-                                className="avatar"
-                            />
-                        </div>
-                    </Link>
-                </div>
-            </div>
-        </div>
-    )
+        <Box>
+            <AppBar position="static" sx={{ background: "#ffffff", 
+            color: "#555", boxShadow: "none", 
+            height: "12%",
+            marginBottom: "1%" }}>
+                <Toolbar>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        sx={{ mr: 2 }}
+                        onClick={props.sidebar}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Search>
+                        <SearchIconWrapper>
+                            <SearchIcon />
+                        </SearchIconWrapper>
+                        <StyledInputBase
+                            placeholder="Search…"
+                            inputProps={{ 'aria-label': 'search' }}
+                        />
+                    </Search>
+                    <Box sx={{ flexGrow: 1 }} />
+                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                        <IconButton size="large" aria-label="language" color="inherit">
+                            <LanguageIcon />
+                        </IconButton>
+                        <IconButton size="large" aria-label="full screen" color="inherit" onClick={props.handle.enter} >
+                            <FullscreenExitOutlinedIcon className="icon" />
+                        </IconButton>
+                        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                            <Badge badgeContent={4} color="error">
+                                <MailIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton
+                            size="large"
+                            aria-label="show 17 new notifications"
+                            color="inherit"
+                        >
+                            <Badge badgeContent={17} color="error">
+                                <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                            <ListOutlinedIcon className="icon" />
+                        </IconButton>
+                        <Link to="/profile" style={{ textDecoration: "none" }}>
+                            <IconButton
+                                size="large"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-haspopup="true"
+                                color="inherit"
+                            >
+                                <Avatar src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=50" />
+                            </IconButton>
+                        </Link>
+                    </Box>
+                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                        <IconButton
+                            size="large"
+                            aria-label="show more"
+                            aria-controls={mobileMenuId}
+                            aria-haspopup="true"
+                            onClick={handleMobileMenuOpen}
+                            color="inherit"
+                        >
+                            <MoreIcon />
+                        </IconButton>
+                    </Box>
+                </Toolbar>
+            </AppBar>
+            {renderMobileMenu}
+        </Box>
+    );
 }
-
-export default Navbar

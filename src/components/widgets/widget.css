@@ -2,11 +2,11 @@
     display: flex;
     justify-content: space-between;
     flex: 1;
-    padding: 10px;
+    padding: 20px;
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
-    height: 120px;
+    height: 150px;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -48,12 +48,13 @@
 .widget .left {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     z-index: 1;
 }
 
 .widget .left .title {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1.5rem;
     margin-bottom: 15px;
 }
 
@@ -73,13 +74,14 @@
 .widget .right {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     z-index: 1;
 }
 
 .widget .right .percentage {
     display: flex;
     align-items: center;
-    font-size: 18px;
+    font-size: 1.2rem;
 }
 
 .widget .right .positive {
@@ -91,7 +93,7 @@
 }
 
 .widget .right .icon {
-    font-size: 26px;
+    font-size: 2rem;
     padding: 1px;
     border-radius: 5px;
     margin-left: auto;

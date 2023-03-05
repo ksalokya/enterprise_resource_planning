@@ -1,4 +1,4 @@
-import { BarChart, Bar, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts';
+import { BarChart, Bar, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import "./chart.css"
 
 const data = [
@@ -39,17 +39,14 @@ const data = [
   },
 ];
 
-
 function CustomBarChart() {
   return (
     <div className="bar-chart">
       <div className="chart-top">
         <p className="chart-title">Last 6 Months (Sales)</p>
       </div>
-      <ResponsiveContainer width="99%" height="90%">
+      <ResponsiveContainer>
         <BarChart
-          width={400}
-          height={300}
           data={data}
           margin={{
             top: 5,

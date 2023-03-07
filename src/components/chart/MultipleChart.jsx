@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Grid from '@mui/material/Grid';
 import { LineChart, Line, CartesianGrid, Legend } from 'recharts';
 import './chart.css'
 
@@ -25,7 +26,7 @@ function MultipleChart() {
     }, [])
 
     return (
-        <div className="multi-chart">
+        <Grid container>
             <div className="multi-chart-row1">
                 <LineChart className='small-charts' width={200} height={100} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -53,7 +54,7 @@ function MultipleChart() {
                     <Line type="monotone" dataKey="Disk" stroke="rgb(247, 191, 71)" activeDot={{ r: 8 }} />
                 </LineChart>
             </div>
-        </div>
+        </ Grid>
     )
 }
 

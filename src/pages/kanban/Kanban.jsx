@@ -1,21 +1,13 @@
-import Navbar from '../../components/navbar/Navbar'
-import Sidebar from '../../components/sidebar/Sidebar'
-
+import Grid from '@mui/material/Grid';
 import KanbanBoard from '../../components/kanban/Kanban'
 
-import './kanban.css'
-
-function Kanban(props) {
+function Kanban() {
     return (
-        <div className="kanban">
-            <Sidebar />
-            <div className="kanban-container">
-                <Navbar handle={props.handle} />
-                <div className='kanban-container-board'>
-                    <KanbanBoard />
-                </div>
-            </div>
-        </div>
+        <Grid container sx={{ paddingLeft: 2, paddingRight: 2 }}>
+            <Grid item lg={12} md={12} xs={12} >
+                <KanbanBoard />
+            </Grid>
+        </Grid>
     )
 }
 

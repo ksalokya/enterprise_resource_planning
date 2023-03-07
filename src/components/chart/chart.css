@@ -71,7 +71,7 @@
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
-    height: 35vh;
+    height: 40vh;
 }
 
 .monitor-custom-right {
@@ -82,7 +82,7 @@
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
-    height: 35vh;
+    height: 40vh;
 }
 
 .custom-active-chart {
@@ -91,23 +91,17 @@
 }
 
 .multi-chart {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
     padding: 10px;
     margin-top: 1%;
 }
 
 .multi-chart-row1 {
-    flex: 1;
-    padding: 25px 0;
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
 }
 
 .multi-chart-row2 {
-    padding: 25px 0;
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
@@ -118,13 +112,10 @@
 }
 
 .line-bar-area {
-    display: flex;
-    justify-content: space-between;
-    flex: 1;
-    flex-direction: column;
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
+    height: 40vh;
 }
 
 .profile-chart {

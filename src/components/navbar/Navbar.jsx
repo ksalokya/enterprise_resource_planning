@@ -103,7 +103,7 @@ export default function Navbar(props) {
             </MenuItem>
             <MenuItem>
                 <IconButton size="large" aria-label="full screen" color="inherit">
-                    <FullscreenExitOutlinedIcon onClick={props.handle.enter} className="icon" />
+                    <FullscreenExitOutlinedIcon className="icon" />
                 </IconButton>
                 <p>Full Screen</p>
             </MenuItem>
@@ -173,7 +173,7 @@ export default function Navbar(props) {
                         <IconButton size="large" aria-label="language" color="inherit">
                             <LanguageIcon />
                         </IconButton>
-                        <IconButton size="large" aria-label="full screen" color="inherit" onClick={props.handle.enter} >
+                        <IconButton size="large" aria-label="full screen" color="inherit" >
                             <FullscreenExitOutlinedIcon className="icon" />
                         </IconButton>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">

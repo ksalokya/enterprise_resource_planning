@@ -1,21 +1,14 @@
-import Navbar from '../../components/navbar/Navbar'
-import Sidebar from '../../components/sidebar/Sidebar'
-
+import Grid from '@mui/material/Grid';
 import Document from '../../components/editor/Document'
 
-import './editor.css'
 
 function Editor(props) {
   return (
-    <div className="editor">
-      <Sidebar />
-      <div className="editor-container">
-        <Navbar handle={props.handle} />
-        <div className="editor-component">
-          <Document />
-        </div>
-      </div>
-    </div>
+    <Grid container sx={{ paddingLeft: 2, paddingRight: 2 }}>
+      <Grid item lg={12} md={12} xs={12} >
+        <Document />
+      </Grid>
+    </Grid>
   )
 }
 

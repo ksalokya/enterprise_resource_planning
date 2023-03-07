@@ -1,31 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
 import Navbar from '../components/navbar/Navbar'
 import Sidebar from '../components/sidebar/Sidebar'
 
 export default function Layout(props) {
+    const matches = useMediaQuery('(max-width:1300px)');
     const [open, setOpen] = useState(true);
-    const [sbar, setSbar] = useState("default");
+    const [displaySidebar, setDisplaySidebar] = useState("default");
+    const [displayNavbar, setDisplayNavbar] = useState("default");
+    const [sbar, setSbar] = useState(1.5);
     const [nbar, setNbar] = useState(10.5);
 
     const handleOpen = () => {
-        setSbar("default");
-        setNbar(10.5);
         setOpen(true);
+        setDisplaySidebar("default");
+        if (matches) {
+            setDisplayNavbar("none");
+            setSbar(12);
+            setNbar(0);
+        } else {
+            setDisplayNavbar("default");
+            setSbar(1.5);
+            setNbar(10.5);
+        }
     }
     const handleClose = () => {
-        setSbar("none");
+        setDisplaySidebar("none");
+        setDisplayNavbar("default");
+        setSbar(0);
         setNbar(12);
         setOpen(false);
     }
+    useEffect(() => {
+        if (matches) handleClose();
+        else handleOpen();
+    }, [matches])
 
     return (
         <Grid container>
-            <Grid item xs={1.5} sx={{ display: sbar }}>
+            <Grid item xs={sbar} sx={{ display: displaySidebar }}>
                 <Sidebar />
             </Grid>
-            <Grid item xs={nbar}>
+            <Grid item xs={nbar} sx={{ display: displayNavbar }}>
                 <Navbar sidebar={open ? handleClose : handleOpen} />
                 <Outlet />
             </Grid>

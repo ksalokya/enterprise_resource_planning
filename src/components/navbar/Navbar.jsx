@@ -28,11 +28,16 @@ const Search = styled('div')(({ theme }) => ({
         backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
     width: '100%',
+    [theme.breakpoints.only('xs')]: {
+        marginLeft: theme.spacing(2),
+        width: '50%',
+    },
     [theme.breakpoints.up('sm')]: {
         marginLeft: theme.spacing(3),
         width: 'auto',
     },
-    border: "solid",
+    borderStyle: "solid",
+    borderColor: "#555",
     top: "50%",
     left: "45%",
     transform: "translate(-50%, -50%)"
@@ -56,10 +61,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
-        [theme.breakpoints.up("sm")]: {
-            width: "50ch",
+        [theme.breakpoints.down("md")]: {
+            width: "30ch",
             "&:focus": {
-                width: "55ch"
+                width: "32ch"
+            }
+        },
+        [theme.breakpoints.up("lg")]: {
+            width: "40ch",
+            "&:focus": {
+                width: "45ch"
             }
         }
     },
@@ -144,10 +155,12 @@ export default function Navbar(props) {
 
     return (
         <Box>
-            <AppBar position="static" sx={{ background: "#ffffff", 
-            color: "#555", boxShadow: "none", 
-            height: "12%",
-            marginBottom: "1%" }}>
+            <AppBar position="static" sx={{
+                background: "#ffffff",
+                color: "#555", boxShadow: "none",
+                height: "12%",
+                marginBottom: "1%"
+            }}>
                 <Toolbar>
                     <IconButton
                         size="large"

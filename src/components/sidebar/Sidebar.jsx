@@ -38,8 +38,8 @@ function Sidebar(props) {
 
   return (
     <div className='sidebar'>
-      <div className="top">
-        <Link to="/home" style={{ textDecoration: "none" }}>
+      <div className="top" onClick={props.sidebar}>
+        <Link to="/home" style={{ textDecoration: "none" }} >
           <span className="logo">
             DashBoard
           </span>

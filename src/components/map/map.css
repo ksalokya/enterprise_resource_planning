@@ -35,3 +35,13 @@
 #element {
     width: 40vw !important;
 }
+
+@media screen and (max-width:800px) {
+    #maps {
+        width: 100% !important;
+    }
+
+    #element {
+        width: 100% !important;
+    }
+}

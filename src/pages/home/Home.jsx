@@ -5,7 +5,7 @@ import Widget from '../../components/widgets/Widget'
 
 function Home() {
   return (
-    <Grid container rowSpacing={1} columnSpacing={2} sx={{ paddingLeft: 1, paddingRight: 1 }} >
+    <Grid container rowSpacing={1} columnSpacing={2} sx={{ paddingLeft: 2, paddingRight: 2 }} >
       <Grid item lg={3} md={6} sm={6} xs={12}>
         <Widget type="user" />
       </Grid>

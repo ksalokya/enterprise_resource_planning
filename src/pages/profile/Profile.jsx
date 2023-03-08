@@ -48,9 +48,9 @@ const rows = [
 
 function Profile() {
   return (
-    <>
-      <div className="profile-top">
-        <div className="profile-left">
+    <Grid container rowSpacing={5} sx={{ paddingLeft: 2, paddingRight: 2 }} >
+      <Grid container item lg={12} md={12} xs={12} columnSpacing={3} className="profile-top">
+        <Grid item lg={4} md={6} xs={12} className="profile-left">
           <div className="profile-editButton">Edit</div>
           <h1 className="profile-title">Information</h1>
           <div className="profile-item">
@@ -80,15 +80,16 @@ function Profile() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="profile-right">
-          <ProfileChart aspect={3 / 1} />
-        </div>
-      </div><div className="profile-bottom">
+        </Grid>
+        <Grid item lg={8} md={8} xs={12} className="profile-right">
+          <ProfileChart/>
+        </Grid>
+      </Grid>
+      <Grid container item lg={12} md={12} xs={12} className="profile-bottom">
         <h1 className="profile-title">Last Transactions</h1>
         <List rows={rows} type={"Address"} />
-      </div>
-    </>
+      </Grid>
+    </Grid>
   )
 }
 

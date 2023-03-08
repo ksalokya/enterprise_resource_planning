@@ -10,10 +10,10 @@ function Delivery() {
                 <WorldMap />
             </Grid>
             <Grid item lg={6} md={6} xs={12}>
-                <Grid item lg={12} md={6} xs={6}>
+                <Grid item xs>
                     <Country />
                 </Grid>
-                <Grid item lg={12} md={6} xs={6} sx={{mt: 2}}>
+                <Grid item xs sx={{mt: 2}}>
                     <Network />
                 </Grid>
             </Grid>

@@ -3,7 +3,7 @@ import BarChart from '../../components/chart/BarChart'
 import PieChart from '../../components/chart/PieChart'
 import Widget from '../../components/widgets/Widget'
 
-function Home(props) {
+function Home() {
   return (
     <Grid container rowSpacing={1} columnSpacing={2} sx={{ paddingLeft: 1, paddingRight: 1 }} >
       <Grid item lg={3} md={6} sm={6} xs={12}>

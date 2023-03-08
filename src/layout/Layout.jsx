@@ -12,7 +12,7 @@ export default function Layout(props) {
     const [displayNavbar, setDisplayNavbar] = useState("default");
     const [sbar, setSbar] = useState(1.5);
     const [nbar, setNbar] = useState(10.5);
-
+    
     const handleOpen = () => {
         setOpen(true);
         setDisplaySidebar("default");
@@ -41,7 +41,7 @@ export default function Layout(props) {
     return (
         <Grid container>
             <Grid item xs={sbar} sx={{ display: displaySidebar }}>
-                <Sidebar />
+                <Sidebar sidebar={matches ? handleClose : handleOpen} />
             </Grid>
             <Grid item xs={nbar} sx={{ display: displayNavbar }}>
                 <Navbar sidebar={open ? handleClose : handleOpen} />

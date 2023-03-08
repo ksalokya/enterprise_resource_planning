@@ -1,12 +1,13 @@
 import Grid from '@mui/material/Grid';
 import Monitor from '../../components/monitor/Monitor'
 import MonitorChart from '../../components/chart/MonitorChart'
+import CustomActiveShapePieChart from '../../components/chart/CustomActiveShapePieChart';
 import MultipleChart from '../../components/chart/MultipleChart'
 import LineBarArea from '../../components/chart/LineBarArea'
 
 function Health() {
   return (
-    <Grid container sx={{ paddingLeft: 2, paddingRight: 2 }} columnSpacing={2}>
+    <Grid container sx={{ paddingLeft: 2, paddingRight: 2 }} columnSpacing={2} rowSpacing={3}>
       <Grid item lg={4} md={6} xs={12} >
         <Grid item lg={12} md={12} xs={12} >
           <Monitor
@@ -37,14 +38,19 @@ function Health() {
           />
         </Grid>
       </Grid>
-      <Grid item lg={8} md={6} xs={12} >
-        <Grid item lg={12} md={12} xs={12} >
+      <Grid item lg={4}>
+        <Grid item lg={12} >
           <MonitorChart />
         </Grid>
-        <Grid item lg={6} md={6} xs={12} >
+        <Grid item lg={12} sx={{ mt: 4 }}>
           <MultipleChart />
         </Grid>
-        <Grid item lg={6} md={6} xs={12} >
+      </Grid>
+      <Grid item lg={4}>
+        <Grid item lg={12} >
+          <CustomActiveShapePieChart />
+        </Grid>
+        <Grid item lg={12} sx={{ mt: 4 }}>
           <LineBarArea />
         </Grid>
       </Grid>

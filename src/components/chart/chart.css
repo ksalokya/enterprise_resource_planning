@@ -57,37 +57,18 @@
     height: 35vh;
 }
 
-.monitor-custom-chart {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-}
-
-.monitor-custom-left {
-    display: flex;
-    justify-content: space-between;
-    flex: 1;
-    flex-direction: column;
+.monitor-chart {
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
-    height: 40vh;
-}
-
-.monitor-custom-right {
-    display: flex;
-    justify-content: space-between;
-    flex: 1;
-    flex-direction: column;
-    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-    border-radius: 15px;
-    height: 40vh;
+    height: 45vh;
 }
 
 .custom-active-chart {
-    display: flex;
-    flex: 1;
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    border-radius: 15px;
+    height: 45vh;
 }
 
 .multi-chart {
@@ -95,16 +76,11 @@
     margin-top: 1%;
 }
 
-.multi-chart-row1 {
+.multi-chart-row {
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
-}
-
-.multi-chart-row2 {
-    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-    border-radius: 15px;
+    height: 40vh;
 }
 
 .small-charts {

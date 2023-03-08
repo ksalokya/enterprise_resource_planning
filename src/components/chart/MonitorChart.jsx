@@ -27,8 +27,7 @@ function MonitorChart() {
     }, [])
 
     return (
-        <div className='monitor-custom-chart'>
-            <div className="monitor-custom-left">
+            <div className="monitor-chart">
                 <ResponsiveContainer width="100%" height="95%">
                     <AreaChart
                         width={500}
@@ -51,10 +50,9 @@ function MonitorChart() {
                     </AreaChart>
                 </ResponsiveContainer>
             </div>
-            <div className="monitor-custom-right">
-                <CustomActiveShapePieChart />
-            </div>
-        </div>
+            // <div className="monitor-custom-right">
+            //     <CustomActiveShapePieChart />
+            // </div>
     )
 }
 

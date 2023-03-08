@@ -30,9 +30,8 @@ const style = {
   p: 4,
 };
 
-function Sidebar() {
+function Sidebar(props) {
   const location = useLocation();
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -51,65 +50,65 @@ function Sidebar() {
         <ul>
           <p className="title">MAIN</p>
           <Link to="/home" style={{ textDecoration: "none" }}>
-            <li className={location.pathname === "/" ? "current-selected" : ""}>
+            <li className={location.pathname === "/" ? "current-selected" : ""} onClick={props.sidebar}>
               <DashboardIcon className="icon" />
               <span>Dashboard</span>
             </li>
           </Link>
           <p className="title">LISTS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
-            <li className={location.pathname === "/users" ? "current-selected" : ""}>
+            <li className={location.pathname === "/users" ? "current-selected" : ""} onClick={props.sidebar}>
               <PersonOutlineIcon className="icon" />
               <span>Users</span>
             </li>
           </Link>
           <Link to="/orders" style={{ textDecoration: "none" }}>
-            <li className={location.pathname === "/orders" ? "current-selected" : ""}>
+            <li className={location.pathname === "/orders" ? "current-selected" : ""} onClick={props.sidebar}>
               <CreditCardIcon className="icon" />
               <span>Orders</span>
             </li>
           </Link>
           <Link to="/delivery" style={{ textDecoration: "none" }}>
-            <li className={location.pathname === "/delivery" ? "current-selected" : ""}>
+            <li className={location.pathname === "/delivery" ? "current-selected" : ""} onClick={props.sidebar}>
               <LocalShippingIcon className="icon" />
               <span>Delivery</span>
             </li>
           </Link>
           <p className="title">APPLICATIONS</p>
           <Link to="/kanban" style={{ textDecoration: "none" }}>
-            <li className={location.pathname === "/kanban" ? "current-selected" : ""}>
+            <li className={location.pathname === "/kanban" ? "current-selected" : ""} onClick={props.sidebar}>
               <ContentPasteIcon className="icon" />
               <span>Kanban</span>
             </li>
           </Link>
           <Link to="/calendar" style={{ textDecoration: "none" }}>
-            <li className={location.pathname === "/calendar" ? "current-selected" : ""}>
+            <li className={location.pathname === "/calendar" ? "current-selected" : ""} onClick={props.sidebar}>
               <CalendarMonthIcon className="icon" />
               <span>Calendar</span>
             </li>
           </Link>
           <Link to="/sheet" style={{ textDecoration: "none" }}>
-            <li className={location.pathname === "/sheet" ? "current-selected" : ""}>
+            <li className={location.pathname === "/sheet" ? "current-selected" : ""} onClick={props.sidebar}>
               <CreateNewFolderIcon className="icon" />
               <span>Spreadsheet</span>
             </li>
           </Link>
           <Link to="/editor" style={{ textDecoration: "none" }}>
-            <li className={location.pathname === "/editor" ? "current-selected" : ""}>
+            <li className={location.pathname === "/editor" ? "current-selected" : ""} onClick={props.sidebar}>
               <MenuBookIcon className="icon" />
               <span>Editor</span>
             </li>
           </Link>
           <p className="title">SERVICE</p>
           <Link to="/health" style={{ textDecoration: "none" }}>
-            <li className={location.pathname === "/health" ? "current-selected" : ""}>
+            <li className={location.pathname === "/health" ? "current-selected" : ""} onClick={props.sidebar}>
               <SettingsSystemDaydreamOutlinedIcon className="icon" />
               <span>System Health</span>
             </li>
           </Link>
           <Link to="/profile" style={{ textDecoration: "none" }}>
             <p className="title">USER</p>
-            <li className={location.pathname === "/profile" ? "current-selected" : ""}>
+            <li className={location.pathname === "/profile" ? "current-selected" : ""} onClick={props.sidebar}>
               <AccountCircleOutlinedIcon className="icon" />
               <span>Profile</span>
             </li>

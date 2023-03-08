@@ -5,7 +5,7 @@ import TwoLevelPieChart from '../../components/chart/TwoLevelPieChart'
 import Product from '../../components/order/Order'
 import {orders} from './orderData'
 
-function Orders(props) {
+function Orders() {
   return (
     <Grid container rowSpacing={3} columnSpacing={2} sx={{ paddingLeft: 2, paddingRight: 2 }} >
       <Grid item lg={4} md={6} xs={12}>

@@ -3,7 +3,7 @@ import WorldMap from '../../components/map/Worldmap'
 import Country from '../../components/map/Country'
 import Network from '../../components/map/Network'
 
-function Delivery(props) {
+function Delivery() {
     return (
         <Grid container sx={{ paddingLeft: 2, paddingRight: 2 }} columnSpacing={2}>
             <Grid item lg={6} md={6} xs={12} >

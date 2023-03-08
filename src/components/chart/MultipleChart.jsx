@@ -26,7 +26,7 @@ function MultipleChart() {
     }, [])
 
     return (
-        <Grid container lg={12} xs={12} className="multi-chart-row">
+        <Grid container lg={12} className="multi-chart-row">
             <Grid item lg={6} md={6} xs={6} >
                 <LineChart className='small-charts' width={200} height={100} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -42,14 +42,14 @@ function MultipleChart() {
                 </LineChart>
             </Grid>
 
-            <Grid item lg={6} md={6} xs={12} >
+            <Grid item lg={6} md={6} xs={6} >
                 <LineChart className='small-charts' width={200} height={100} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <Legend />
                     <Line type="monotone" dataKey="Traffic" stroke="rgb(27, 185, 52)" activeDot={{ r: 8 }} />
                 </LineChart>
             </Grid>
-            <Grid item lg={6} md={6} xs={12} >
+            <Grid item lg={6} md={6} xs={6} >
                 <LineChart className='small-charts' width={200} height={100} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <Legend />

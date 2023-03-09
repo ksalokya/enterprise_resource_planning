@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -9,9 +9,16 @@ import Lottie from 'react-lottie';
 import Typography from '@mui/material/Typography';
 import * as animationData from "./animation.json"
 import { Link } from "react-router-dom";
-
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function ResetPassword() {
+    const matches = useMediaQuery('(max-width:900px)');
+    const [displayLottie, setDisplayLottie] = useState('default');
+    useEffect(() => {
+        if (matches) setDisplayLottie('none');
+        else setDisplayLottie('default');
+    }, [matches])
+
     const defaultOptions = {
         loop: true,
         autoplay: true,
@@ -27,13 +34,13 @@ export default function ResetPassword() {
             <Container maxWidth="lg" className='box'>
                 <Box sx={{ bgcolor: 'rgba(255, 255, 255, .5)', borderRadius: '20px' }}>
                     <Grid container>
-                        <Grid item xs={6} sx={{ padding: 4, marginTop: 2 }}>
+                        <Grid item lg={6} md={6} sx={{ padding: 4, marginTop: 2, display: displayLottie }}>
                             <Lottie
                                 options={defaultOptions}
                                 isClickToPauseDisabled={true}
                             />
                         </Grid>
-                        <Grid item xs={6} sx={{ padding: 4, bgcolor: "#fff" }}>
+                        <Grid item lg={6} md={6} xs={12} sx={{ padding: 4, bgcolor: "#fff" }}>
                             <div className='top-box'>
                                 <h2>Reset Password!</h2>
                                 <Typography>

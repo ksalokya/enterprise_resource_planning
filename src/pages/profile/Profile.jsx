@@ -56,7 +56,7 @@ function Profile() {
           <div className="profile-item">
             <img
               src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
+              alt="profile photo"
               className="profile-itemImg" />
             <div className="profile-details">
               <h1 className="profile-itemTitle">Jane Doe</h1>

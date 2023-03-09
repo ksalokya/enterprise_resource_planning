@@ -27,9 +27,7 @@
 }
 
 .profile-editButton {
-    position: absolute;
-    top: 0;
-    right: 0;
+    float: right;
     padding: 5px;
     font-size: 12px;
     color: #7451f8;

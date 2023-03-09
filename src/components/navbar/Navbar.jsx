@@ -19,6 +19,7 @@ import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'absolute',
@@ -89,6 +90,9 @@ export default function Navbar(props) {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
+    const navigate = useNavigate();
+    const navigateToProfile = () => navigate('/profile');
+
     const mobileMenuId = 'primary-search-account-menu-mobile';
     const renderMobileMenu = (
         <Menu
@@ -113,7 +117,7 @@ export default function Navbar(props) {
                 <p>Languages</p>
             </MenuItem>
             <MenuItem>
-                <IconButton size="large" aria-label="full screen" color="inherit">
+                <IconButton size="large" aria-label="full screen" color="inherit" onClick={props.handle.enter} >
                     <FullscreenExitOutlinedIcon className="icon" />
                 </IconButton>
                 <p>Full Screen</p>
@@ -138,7 +142,7 @@ export default function Navbar(props) {
                 </IconButton>
                 <p>Notifications</p>
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={navigateToProfile}>
                 <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -150,7 +154,7 @@ export default function Navbar(props) {
                 </IconButton>
                 <p>Profile</p>
             </MenuItem>
-        </Menu>
+        </Menu >
     );
 
     return (
@@ -186,7 +190,7 @@ export default function Navbar(props) {
                         <IconButton size="large" aria-label="language" color="inherit">
                             <LanguageIcon />
                         </IconButton>
-                        <IconButton size="large" aria-label="full screen" color="inherit" >
+                        <IconButton size="large" aria-label="full screen" color="inherit" onClick={props.handle.enter}>
                             <FullscreenExitOutlinedIcon className="icon" />
                         </IconButton>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">

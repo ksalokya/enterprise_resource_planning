@@ -44,7 +44,7 @@ export default function Layout(props) {
                 <Sidebar sidebar={matches ? handleClose : handleOpen} />
             </Grid>
             <Grid item xs={nbar} sx={{ display: displayNavbar }}>
-                <Navbar sidebar={open ? handleClose : handleOpen} />
+                <Navbar sidebar={open ? handleClose : handleOpen} handle={props.handle}/>
                 <Outlet />
             </Grid>
         </Grid>

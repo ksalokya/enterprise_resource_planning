@@ -36,7 +36,7 @@ function LineBarArea() {
 
     return (
         <div className="line-bar-area">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer height="100%">
                 <ComposedChart
                     width={500}
                     height={400}

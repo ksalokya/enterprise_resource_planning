@@ -1,19 +1,13 @@
-import Navbar from '../../components/navbar/Navbar'
-import Sidebar from '../../components/sidebar/Sidebar'
+import Grid from '@mui/material/Grid';
 import Datatable from '../../components/usertable/Datatable'
-import './users.css'
 
-function Users(props) {
+function Users() {
     return (
-        <div className="list">
-            <Sidebar />
-            <div className="list-container">
-                <Navbar handle={props.handle} />
-                <div className="table">
-                    <Datatable />
-                </div>
-            </div>
-        </div>
+        <Grid container rowSpacing={3} columnSpacing={2} sx={{ paddingLeft: 2, paddingRight: 2 }} >
+            <Grid item lg={12} md={6} xs={12}>
+                <Datatable />
+            </Grid>
+        </Grid>
     )
 }
 

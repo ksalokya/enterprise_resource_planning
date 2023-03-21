@@ -1,15 +1,12 @@
 .sidebar {
-    flex: 1;
     border-right: 0.5px solid rgb(230, 227, 227);
     min-height: 100vh;
     background-color: white;
 }
 
 .top {
-    height: 9%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 7% 0;
+    text-align: center;
 }
 
 .logo {
@@ -37,8 +34,7 @@
     font-size: 15px;
     font-weight: bold;
     color: #999;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin: 5% 0;
 }
 
 .center ul li {
@@ -65,11 +61,66 @@
 }
 
 .bottom {
-    display: flex;
+    display: default;
     align-items: center;
     margin: 10px;
 }
 
 .current-selected {
     background-color: #ece8ff;
+}
+
+@media screen and (max-width: 1300px) {
+    .center {
+        margin-left: 5%;
+    }
+
+    .logo {
+        font-size: 100px;
+    }
+
+    .top {
+        margin: 1% 0;
+    }
+
+    .center ul .title {
+        font-size: 40px;
+        margin: 2% 0;
+    }
+
+    .center ul li {
+        margin-bottom: 1%;
+    }
+
+    .center ul .icon {
+        font-size: 40px;
+        margin: 1% 2%;
+    }
+
+    .center ul span {
+        font-size: 40px;
+        margin: 1% 2%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .center {
+        margin-left: 2%;
+    }
+
+    .logo {
+        font-size: 50px;
+    }
+
+    .center ul .title {
+        font-size: 30px;
+    }
+
+    .center ul .icon {
+        font-size: 25px;
+    }
+
+    .center ul span {
+        font-size: 25px;
+    }
 }

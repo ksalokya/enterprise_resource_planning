@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -9,9 +9,16 @@ import Lottie from 'react-lottie';
 import Typography from '@mui/material/Typography';
 import * as animationData from "./animation.json"
 import { Link } from "react-router-dom";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
+export default function Signin() {
+    const matches = useMediaQuery('(max-width:900px)');
+    const [displayLottie, setDisplayLottie] = useState('default');
+    useEffect(() => {
+        if (matches) setDisplayLottie('none');
+        else setDisplayLottie('default');
+    }, [matches])
 
-export default function ResetPassword() {
     const defaultOptions = {
         loop: true,
         autoplay: true,
@@ -27,34 +34,22 @@ export default function ResetPassword() {
             <Container maxWidth="lg" className='box'>
                 <Box sx={{ bgcolor: 'rgba(255, 255, 255, .5)', borderRadius: '20px' }}>
                     <Grid container>
-                        <Grid item xs={6} sx={{ padding: 4, marginTop: 2 }}>
+                        <Grid item lg={6} md={6} sx={{ marginTop: 2, display: displayLottie }}>
                             <Lottie
                                 options={defaultOptions}
                                 isClickToPauseDisabled={true}
                             />
                         </Grid>
-                        <Grid item xs={6} sx={{ padding: 4, bgcolor: "#fff" }}>
+                        <Grid item lg={6} md={6} xs={12} sx={{ padding: 4, bgcolor: "#fff" }}>
                             <div className='top-box'>
-                                <h2>Reset Password!</h2>
+                                <h2>Hello Again!</h2>
                                 <Typography>
-                                    Return to Login Page.{" "}
-                                    <Link to="/signin">Sign In</Link>
+                                    Don't have an account?{" "}
+                                    <Link to="/signup">Sign Up</Link>
                                 </Typography>
                             </div>
                             <form />
-                            <Grid container spacing={3} sx={{ marginTop: 3 }}>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        style={{ color: "#ffffff" }}
-                                        variant="outlined"
-                                        required={true}
-                                        fullWidth
-                                        id="username"
-                                        label="Username"
-                                        name="username"
-                                        autoComplete="off"
-                                    />
-                                </Grid>
+                            <Grid container spacing={3} sx={{ marginTop: 6 }}>
                                 <Grid item xs={12}>
                                     <TextField
                                         style={{ color: "#ffffff" }}
@@ -80,16 +75,8 @@ export default function ResetPassword() {
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <TextField
-                                        variant="outlined"
-                                        required={true}
-                                        fullWidth
-                                        name="passwordConfirmation"
-                                        label="Password Confirmation"
-                                        type="password"
-                                        id="password-confirmation"
-                                        autoComplete="off"
-                                    />
+                                    <input type="checkbox" />
+                                    <span>&nbsp; Remember me.</span>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Button
@@ -99,8 +86,15 @@ export default function ResetPassword() {
                                         color="primary"
                                         className='register-btn'
                                     >
-                                        Reset
+                                        Sign In
                                     </Button>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <div className="forgot-password">
+                                        <Typography>
+                                            <Link to="/reset">Forgot Password?</Link>
+                                        </Typography>
+                                    </div>
                                 </Grid>
                             </Grid>
                         </Grid>

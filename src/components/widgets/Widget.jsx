@@ -99,7 +99,7 @@ function Widget({ type }) {
       </div>
       <div className="right">
         <div className={`percentage ${data.pos ? "positive" : "negative"}`}>
-          {data.pos ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon /> }
+          {data.pos ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           {data.diff} %
         </div>
         {data.icon}

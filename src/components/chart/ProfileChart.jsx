@@ -17,7 +17,7 @@ const data = [
     { name: "June", Total: 1700 },
 ];
 
-function ProfileChart(props) {
+function ProfileChart() {
     return (
         <div className="profile-chart">
             <ResponsiveContainer width="100%" height="100%">

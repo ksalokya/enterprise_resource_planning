@@ -1,21 +1,13 @@
-import Navbar from '../../components/navbar/Navbar'
-import Sidebar from '../../components/sidebar/Sidebar'
-
+import Grid from '@mui/material/Grid';
 import Scheduler from '../../components/calendar/Calendar'
 
-import './calendar.css'
-
-function Calendar(props) {
+function Calendar() {
     return (
-        <div className="calendar">
-            <Sidebar />
-            <div className="calendar-container">
-                <Navbar handle={props.handle} />
-                <div className="calendar-component">
-                    <Scheduler />
-                </div>
-            </div>
-        </div>
+        <Grid container sx={{ paddingLeft: 2, paddingRight: 2 }}>
+            <Grid item lg={12} md={12} xs={12} >
+                <Scheduler />
+            </Grid>
+        </Grid>
     )
 }
 

@@ -1,21 +1,13 @@
-import Navbar from '../../components/navbar/Navbar'
-import Sidebar from '../../components/sidebar/Sidebar'
-
+import Grid from '@mui/material/Grid';
 import Spreadsheet from '../../components/sheet/Spreadsheet'
 
-import './sheet.css'
-
-function Sheet(props) {
+function Sheet() {
     return (
-        <div className="sheet">
-            <Sidebar />
-            <div className="sheet-container">
-                <Navbar handle={props.handle} />
-                <div className="sheet-component">
-                    <Spreadsheet />
-                </div>
-            </div>
-        </div>
+        <Grid container sx={{ paddingLeft: 2, paddingRight: 2 }}>
+            <Grid item lg={12} md={12} xs={12} >
+                <Spreadsheet />
+            </Grid>
+        </Grid>
     )
 }
 

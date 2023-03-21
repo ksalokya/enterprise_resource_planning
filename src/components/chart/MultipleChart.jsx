@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Grid from '@mui/material/Grid';
 import { LineChart, Line, CartesianGrid, Legend } from 'recharts';
 import './chart.css'
 
@@ -25,35 +26,36 @@ function MultipleChart() {
     }, [])
 
     return (
-        <div className="multi-chart">
-            <div className="multi-chart-row1">
+        <Grid container lg={12} className="multi-chart-row">
+            <Grid item lg={6} md={6} xs={6} sx={{ mt: 3 }}>
                 <LineChart className='small-charts' width={200} height={100} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <Legend />
                     <Line type="monotone" dataKey="CPU" stroke="rgb(30, 183, 255)" activeDot={{ r: 8 }} />
                 </LineChart>
-
+            </Grid>
+            <Grid item lg={6} md={6} xs={6} sx={{ mt: 3 }}>
                 <LineChart className='small-charts' width={200} height={100} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <Legend />
                     <Line type="monotone" dataKey="Memory" stroke="rgb(202, 142, 255)" activeDot={{ r: 8 }} />
                 </LineChart>
-            </div>
-
-            <div className="multi-chart-row2">
+            </Grid>
+            <Grid item lg={6} md={6} xs={6}  >
                 <LineChart className='small-charts' width={200} height={100} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <Legend />
                     <Line type="monotone" dataKey="Traffic" stroke="rgb(27, 185, 52)" activeDot={{ r: 8 }} />
                 </LineChart>
-
+            </Grid>
+            <Grid item lg={6} md={6} xs={6} >
                 <LineChart className='small-charts' width={200} height={100} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <Legend />
                     <Line type="monotone" dataKey="Disk" stroke="rgb(247, 191, 71)" activeDot={{ r: 8 }} />
                 </LineChart>
-            </div>
-        </div>
+            </Grid>
+        </Grid >
     )
 }
 

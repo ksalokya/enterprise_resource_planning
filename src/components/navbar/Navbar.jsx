@@ -73,7 +73,7 @@ export default function Navbar(props) {
             [theme.breakpoints.up("lg")]: {
                 width: props.open ? "40ch" : "50ch",
                 "&:focus": {
-                    width: "45ch"
+                    width: props.open ? "45ch" : "55ch"
                 }
             }
         },

@@ -16,7 +16,7 @@ export const userColumns = [
   {
     field: "email",
     headerName: "Email",
-    width: 280,
+    width: 350,
   },
 
   {
@@ -27,12 +27,12 @@ export const userColumns = [
   {
     field: "contact",
     headerName: "Contact",
-    width: 180
+    width: 220
   },
   {
     field: "status",
     headerName: "Status",
-    width: 130,
+    width: 180,
     renderCell: (params) => {
       return (
         <div className={`cellWithStatus ${params.row.status}`}>

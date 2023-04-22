@@ -37,7 +37,7 @@ function Sidebar(props) {
   const handleClose = () => setOpen(false);
 
   return (
-    <div className='sidebar'>
+    <div className="sidebar">
       <div className="top" onClick={props.sidebar}>
         <Link to="/home" style={{ textDecoration: "none" }} >
           <span className="logo">

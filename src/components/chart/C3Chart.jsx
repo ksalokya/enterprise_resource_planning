@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import c3 from "c3";
 import dayjs from 'dayjs'
 import 'c3/c3.css';
-import './c3.js'
+import './chart.css'
 
 const timeNow = () => dayjs().format('YYYY-MM-DD HH:mm:ss');
 const timeTail = () => dayjs().subtract(1, 'm').format('YYYY-MM-DD HH:mm:ss');

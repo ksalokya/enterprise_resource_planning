@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { AreaChart, Area, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import './chart.css'
 
-import CustomActiveShapePieChart from './CustomActiveShapePieChart';
-
 function MonitorChart() {
 
     const [data, setData] = useState([{
@@ -50,9 +48,6 @@ function MonitorChart() {
                     </AreaChart>
                 </ResponsiveContainer>
             </div>
-            // <div className="monitor-custom-right">
-            //     <CustomActiveShapePieChart />
-            // </div>
     )
 }
 

@@ -104,7 +104,7 @@ export default function Signup() {
                                     />
                                 </Grid>
                                 <Grid item xs={12} className="agreement">
-                                    <input type="checkbox" checked />
+                                    <input type="checkbox" />
                                     <span>&nbsp; I agree to Plataform's &nbsp;
                                         <a href="#">Terms of Service</a> and&nbsp;
                                         <a href="#">Privacy Policy.</a>

@@ -4,6 +4,7 @@
     flex: 1;
     flex-direction: column;
     height: 90vh;
+    background-color: black !important;
 }
 
 .country {
@@ -15,6 +16,7 @@
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
     height: 45vh;
+    justify-content: center;
 }
 
 .network {
@@ -26,6 +28,7 @@
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
     height: 45vh;
+    justify-content: center;
 }
 
 #maps {

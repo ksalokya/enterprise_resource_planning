@@ -29,9 +29,9 @@
 .profile-editButton {
     float: right;
     padding: 5px;
-    font-size: 12px;
-    color: #7451f8;
-    background-color: #7551f818;
+    font-size: 18px;
+    color: #a694ea;
+    background-color: #a994f818;
     cursor: pointer;
     border-radius: 0px 0px 0px 5px;
 }
@@ -65,6 +65,7 @@
 }
 
 .profile-itemValue {
+    color: gray;
     font-weight: 300;
 }
 

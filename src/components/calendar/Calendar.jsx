@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 import { ScheduleComponent, ViewsDirective, ViewDirective, Day, Week, WorkWeek, Month, Agenda, Inject, Resize, DragAndDrop } from '@syncfusion/ej2-react-schedule';
 import { DatePickerComponent } from '@syncfusion/ej2-react-calendars';
-
 import Header from "../header/Header";
-
 import { scheduleData } from './data';
-import '../../../node_modules/@syncfusion/ej2/material.css';
 import './calendar.css'
 
 function Calendar() {
+
     const [scheduleObj, setScheduleObj] = useState();
 
     const change = (args) => {
@@ -19,7 +17,7 @@ function Calendar() {
     const onDragStart = (arg) => {
         // eslint-disable-next-line no-param-reassign
         arg.navigation.enable = true;
-    };
+    }
 
     return (
         <div className="scheduler">
@@ -38,7 +36,7 @@ function Calendar() {
             </ScheduleComponent>
             <div>
                 <table
-                    style={{ width: '100%', background: 'white' }}
+                    style={{ width: '100%' }}
                 >
                     <tbody>
                         <tr style={{ height: '50px' }}>

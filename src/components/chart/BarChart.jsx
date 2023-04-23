@@ -45,15 +45,9 @@ function CustomBarChart() {
       <div className="chart-top">
         <p className="chart-title">Last 6 Months (Sales)</p>
       </div>
-      <ResponsiveContainer>
+      <ResponsiveContainer height="95%">
         <BarChart
           data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />

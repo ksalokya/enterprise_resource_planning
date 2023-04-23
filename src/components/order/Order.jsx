@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { DarkMode } from '../../App';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,35 +10,39 @@ import Paper from "@mui/material/Paper";
 import './order.css'
 
 function Order(props) {
+  const isDarkModeEnabled = useContext(DarkMode);
+
   return (
-    <TableContainer component={Paper} className="table">
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <TableContainer component={Paper} className="table" sx={{
+      backgroundColor: isDarkModeEnabled ? '#121212' : '',
+    }}>
+      <Table sx={{ minWidth: 650, color: isDarkModeEnabled ? '#fff' : '' }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell className="tableCell">Tracking ID</TableCell>
-            <TableCell className="tableCell">Product</TableCell>
-            <TableCell className="tableCell">{props.type}</TableCell>
-            <TableCell className="tableCell">Date</TableCell>
-            <TableCell className="tableCell">Amount</TableCell>
-            <TableCell className="tableCell">Payment Method</TableCell>
-            <TableCell className="tableCell">Status</TableCell>
+            <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>Tracking ID</TableCell>
+            <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>Product</TableCell>
+            <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>{props.type}</TableCell>
+            <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>Date</TableCell>
+            <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>Amount</TableCell>
+            <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>Payment Method</TableCell>
+            <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {props.rows.map((row) => (
             <TableRow key={row.id}>
-              <TableCell className="tableCell">{row.id}</TableCell>
-              <TableCell className="tableCell">
+              <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>{row.id}</TableCell>
+              <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>
                 <div className="cellWrapper">
                   <img src={row.img} alt="" className="image" />
                   {row.product}
                 </div>
               </TableCell>
-              <TableCell className="tableCell">{row.type}</TableCell>
-              <TableCell className="tableCell">{row.date}</TableCell>
-              <TableCell className="tableCell">{row.amount}</TableCell>
-              <TableCell className="tableCell">{row.method}</TableCell>
-              <TableCell className="tableCell">
+              <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>{row.type}</TableCell>
+              <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>{row.date}</TableCell>
+              <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>{row.amount}</TableCell>
+              <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>{row.method}</TableCell>
+              <TableCell>
                 <span className={`status ${row.status}`}>{row.status}</span>
               </TableCell>
             </TableRow>

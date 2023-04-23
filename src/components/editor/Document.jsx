@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
     DocumentEditorContainerComponent,
     Toolbar,
@@ -7,10 +7,10 @@ import Header from '../header/Header'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import './document.css'
 
-
 DocumentEditorContainerComponent.Inject(Toolbar);
 
 function Document() {
+
     const matches = useMediaQuery('(max-width:900px)');
     const [displayPropertiesPane, setDisplayPropertiesPane] = useState(true);
     useEffect(() => {

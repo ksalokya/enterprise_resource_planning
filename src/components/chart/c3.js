@@ -1,0 +1,1 @@
+export const c3DarkMode = ".tick text {\r\n    stroke: lightgray !important;\r\n}\r\n\r\n.c3-legend-item text {\r\n    stroke: white !important;\r\n}\r\n\r\n.c3-axis-y .domain {\r\n    stroke: white !important;\r\n}\r\n\r\n.c3-axis-x .domain {\r\n    stroke: white !important;\r\n}"

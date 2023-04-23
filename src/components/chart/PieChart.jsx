@@ -34,7 +34,7 @@ function CustomPieChart() {
         <p className="chart-title">Total Revenue</p>
         <MoreVertIcon />
       </div>
-      <ResponsiveContainer>
+      <ResponsiveContainer height="95%">
         <PieChart>
           <Pie
             data={data}

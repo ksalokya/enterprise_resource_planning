@@ -13,13 +13,14 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import LanguageIcon from '@mui/icons-material/Language';
 import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
-import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
+import { DarkMode } from '../../App';
+import Chip from '@mui/material/Chip';
 
 
 export default function Navbar(props) {
@@ -45,7 +46,7 @@ export default function Navbar(props) {
         left: props.open ? "45%" : "48%",
         transform: "translate(-50%, -50%)"
     }));
-    
+
     const SearchIconWrapper = styled('div')(({ theme }) => ({
         padding: theme.spacing(0, 2),
         height: '100%',
@@ -55,7 +56,7 @@ export default function Navbar(props) {
         alignItems: 'center',
         justifyContent: 'center',
     }));
-    
+
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
         color: 'inherit',
         '& .MuiInputBase-input': {
@@ -111,17 +112,17 @@ export default function Navbar(props) {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem>
-                <IconButton size="large" aria-label="language" color="inherit">
-                    <LanguageIcon />
-                </IconButton>
-                <p>Languages</p>
-            </MenuItem>
-            <MenuItem>
-                <IconButton size="large" aria-label="full screen" color="inherit" onClick={props.handle.enter} >
+            <MenuItem onClick={props.handle.enter}>
+                <IconButton size="large" aria-label="full screen" color="inherit">
                     <FullscreenExitOutlinedIcon className="icon" />
                 </IconButton>
                 <p>Full Screen</p>
+            </MenuItem>
+            <MenuItem onClick={props.handleDarkMode}>
+                <IconButton size="large" aria-label="language" color="inherit">
+                    <DarkModeOutlinedIcon />
+                </IconButton>
+                <p>Dark Mode</p>
             </MenuItem>
             <MenuItem>
                 <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -158,14 +159,19 @@ export default function Navbar(props) {
         </Menu >
     );
 
+    const isDarkModeEnabled = React.useContext(DarkMode);
+
     return (
         <Box>
-            <AppBar position="static" sx={{
-                background: "#ffffff",
-                color: "#555", boxShadow: "none",
-                height: "12%",
-                marginBottom: "1%"
-            }}>
+            <AppBar
+                position="static"
+                sx={{
+                    boxShadow: "none",
+                    height: "12%",
+                    paddingBottom: "1%",
+                    background: isDarkModeEnabled ? '#121212' : '#ffffff',
+                    color: isDarkModeEnabled ? '#fff' : '#555'
+                }}>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -188,11 +194,12 @@ export default function Navbar(props) {
                     </Search>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <IconButton size="large" aria-label="language" color="inherit">
-                            <LanguageIcon />
-                        </IconButton>
                         <IconButton size="large" aria-label="full screen" color="inherit" onClick={props.handle.enter}>
                             <FullscreenExitOutlinedIcon className="icon" />
+                        </IconButton>
+                        <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={props.handleDarkMode}>
+                            <DarkModeOutlinedIcon className="icon" />
+                            <Chip sx={{ ml: 1 }} color="secondary" size="small" label="Beta" />
                         </IconButton>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={4} color="error">
@@ -207,9 +214,6 @@ export default function Navbar(props) {
                             <Badge badgeContent={17} color="error">
                                 <NotificationsIcon />
                             </Badge>
-                        </IconButton>
-                        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                            <ListOutlinedIcon className="icon" />
                         </IconButton>
                         <Link to="/profile" style={{ textDecoration: "none" }}>
                             <IconButton

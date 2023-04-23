@@ -14,7 +14,7 @@ function Orders() {
       <Grid item lg={4} md={6} xs={12}>
         <MixedBarChart />
       </Grid>
-      <Grid item lg={4} md={6} xs={12}>
+      <Grid item lg={4} md={12} xs={12}>
         <TwoLevelPieChart />
       </Grid>
       <Grid item lg={12} md={12} xs={12}>

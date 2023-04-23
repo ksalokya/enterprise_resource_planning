@@ -25,10 +25,18 @@
     margin-bottom: 2px;
 }
 
+.monitor-title-dark {
+    color: #fff !important;
+}
+
 .monitor-unit {
     font-size: 18px;
     font-weight: 300;
     margin-bottom: 15px;
+}
+
+.monitor-unit-dark {
+    color: #eeeeee !important;
 }
 
 .monitor-right {

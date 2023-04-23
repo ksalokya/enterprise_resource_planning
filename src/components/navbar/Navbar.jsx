@@ -13,14 +13,12 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
 import { DarkMode } from '../../App';
-import Chip from '@mui/material/Chip';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import './navbar.css'
 
@@ -116,12 +114,6 @@ export default function Navbar(props) {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem onClick={props.handle.enter}>
-                <IconButton size="large" aria-label="full screen" color="inherit">
-                    <FullscreenExitOutlinedIcon className="icon" />
-                </IconButton>
-                <p>Full Screen</p>
-            </MenuItem>
             <MenuItem onClick={props.handleDarkMode}>
                 <IconButton size="large" aria-label="language" color="inherit">
                     <DarkModeOutlinedIcon />
@@ -196,12 +188,8 @@ export default function Navbar(props) {
                     </Search>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <IconButton size="large" aria-label="full screen" color="inherit" onClick={props.handle.enter}>
-                            <FullscreenExitOutlinedIcon className="icon" />
-                        </IconButton>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={props.handleDarkMode}>
                             <DarkModeOutlinedIcon className="icon" />
-                            <Chip sx={{ ml: 1 }} color="secondary" size="small" label="Beta" />
                         </IconButton>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={4} color="error">

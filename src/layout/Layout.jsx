@@ -79,7 +79,6 @@ export default function Layout(props) {
                 <Navbar
                     open={open}
                     sidebar={() => open ? handleClose() : handleOpen('function')}
-                    handle={props.handle}
                     handleDarkMode={props.handleDarkMode}
                 />
                 <Outlet />

@@ -74,8 +74,3 @@
 .register-btn:hover {
   background-color: rgb(0, 136, 254) !important;
 }
-
-.dark-mode{
-  background-color: #121212 !important;
-  color : #fff !important
-}

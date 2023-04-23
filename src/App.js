@@ -1,5 +1,4 @@
 import React, { useState, createContext, useEffect } from 'react';
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import {
   BrowserRouter,
   Routes,
@@ -32,8 +31,6 @@ const Profile = React.lazy(() => import('./pages/profile/Profile'));
 export const DarkMode = createContext();
 
 function App() {
-  const handle = useFullScreenHandle();
-
   const [isDarkMode, setIsDarkMode] = useState(false);
   const handleDarkMode = () => setIsDarkMode(!isDarkMode);
 
@@ -69,104 +66,102 @@ function App() {
   return (
     <DarkMode.Provider value={isDarkMode}>
       <div>
-        <FullScreen handle={handle}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/">
-                <Route index element={<Navigate to="/signup" />} />
-                <Route path="signup">
-                  <Route index element={<Signup />} />
-                </Route>
-                <Route path="signin">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Navigate to="/signup" />} />
+              <Route path="signup">
+                <Route index element={<Signup />} />
+              </Route>
+              <Route path="signin">
+                <Route index element={
+                  <React.Suspense fallback={<Loader />}>
+                    <Signin />
+                  </React.Suspense>
+                } />
+              </Route>
+              <Route path="reset">
+                <Route index element={
+                  <React.Suspense fallback={<Loader />}>
+                    <ResetPassword />
+                  </React.Suspense>
+                } />
+              </Route>
+              <Route element={<Layout handleDarkMode={handleDarkMode} />}>
+                <Route path="home">
                   <Route index element={
                     <React.Suspense fallback={<Loader />}>
-                      <Signin />
+                      <Home />
                     </React.Suspense>
                   } />
                 </Route>
-                <Route path="reset">
+                <Route path="users">
                   <Route index element={
                     <React.Suspense fallback={<Loader />}>
-                      <ResetPassword />
+                      <Users />
                     </React.Suspense>
                   } />
                 </Route>
-                <Route element={<Layout handle={handle} handleDarkMode={handleDarkMode} />}>
-                  <Route path="home">
-                    <Route index element={
-                      <React.Suspense fallback={<Loader />}>
-                        <Home />
-                      </React.Suspense>
-                    } />
-                  </Route>
-                  <Route path="users">
-                    <Route index element={
-                      <React.Suspense fallback={<Loader />}>
-                        <Users />
-                      </React.Suspense>
-                    } />
-                  </Route>
-                  <Route path="orders">
-                    <Route index element={
-                      <React.Suspense fallback={<Loader />}>
-                        <Products />
-                      </React.Suspense>
-                    } />
-                  </Route>
-                  <Route path="delivery">
-                    <Route index element={
-                      <React.Suspense fallback={<Loader />}>
-                        <Delivery />
-                      </React.Suspense>
-                    } />
-                  </Route>
-                  <Route path="kanban">
-                    <Route index element={
-                      <React.Suspense fallback={<Loader />}>
-                        <Kanban />
-                      </React.Suspense>
-                    } />
-                  </Route>
-                  <Route path="calendar">
-                    <Route index element={
-                      <React.Suspense fallback={<Loader />}>
-                        <Calendar />
-                      </React.Suspense>
-                    } />
-                  </Route>
-                  <Route path="sheet">
-                    <Route index element={
-                      <React.Suspense fallback={<Loader />}>
-                        <Sheet />
-                      </React.Suspense>
-                    } />
-                  </Route>
-                  <Route path="editor">
-                    <Route index element={
-                      <React.Suspense fallback={<Loader />}>
-                        <Editor />
-                      </React.Suspense>
-                    } />
-                  </Route>
-                  <Route path="health">
-                    <Route index element={
-                      <React.Suspense fallback={<Loader />}>
-                        <Health />
-                      </React.Suspense>
-                    } />
-                  </Route>
-                  <Route path="profile">
-                    <Route index element={
-                      <React.Suspense fallback={<Loader />}>
-                        <Profile />
-                      </React.Suspense>
-                    } />
-                  </Route>
+                <Route path="orders">
+                  <Route index element={
+                    <React.Suspense fallback={<Loader />}>
+                      <Products />
+                    </React.Suspense>
+                  } />
+                </Route>
+                <Route path="delivery">
+                  <Route index element={
+                    <React.Suspense fallback={<Loader />}>
+                      <Delivery />
+                    </React.Suspense>
+                  } />
+                </Route>
+                <Route path="kanban">
+                  <Route index element={
+                    <React.Suspense fallback={<Loader />}>
+                      <Kanban />
+                    </React.Suspense>
+                  } />
+                </Route>
+                <Route path="calendar">
+                  <Route index element={
+                    <React.Suspense fallback={<Loader />}>
+                      <Calendar />
+                    </React.Suspense>
+                  } />
+                </Route>
+                <Route path="sheet">
+                  <Route index element={
+                    <React.Suspense fallback={<Loader />}>
+                      <Sheet />
+                    </React.Suspense>
+                  } />
+                </Route>
+                <Route path="editor">
+                  <Route index element={
+                    <React.Suspense fallback={<Loader />}>
+                      <Editor />
+                    </React.Suspense>
+                  } />
+                </Route>
+                <Route path="health">
+                  <Route index element={
+                    <React.Suspense fallback={<Loader />}>
+                      <Health />
+                    </React.Suspense>
+                  } />
+                </Route>
+                <Route path="profile">
+                  <Route index element={
+                    <React.Suspense fallback={<Loader />}>
+                      <Profile />
+                    </React.Suspense>
+                  } />
                 </Route>
               </Route>
-            </Routes>
-          </BrowserRouter>
-        </FullScreen>
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </div >
     </DarkMode.Provider>
   );

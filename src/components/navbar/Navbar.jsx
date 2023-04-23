@@ -20,6 +20,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
 import { DarkMode } from '../../App';
+import Chip from '@mui/material/Chip';
 
 
 export default function Navbar(props) {
@@ -198,6 +199,7 @@ export default function Navbar(props) {
                         </IconButton>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={props.handleDarkMode}>
                             <DarkModeOutlinedIcon className="icon" />
+                            <Chip sx={{ ml: 1 }} color="secondary" size="small" label="Beta" />
                         </IconButton>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={4} color="error">

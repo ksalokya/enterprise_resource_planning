@@ -18,7 +18,7 @@
 ![03-resetpassword](https://user-images.githubusercontent.com/72447529/221411025-3c05c465-95d0-432e-ab1d-1496d429742c.jpg)
 
 ### Home
-![04-home](https://user-images.githubusercontent.com/72447529/221411075-8122fabf-6a35-4d58-b7fa-9c8251fc18b3.jpg)
+![04-home](https://user-images.githubusercontent.com/72447529/233848646-e1fe2ae6-3eab-4546-928c-398abff40008.png)
 
 ### User
 ![05-users](https://user-images.githubusercontent.com/72447529/221411098-78752874-574d-4dbb-91e7-c637d1e3729b.jpg)

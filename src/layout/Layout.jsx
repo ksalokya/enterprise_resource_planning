@@ -1,10 +1,9 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
 import Navbar from '../components/navbar/Navbar'
 import Sidebar from '../components/sidebar/Sidebar'
-import { DarkMode } from '../App';
 
 export default function Layout(props) {
     const matches = useMediaQuery('(max-width:1200px)');
@@ -62,8 +61,6 @@ export default function Layout(props) {
         if (matches) handleClose('useEffect');
         else handleOpen();
     }, [matches])
-
-    const isDarkModeEnabled = useContext(DarkMode);
 
     return (
         <Grid container>

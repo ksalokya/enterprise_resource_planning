@@ -5,9 +5,9 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@mui/icons-material": "^5.11.9",
-    "@mui/material": "^5.11.10",
-    "@mui/x-data-grid": "^5.17.25",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.12.1",
+    "@mui/x-data-grid": "^5.17.26",
     "@syncfusion/ej2": "^21.1.41",
     "@syncfusion/ej2-base": "^21.1.40",
     "@syncfusion/ej2-react-calendars": "^21.1.41",
@@ -28,11 +28,11 @@
     "react-dom": "^18.2.0",
     "react-full-screen": "^1.1.1",
     "react-lottie": "^1.2.3",
-    "react-router-dom": "^6.8.1",
+    "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
-    "react-spring": "^9.7.0",
-    "recharts": "^2.4.3",
-    "web-vitals": "^3.1.1"
+    "react-spring": "^9.7.1",
+    "recharts": "^2.5.0",
+    "web-vitals": "^3.3.1"
   },
   "scripts": {
     "start": "react-scripts start",

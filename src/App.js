@@ -10,6 +10,7 @@ import {
 import "./app.css"
 import { lightMode } from "./components/map/light.js";
 import { darkMode } from "./components/map/dark.js";
+import { c3DarkMode } from './components/chart/c3'
 import Signup from './pages/signup/Signup';
 import Loader from './components/loader/Loader';
 import Layout from './layout/Layout';
@@ -52,7 +53,7 @@ function App() {
       let styleLink = document.getElementById('css-link');
       styleLink.href = 'https://cdn.syncfusion.com/ej2/highcontrast.css';
       const styleTag = document.getElementById('theme');
-      styleTag.innerHTML = darkMode;
+      styleTag.innerHTML = darkMode + c3DarkMode;
       setTimeout(function () { document.getElementsByTagName('body')[0].style.display = 'block'; }, 100);
     } else {
       document.getElementsByTagName('body')[0].style.display = 'none';

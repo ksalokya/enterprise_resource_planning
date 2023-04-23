@@ -2,6 +2,11 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/37945a6e-7402-421f-a19a-d21860e7c37f/deploy-status)](https://app.netlify.com/sites/enterprise-planning/deploys)
 
+
+## Enviroments
+#### It's not a bug - it's an undocumented feature.        => [Production](https://enterprise-planning.netlify.app/)
+#### Software is written by humans and therefore has bugs => [Staging](https://sage-palmier-a39649.netlify.app)
+
 ## Screens
 
 ### Sign Up
@@ -43,4 +48,3 @@
 ### Profile
 ![13-profile](https://user-images.githubusercontent.com/72447529/221411182-93c6e5e1-b1ee-4715-8148-84c4edbf1c58.jpg)
 
-[Staging](https://sage-palmier-a39649.netlify.app)

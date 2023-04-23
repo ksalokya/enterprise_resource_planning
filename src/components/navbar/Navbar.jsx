@@ -21,9 +21,13 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
 import { DarkMode } from '../../App';
 import Chip from '@mui/material/Chip';
-
+import useMediaQuery from '@mui/material/useMediaQuery';
+import './navbar.css'
 
 export default function Navbar(props) {
+    const matches = useMediaQuery('(max-width:900px)');
+    const isDarkModeEnabled = React.useContext(DarkMode);
+
     const Search = styled('div')(({ theme }) => ({
         position: 'absolute',
         borderRadius: theme.shape.borderRadius,
@@ -66,9 +70,9 @@ export default function Navbar(props) {
             transition: theme.transitions.create('width'),
             width: '100%',
             [theme.breakpoints.down("md")]: {
-                width: "35ch",
+                width: "28ch",
                 "&:focus": {
-                    width: "40ch"
+                    width: "30ch"
                 }
             },
             [theme.breakpoints.up("lg")]: {
@@ -159,8 +163,6 @@ export default function Navbar(props) {
         </Menu >
     );
 
-    const isDarkModeEnabled = React.useContext(DarkMode);
-
     return (
         <Box>
             <AppBar
@@ -178,7 +180,7 @@ export default function Navbar(props) {
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
-                        sx={{ mr: 2, backgroundColor: !props.open ? "#dddddd" : "#ffffff" }}
+                        sx={{ mr: 2, backgroundColor: (!isDarkModeEnabled && !matches && !props.open) ? "#eeeeee" : '' }}
                         onClick={props.sidebar}
                     >
                         <MenuIcon />

@@ -66,9 +66,9 @@ export default function Navbar(props) {
             transition: theme.transitions.create('width'),
             width: '100%',
             [theme.breakpoints.down("md")]: {
-                width: "30ch",
+                width: "35ch",
                 "&:focus": {
-                    width: "32ch"
+                    width: "40ch"
                 }
             },
             [theme.breakpoints.up("lg")]: {
@@ -178,7 +178,7 @@ export default function Navbar(props) {
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
-                        sx={{ mr: 2 }}
+                        sx={{ mr: 2, backgroundColor: !props.open ? "#dddddd" : "#ffffff" }}
                         onClick={props.sidebar}
                     >
                         <MenuIcon />

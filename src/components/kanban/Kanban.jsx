@@ -65,11 +65,14 @@ function Kanban() {
                         position: 'absolute',
                         top: '50%',
                         left: '50%',
-                        transform: 'translate(-50%, -50%)',
+                        transform: 'translate(-50%, -50%)'
                     }}>
-                        <Skeleton variant="rounded" />
-                        <Skeleton animation="wave" />
-                        <Skeleton animation={false} />
+                        <Skeleton sx={{ backgroundColor: '#aaaaaa' }} variant="rounded" />
+                        <Skeleton sx={{ backgroundColor: '#aaaaaa' }} animation="wave" />
+                        <Skeleton sx={{ backgroundColor: '#aaaaaa' }} animation={false} />
+                        <Skeleton sx={{ marginTop: 2, backgroundColor: isDarkModeEnabled ? '#333333' : '#aaaaaa' }} variant="rounded" />
+                        <Skeleton sx={{ backgroundColor: isDarkModeEnabled ? '#333333' : '#aaaaaa' }} animation="wave" />
+                        <Skeleton sx={{ backgroundColor: isDarkModeEnabled ? '#333333' : '#aaaaaa' }} animation={false} />
                     </Box>
             }
         </>

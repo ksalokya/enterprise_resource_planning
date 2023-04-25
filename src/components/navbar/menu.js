@@ -1,1 +1,0 @@
-export const darkMenu = ".css-1ka5eyc-MuiPaper-root-MuiMenu-paper-MuiPopover-paper {\r\n    background-color: #121212 !important;\r\n    color: #fff !important;\r\n}"

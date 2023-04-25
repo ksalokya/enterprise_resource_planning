@@ -113,6 +113,12 @@ export default function Navbar(props) {
             }}
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
+            PaperProps={{
+                style: {
+                    backgroundColor: isDarkModeEnabled ? "#121212" : '',
+                    color: isDarkModeEnabled ? "#fff" : ''
+                }
+            }}
         >
             <MenuItem onClick={props.handleDarkMode}>
                 <IconButton size="large" aria-label="language" color="inherit">

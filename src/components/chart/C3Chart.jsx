@@ -56,11 +56,11 @@ export default function C3Chart() {
     }, [])
 
     return (
-        <>
+        <div className='c3-chart'>
             <div className="chart-top">
                 <p className="chart-title">Live Report</p>
             </div>
-            <div id="line-chart" style={{ padding: '5px' }}></div>
-        </>
+            <div id="line-chart" style={{ padding: '5px', margin: '10px' }}></div>
+        </div>
     )
 }

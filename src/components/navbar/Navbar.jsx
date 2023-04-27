@@ -35,7 +35,7 @@ export default function Navbar(props) {
         },
         width: '100%',
         [theme.breakpoints.only('xs')]: {
-            marginLeft: theme.spacing(2),
+            marginLeft: theme.spacing(1),
             width: '50%',
         },
         [theme.breakpoints.up('sm')]: {
@@ -43,7 +43,9 @@ export default function Navbar(props) {
             width: 'auto',
         },
         borderStyle: "solid",
-        borderColor: "#555",
+        borderWidth: '0.5px',
+        borderColor: "rgb(54, 65, 82)",
+        borderRadius: '12px',
         top: "50%",
         left: props.open ? "45%" : "48%",
         transform: "translate(-50%, -50%)"
@@ -178,7 +180,20 @@ export default function Navbar(props) {
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
-                        sx={{ mr: 2, backgroundColor: (!isDarkModeEnabled && !matches && !props.open) ? "#eeeeee" : '' }}
+                        sx={{
+                            mr: 2,
+                            backgroundColor: (!isDarkModeEnabled && !matches) ? "rgb(222, 230, 240)" : '',
+                            color: isDarkModeEnabled ? '#fff' : 'rgb(94, 53, 177)',
+                            marginLeft: matches ? "1px" : "",
+                            borderRadius: '8px',
+                            height: '36px',
+                            width: '36px',
+                            transition: 'all 0.2s ease-in-out 0s',
+                            "&:hover": {
+                                background: 'rgb(26, 115, 232)',
+                                color: 'rgb(237, 231, 246)'
+                            }
+                        }}
                         onClick={props.sidebar}
                     >
                         <MenuIcon />

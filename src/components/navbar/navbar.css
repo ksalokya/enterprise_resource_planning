@@ -10,24 +10,6 @@
     padding: 20px;
 }
 
-.navbar .wrapper .search {
-    display: flex;
-    align-items: center;
-    margin-left: 25%;
-    border: 0.5px solid lightgray;
-    height: 50px !important;
-    width: 400px !important;
-}
-
-.css-i44wyl {
-    height: 50px !important;
-    width: 400px !important;
-}
-
-.css-igs3ac {
-    bottom: 5px !important;
-}
-
 .navbar .wrapper .items {
     display: flex;
     align-items: center;

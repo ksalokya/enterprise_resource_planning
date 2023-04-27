@@ -1,3 +1,12 @@
+.c3-chart {
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    border-radius: 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 .bar-chart {
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
@@ -109,7 +118,7 @@
 
 .chart-title {
     font-size: 20px;
-    padding: 0 12px;
+    padding: 5px 15px;
     font-weight: bold;
 }
 

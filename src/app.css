@@ -1,5 +1,6 @@
 .main {
-  background-image: url("./assets/bg-image.jpg") !important;
+  background-color: #21D4FD;
+  background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
   background-position: center;
   background-size: cover;
   position: relative;
@@ -18,6 +19,10 @@
 .top-box {
   background-color: #fff !important;
   opacity: 1 !important;
+}
+
+.top-header {
+  color: #1a73e8 !important
 }
 
 .top-box a {

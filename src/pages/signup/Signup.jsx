@@ -11,10 +11,10 @@ import * as animationData from "./animation.json"
 import { Link } from "react-router-dom";
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-
 export default function Signup() {
     const matches = useMediaQuery('(max-width:900px)');
     const [displayLottie, setDisplayLottie] = useState('default');
+
     useEffect(() => {
         if (matches) setDisplayLottie('none');
         else setDisplayLottie('default');
@@ -35,10 +35,11 @@ export default function Signup() {
             <Container maxWidth="lg" className='box'>
                 <Box sx={{ bgcolor: 'rgba(255, 255, 255, .5)', borderRadius: '20px' }}>
                     <Grid container>
-                        <Grid item lg={6} md={6} sx={{ padding: 4, marginTop: 2, display: displayLottie }}>
+                        <Grid item lg={6} md={6} sx={{ display: displayLottie }}>
                             <Lottie
                                 options={defaultOptions}
                                 isClickToPauseDisabled={true}
+                                height={600}
                             />
                         </Grid>
                         <Grid item lg={6} md={6} xs={12} sx={{ padding: 4, bgcolor: "#fff" }}>

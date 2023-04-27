@@ -102,7 +102,7 @@ function Sidebar(props) {
           </Link>
           <p className="title">PREDICTION</p>
           <Link to="/prediction" style={{ textDecoration: "none" }}>
-            <li className={location.pathname === "/health" ? "current-selected" : ""} onClick={props.sidebar}>
+            <li className={location.pathname === "/prediction" ? "current-selected" : ""} onClick={props.sidebar}>
               <OnlinePredictionIcon className="icon" />
               <span>Predict Revenue</span>
             </li>

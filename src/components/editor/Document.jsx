@@ -26,6 +26,7 @@ function Document() {
                 serviceUrl="https://ej2services.syncfusion.com/production/web-services/api/documenteditor/"
                 enableToolbar={true}
                 showPropertiesPane={displayPropertiesPane}
+                enableAutoFocus={false}
             />
         </div>
     )

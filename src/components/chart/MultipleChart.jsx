@@ -26,15 +26,20 @@ function MultipleChart() {
     }, [])
 
     return (
-        <Grid container lg={12} className="multi-chart-row">
-            <Grid item lg={6} md={6} xs={6} sx={{ mt: 3 }}>
+        <Grid container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            lg={12} className="multi-chart-row"
+        >
+            <Grid item lg={6} md={6} xs={6} sx={{ mt: 2 }}>
                 <LineChart className='small-charts' width={200} height={100} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <Legend />
                     <Line type="monotone" dataKey="CPU" stroke="rgb(30, 183, 255)" activeDot={{ r: 8 }} />
                 </LineChart>
             </Grid>
-            <Grid item lg={6} md={6} xs={6} sx={{ mt: 3 }}>
+            <Grid item lg={6} md={6} xs={6} sx={{ mt: 2 }}>
                 <LineChart className='small-charts' width={200} height={100} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <Legend />

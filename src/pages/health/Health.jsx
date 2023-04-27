@@ -8,7 +8,11 @@ import LineBarArea from '../../components/chart/LineBarArea'
 function Health() {
   return (
     <Grid container sx={{ paddingLeft: 2, paddingRight: 2 }} columnSpacing={2} rowSpacing={3}>
-      <Grid item lg={4} md={6} xs={12} >
+      <Grid container lg={4} md={6} xs={12}
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Grid item lg={12} md={12} xs={12} >
           <Monitor
             title="CPU"

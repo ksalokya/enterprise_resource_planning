@@ -28,8 +28,8 @@ export default function Layout(props) {
         setHelper(false);
         setDisplaySidebar("default");
         setDisplayNavbar("default");
-        setSbar(1.5);
-        setNbar(10.5);
+        setSbar(2);
+        setNbar(10);
     }
 
     const handleOpen = (expression) => {

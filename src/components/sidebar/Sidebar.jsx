@@ -12,6 +12,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import LogoutIcon from '@mui/icons-material/Logout';
+import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -97,6 +98,13 @@ function Sidebar(props) {
             <li className={location.pathname === "/editor" ? "current-selected" : ""} onClick={props.sidebar}>
               <MenuBookIcon className="icon" />
               <span>Editor</span>
+            </li>
+          </Link>
+          <p className="title">PREDICTION</p>
+          <Link to="/prediction" style={{ textDecoration: "none" }}>
+            <li className={location.pathname === "/health" ? "current-selected" : ""} onClick={props.sidebar}>
+              <OnlinePredictionIcon className="icon" />
+              <span>Predict Revenue</span>
             </li>
           </Link>
           <p className="title">SERVICE</p>

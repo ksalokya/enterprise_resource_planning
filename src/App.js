@@ -24,6 +24,7 @@ const Kanban = React.lazy(() => import('./pages/kanban/Kanban'));
 const Calendar = React.lazy(() => import('./pages/calendar/Calendar'));
 const Sheet = React.lazy(() => import('./pages/sheet/Sheet'));
 const Editor = React.lazy(() => import('./pages/editor/Editor'));
+const Prediction = React.lazy(() => import('./pages/prediction/Prediction'));
 const Health = React.lazy(() => import('./pages/health/Health'));
 const Profile = React.lazy(() => import('./pages/profile/Profile'));
 
@@ -51,14 +52,14 @@ function App() {
       styleLink.href = 'https://cdn.syncfusion.com/ej2/highcontrast.css';
       const styleTag = document.getElementById('theme');
       styleTag.innerHTML = darkMode + c3DarkMode;
-      setTimeout(function () { document.getElementsByTagName('body')[0].style.display = 'block'; }, 100);
+      setTimeout(function () { document.getElementsByTagName('body')[0].style.display = 'block'; }, 50);
     } else {
       document.getElementsByTagName('body')[0].style.display = 'none';
       let styleLink = document.getElementById('css-link');
       styleLink.href = 'https://cdn.syncfusion.com/ej2/material.css';
       const styleTag = document.getElementById('theme');
       styleTag.innerHTML = lightMode;
-      setTimeout(function () { document.getElementsByTagName('body')[0].style.display = 'block'; }, 100);
+      setTimeout(function () { document.getElementsByTagName('body')[0].style.display = 'block'; }, 50);
     }
   }
 
@@ -140,6 +141,13 @@ function App() {
                   <Route index element={
                     <React.Suspense fallback={<Loader />}>
                       <Editor />
+                    </React.Suspense>
+                  } />
+                </Route>
+                <Route path="prediction">
+                  <Route index element={
+                    <React.Suspense fallback={<Loader />}>
+                      <Prediction />
                     </React.Suspense>
                   } />
                 </Route>

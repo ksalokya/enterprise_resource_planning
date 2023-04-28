@@ -49,14 +49,14 @@ function App() {
     if (param === 'true') {
       document.getElementsByTagName('body')[0].style.display = 'none';
       let styleLink = document.getElementById('css-link');
-      styleLink.href = 'https://cdn.syncfusion.com/ej2/highcontrast.css';
+      styleLink.href = 'https://cdn.syncfusion.com/ej2/21.1.35/highcontrast.css';
       const styleTag = document.getElementById('theme');
       styleTag.innerHTML = darkMode + c3DarkMode;
       setTimeout(function () { document.getElementsByTagName('body')[0].style.display = 'block'; }, 50);
     } else {
       document.getElementsByTagName('body')[0].style.display = 'none';
       let styleLink = document.getElementById('css-link');
-      styleLink.href = 'https://cdn.syncfusion.com/ej2/material.css';
+      styleLink.href = 'https://cdn.syncfusion.com/ej2/21.1.35/material.css';
       const styleTag = document.getElementById('theme');
       styleTag.innerHTML = lightMode;
       setTimeout(function () { document.getElementsByTagName('body')[0].style.display = 'block'; }, 50);

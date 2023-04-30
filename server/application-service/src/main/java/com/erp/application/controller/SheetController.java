@@ -21,9 +21,10 @@ public class SheetController {
 
 //    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/api/v1/sheet/get")
-    public ResponseEntity<SheetResponsePayload> getSheetController(@RequestBody SheetRequestPayload sheetRequestPayload) {
+    public ResponseEntity<SheetResponsePayload> getSheetController(@RequestBody SheetRequestPayload sheetRequestPayload) throws InterruptedException {
         logger.info("getSheetController method invoked with email :: " + sheetRequestPayload);
         SheetResponsePayload sheetResponsePayload = sheetService.getSheet(sheetRequestPayload);
+        Thread.sleep(3000);
         return new ResponseEntity<>(sheetResponsePayload, HttpStatus.OK);
     }
 

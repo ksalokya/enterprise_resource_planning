@@ -10,7 +10,7 @@ import './datatable.css'
 function Datatable() {
     const isDarkModeEnabled = useContext(DarkMode);
     const [data, setData] = useState(userRows);
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const toggleModal = () => setOpen(!open);
 
     const handleDelete = (id) => {

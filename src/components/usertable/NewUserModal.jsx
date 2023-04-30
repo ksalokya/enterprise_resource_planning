@@ -1,21 +1,10 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Box from '@mui/material/Box';
+import { useMediaQuery } from "@mui/material";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import Modal from '@mui/material/Modal';
+import { DarkMode } from '../../App'
 import './modal.css';
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 600,
-    bgcolor: 'background.paper',
-    border: '0px',
-    borderRadius: '15px',
-    boxShadow: 24,
-    p: 2,
-};
 
 const inputs = [
     {
@@ -63,7 +52,10 @@ const inputs = [
 ];
 
 export default function NewUser(props) {
-    const [open, setOpen] = useState(true);
+    let isDarkModeEnabled = useContext(DarkMode);
+    const matches = useMediaQuery('(max-width: 650px)')
+
+    const [open, setOpen] = useState(false);
     const [file, setFile] = useState("");
 
     const handleOpen = () => setOpen(true);
@@ -84,20 +76,28 @@ export default function NewUser(props) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: matches ? 400 : 600,
+                    bgcolor: isDarkModeEnabled ? '#121212' : '#fff',
+                    border: 'none',
+                    borderRadius: '15px',
+                    boxShadow: 24,
+                    p: matches ? 0 : 2,
+                }}
+                >
                     <div className="new">
                         <div className="newContainer">
                             <div className="top">
                                 <h1>Add New User</h1>
                             </div>
-                            <div className="bottom">
+                            <div className={`bottom ${isDarkModeEnabled ? 'bottom-dark' : ''}`}>
                                 <div className="left">
                                     <img
-                                        src={
-                                            file
-                                                ? URL.createObjectURL(file)
-                                                : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-                                        }
+                                        src={file ? URL.createObjectURL(file) : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}
                                         alt=""
                                     />
                                 </div>
@@ -128,6 +128,6 @@ export default function NewUser(props) {
                     </div>
                 </Box>
             </Modal>
-        </div>
+        </div >
     );
 }

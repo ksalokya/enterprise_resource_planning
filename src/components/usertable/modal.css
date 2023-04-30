@@ -16,6 +16,10 @@
     display: flex;
 }
 
+.bottom-dark {
+    color: #fff !important;
+}
+
 .new h1 {
     color: lightgray;
     font-size: 20px;
@@ -41,6 +45,10 @@
     flex: 2;
 }
 
+.icon {
+    cursor: pointer;
+}
+
 .new form {
     display: flex;
     flex-wrap: wrap;
@@ -48,11 +56,18 @@
     justify-content: space-around;
 }
 
+.new input {
+    width: 100%;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid gray;
+    border-radius: 5px;
+}
+
 .new label {
     display: flex;
     align-items: center;
     gap: 10px;
-
 }
 
 .new button {
@@ -64,15 +79,5 @@
     font-weight: bold;
     cursor: pointer;
     margin-top: 10px;
-}
-
-.new input {
-    width: 100%;
-    padding: 5px;
-    border: none;
-    border-bottom: 1px solid gray;
-}
-
-.icon {
-    cursor: pointer;
+    border-radius: 5px;
 }

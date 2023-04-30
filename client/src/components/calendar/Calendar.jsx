@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ScheduleComponent, ViewsDirective, ViewDirective, Day, Week, WorkWeek, Month, Agenda, Inject, Resize, DragAndDrop } from '@syncfusion/ej2-react-schedule';
 import { DatePickerComponent } from '@syncfusion/ej2-react-calendars';
+import { DataManager, UrlAdaptor } from '@syncfusion/ej2-data';
 import Header from "../header/Header";
 import { scheduleData } from './data';
 import './calendar.css'
@@ -19,6 +20,13 @@ function Calendar() {
         arg.navigation.enable = true;
     }
 
+    let dataManager = new DataManager({
+        url: 'http://localhost:5000/get',
+        crudUrl: 'http://localhost:5000/update',
+        adaptor: new UrlAdaptor(),
+        crossDomain: true
+    });
+
     return (
         <div className="scheduler">
             <Header title="Calendar" />
@@ -26,7 +34,7 @@ function Calendar() {
                 height="72%"
                 ref={(schedule) => setScheduleObj(schedule)}
                 selectedDate={new Date(2021, 0, 10)}
-                eventSettings={{ dataSource: scheduleData }}
+                eventSettings={{ dataSource: dataManager }}
                 dragStart={onDragStart}
             >
                 <ViewsDirective>

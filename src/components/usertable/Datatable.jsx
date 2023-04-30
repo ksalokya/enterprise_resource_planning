@@ -2,12 +2,16 @@ import { useState, useContext } from 'react';
 import { DarkMode } from '../../App';
 import { Link } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
+import Button from '@mui/material/Button';
 import { userColumns, userRows } from './datasource.js';
+import NewUserModal from './NewUserModal'
 import './datatable.css'
 
 function Datatable() {
     const isDarkModeEnabled = useContext(DarkMode);
     const [data, setData] = useState(userRows);
+    const [open, setOpen] = useState(true);
+    const toggleModal = () => setOpen(!open);
 
     const handleDelete = (id) => {
         setData(data.filter((item) => item.id !== id));
@@ -40,9 +44,9 @@ function Datatable() {
         <div className='data-table'>
             <div className="datatableTitle">
                 Add New User
-                <Link to="/users/new" className="link">
+                <Button onClick={toggleModal} className="link" variant="text">
                     Add New
-                </Link>
+                </Button>
             </div>
             <DataGrid
                 rows={data}
@@ -54,6 +58,7 @@ function Datatable() {
                     color: isDarkModeEnabled ? '#fff' : ''
                 }}
             />
+            <NewUserModal open={open} toggleModal={toggleModal} />
         </div>
     )
 }

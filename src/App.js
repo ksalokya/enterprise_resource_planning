@@ -31,7 +31,7 @@ const Profile = React.lazy(() => import('./pages/profile/Profile'));
 export const DarkMode = createContext();
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('dark') ? true : false);
+  const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('dark') === 'true' ? true : false);
   const handleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   useEffect(() => {

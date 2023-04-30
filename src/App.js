@@ -31,7 +31,7 @@ const Profile = React.lazy(() => import('./pages/profile/Profile'));
 export const DarkMode = createContext();
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('dark') ? true : false);
   const handleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   useEffect(() => {
@@ -53,6 +53,7 @@ function App() {
       const styleTag = document.getElementById('theme');
       styleTag.innerHTML = darkMode + c3DarkMode;
       setTimeout(function () { document.getElementsByTagName('body')[0].style.display = 'block'; }, 50);
+      localStorage.setItem('dark', 'true');
     } else {
       document.getElementsByTagName('body')[0].style.display = 'none';
       let styleLink = document.getElementById('css-link');
@@ -60,6 +61,7 @@ function App() {
       const styleTag = document.getElementById('theme');
       styleTag.innerHTML = lightMode;
       setTimeout(function () { document.getElementsByTagName('body')[0].style.display = 'block'; }, 50);
+      localStorage.setItem('dark', 'false');
     }
   }
 

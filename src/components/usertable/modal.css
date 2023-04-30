@@ -3,20 +3,20 @@
     display: flex;
 }
 
-.newContainer {
+.new .newContainer {
     flex: 6;
 }
 
-.top,
+.new .top,
 .bottom {
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     padding: 10px;
-    margin: 20px;
+    margin: 7px;
     display: flex;
 }
 
-.bottom-dark {
+.new .bottom-dark {
     color: #fff !important;
 }
 
@@ -25,7 +25,7 @@
     font-size: 20px;
 }
 
-.left {
+.new .left {
     flex: 1;
     text-align: center;
 }
@@ -37,15 +37,15 @@
     object-fit: cover;
 }
 
-.formInput {
+.new .formInput {
     width: 40%;
 }
 
-.right {
+.new .right {
     flex: 2;
 }
 
-.icon {
+.new .icon {
     cursor: pointer;
 }
 

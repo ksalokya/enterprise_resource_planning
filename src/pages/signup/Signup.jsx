@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -10,8 +10,10 @@ import Typography from '@mui/material/Typography';
 import * as animationData from "./animation.json"
 import { Link } from "react-router-dom";
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { DarkMode } from '../../App'
 
 export default function Signup() {
+    const isDarkModeEnabled = useContext(DarkMode);
     const matches = useMediaQuery('(max-width:900px)');
     const [displayLottie, setDisplayLottie] = useState('default');
 
@@ -30,7 +32,7 @@ export default function Signup() {
     };
 
     return (
-        <div className='main'>
+        <div className={`main ${isDarkModeEnabled ? 'main-dark' : 'main-light'}`}>
             <CssBaseline />
             <Container maxWidth="lg" className='box'>
                 <Box sx={{ bgcolor: 'rgba(255, 255, 255, .5)', borderRadius: '20px' }}>

@@ -5,6 +5,7 @@ import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUpload
 import Modal from '@mui/material/Modal';
 import { DarkMode } from '../../App'
 import './modal.css';
+import NoImage from './no_image.jpg'
 
 const inputs = [
     {
@@ -53,7 +54,8 @@ const inputs = [
 
 export default function NewUser(props) {
     let isDarkModeEnabled = useContext(DarkMode);
-    const matches = useMediaQuery('(max-width: 650px)')
+    const matches400px = useMediaQuery('(max-width: 400px)')
+    const matches650px = useMediaQuery('(max-width: 650px)')
 
     const [open, setOpen] = useState(false);
     const [file, setFile] = useState("");
@@ -81,12 +83,12 @@ export default function NewUser(props) {
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
-                    width: matches ? 400 : 600,
+                    width: matches650px ? (matches400px ? 350 : 400) : 600,
                     bgcolor: isDarkModeEnabled ? '#121212' : '#fff',
                     border: 'none',
                     borderRadius: '15px',
                     boxShadow: 24,
-                    p: matches ? 0 : 2,
+                    p: matches650px ? 0 : 2,
                 }}
                 >
                     <div className="new">
@@ -97,7 +99,7 @@ export default function NewUser(props) {
                             <div className={`bottom ${isDarkModeEnabled ? 'bottom-dark' : ''}`}>
                                 <div className="left">
                                     <img
-                                        src={file ? URL.createObjectURL(file) : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}
+                                        src={file ? URL.createObjectURL(file) : NoImage}
                                         alt=""
                                     />
                                 </div>

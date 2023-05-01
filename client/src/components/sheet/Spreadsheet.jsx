@@ -1,20 +1,8 @@
 import { useEffect } from 'react';
-import { SpreadsheetComponent, SheetsDirective, SheetDirective, RangesDirective } from '@syncfusion/ej2-react-spreadsheet';
-import { RangeDirective, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-spreadsheet';
+import { SpreadsheetComponent } from '@syncfusion/ej2-react-spreadsheet';
 import Header from '../header/Header'
+import { debounce } from '../../utils/debounce';
 import './spreadsheet.css'
-
-function debounce(a, b, c) {
-    var d, e;
-    return function () {
-        function h() {
-            d = null;
-            c || (e = a.apply(f, g));
-        }
-        var f = this, g = arguments;
-        return (clearTimeout(d), d = setTimeout(h, b), c && !d && (e = a.apply(f, g)), e)
-    }
-}
 
 function Spreadsheet() {
     let spreadsheet;
@@ -27,16 +15,17 @@ function Spreadsheet() {
             },
             body: JSON.stringify({ Email: "user@gmail.com", Name: spreadsheet.sheets[0].name }),
         })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data)
-                spreadsheet.openFromJson({ file: data.JSONData });
+            .then((response) => {
+                if (response.status !== 204) {
+                    response.json().then((data) => {
+                        spreadsheet.openFromJson({ file: data.JSONData });
+                    })
+                }
             })
     }, [])
 
 
     const saveSheetToDB = debounce(() => {
-        console.log("saving res...");
         spreadsheet.endEdit();
         spreadsheet.saveAsJson().then(Json => (fetch('http://localhost:8080/api/v1/sheet/update', {
             method: 'POST',
@@ -44,11 +33,7 @@ function Spreadsheet() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ Email: "user@gmail.com", Name: spreadsheet.sheets[0].name, JSONData: JSON.stringify(Json.jsonObject), ContentType: "Xlsx", VersionType: "Xlsx" }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-            })))
+        })))
     }, 2000)
 
     return (
@@ -56,21 +41,13 @@ function Spreadsheet() {
             <Header title="Spreadsheet" />
             <SpreadsheetComponent
                 ref={(scope) => { spreadsheet = scope }}
-                height="82%"
+                height="85%"
                 allowOpen={true}
                 openUrl='https://ej2services.syncfusion.com/production/web-services/api/spreadsheet/open'
                 allowSave={true}
                 saveUrl='https://ej2services.syncfusion.com/production/web-services/api/spreadsheet/save'
                 cellEditing={saveSheetToDB}
-            >
-                <SheetsDirective>
-                    <SheetDirective>
-                        <RangesDirective>
-                            <RangeDirective></RangeDirective>
-                        </RangesDirective>
-                    </SheetDirective>
-                </SheetsDirective>
-            </SpreadsheetComponent>
+            />
         </div >
     )
 }

@@ -29,7 +29,6 @@ public class SheetServiceImplementation implements SheetService {
     public SheetResponsePayload getSheet(SheetRequestPayload sheetRequestPayload) {
         logger.info("getSheet method invoked with email : " + sheetRequestPayload);
 
-        // TODO :: Add condition for sheet name
         SheetModel sheetModel = sheetRepository.findByEmail(sheetRequestPayload.getEmail())
                 .orElseThrow(() -> new ResourceNotFoundException("Sheet", "User", "user"));
 

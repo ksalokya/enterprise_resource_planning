@@ -20,16 +20,17 @@ function Spreadsheet() {
     let spreadsheet;
 
     useEffect(() => {
-        fetch('http://localhost:5000/get', {
+        fetch('http://localhost:8080/api/v1/sheet/get', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ Name: "Sheet1" }),
+            body: JSON.stringify({ Email: "user@gmail.com", Name: spreadsheet.sheets[0].name }),
         })
             .then((response) => response.json())
             .then((data) => {
-                spreadsheet.openFromJson({ file: data });
+                console.log(data)
+                spreadsheet.openFromJson({ file: data.JSONData });
             })
     }, [])
 
@@ -37,16 +38,16 @@ function Spreadsheet() {
     const saveSheetToDB = debounce(() => {
         console.log("saving res...");
         spreadsheet.endEdit();
-        spreadsheet.saveAsJson().then(Json => (fetch('http://localhost:5000/update', {
+        spreadsheet.saveAsJson().then(Json => (fetch('http://localhost:8080/api/v1/sheet/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ JSONData: JSON.stringify(Json.jsonObject), ContentType: "Xlsx", VersionType: "Xlsx" }),
+            body: JSON.stringify({ Email: "user@gmail.com", Name: spreadsheet.sheets[0].name, JSONData: JSON.stringify(Json.jsonObject), ContentType: "Xlsx", VersionType: "Xlsx" }),
         })
             .then((response) => response.json())
             .then((data) => {
-                // console.log(data);
+                console.log(data);
             })))
     }, 2000)
 

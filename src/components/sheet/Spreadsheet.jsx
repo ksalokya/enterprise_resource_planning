@@ -1,10 +1,20 @@
+import { useEffect } from 'react';
 import { SpreadsheetComponent, SheetsDirective, SheetDirective, RangesDirective } from '@syncfusion/ej2-react-spreadsheet';
 import { RangeDirective, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-spreadsheet';
 import Header from '../header/Header'
-import { DataManager, UrlAdaptor } from '@syncfusion/ej2-data';
-// import { data } from './data';
 import './spreadsheet.css'
-import { useEffect } from 'react';
+
+function debounce(a, b, c) {
+    var d, e;
+    return function () {
+        function h() {
+            d = null;
+            c || (e = a.apply(f, g));
+        }
+        var f = this, g = arguments;
+        return (clearTimeout(d), d = setTimeout(h, b), c && !d && (e = a.apply(f, g)), e)
+    }
+}
 
 function Spreadsheet() {
     let spreadsheet;
@@ -19,43 +29,44 @@ function Spreadsheet() {
         })
             .then((response) => response.json())
             .then((data) => {
-                spreadsheet.openFromJson({ file: data }); // convert the json data to file and loaded into spreadsheet
+                spreadsheet.openFromJson({ file: data });
             })
     }, [])
 
-    const handleOnclick = () => {
+
+    const saveSheetToDB = debounce(() => {
+        console.log("saving res...");
+        spreadsheet.endEdit();
         spreadsheet.saveAsJson().then(Json => (fetch('http://localhost:5000/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ JSONData: JSON.stringify(Json.jsonObject), ContentType: "Xlsx", VersionType: "Xlsx" }), // send the filename, json data, content type, version type from client to server
+            body: JSON.stringify({ JSONData: JSON.stringify(Json.jsonObject), ContentType: "Xlsx", VersionType: "Xlsx" }),
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
             })))
-    }
+    }, 2000)
 
     return (
         <div className='spreadsheet'>
             <Header title="Spreadsheet" />
-            <button onClick={handleOnclick}>Save File</button>
             <SpreadsheetComponent
                 ref={(scope) => { spreadsheet = scope }}
                 height="82%"
                 allowOpen={true}
                 openUrl='https://ej2services.syncfusion.com/production/web-services/api/spreadsheet/open'
                 allowSave={true}
-                saveUrl='https://ej2services.syncfusion.com/production/web-services/api/spreadsheet/save'>
+                saveUrl='https://ej2services.syncfusion.com/production/web-services/api/spreadsheet/save'
+                cellEditing={saveSheetToDB}
+            >
                 <SheetsDirective>
                     <SheetDirective>
                         <RangesDirective>
                             <RangeDirective></RangeDirective>
                         </RangesDirective>
-                        {/* <ColumnsDirective>
-                            {data.map((item, index) => <ColumnDirective key={index} width={150} />)}
-                        </ColumnsDirective> */}
                     </SheetDirective>
                 </SheetsDirective>
             </SpreadsheetComponent>

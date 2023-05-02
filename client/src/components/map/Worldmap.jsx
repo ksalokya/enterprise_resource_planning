@@ -1,11 +1,13 @@
 import { MapsComponent, LayersDirective, LayerDirective } from '@syncfusion/ej2-react-maps';
+import { useMediaQuery } from '@mui/material';
 import { world_map } from './world_map.js';
 import { population_density } from './data.js';
 import './map.css'
 
 function Worldmap() {
+  const matches = useMediaQuery('(max-width:900px)')
   return (
-    <div className="worldmap">
+    <div className="worldmap" style={{ height: matches ? '45vh' : '92vh' }}>
       <MapsComponent height='100%'>
         <LayersDirective>
           <LayerDirective shapeData={world_map} shapeDataPath='name' shapePropertyPath='name' dataSource={population_density} shapeSettings={{

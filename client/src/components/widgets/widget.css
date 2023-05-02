@@ -41,7 +41,15 @@
     color: white !important;
 }
 
+.widget.active a {
+    color: white !important;
+}
+
 .widget:hover {
+    color: white !important;
+}
+
+.widget:hover a {
     color: white !important;
 }
 
@@ -64,7 +72,7 @@
     margin-bottom: 15px;
 }
 
-.widget .left .link {
+.widget .left .link-style {
     width: max-content;
     font-size: 14px;
     border-bottom: 1px solid gray;

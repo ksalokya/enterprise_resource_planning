@@ -19,8 +19,16 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
 import { DarkMode } from '../../App';
+import Autocomplete from '@mui/material/Autocomplete';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import './navbar.css'
+
+const topLinks = [
+    { title: 'Users', link: '/users' },
+    { title: 'Orders', link: '/orders' },
+    { title: 'Delivery', link: '/delivery' },
+    { title: 'Kanban', link: '/kanban' }
+]
 
 export default function Navbar(props) {
     const matches = useMediaQuery('(max-width:900px)');
@@ -202,9 +210,24 @@ export default function Navbar(props) {
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
+                        <Autocomplete
+                            disableClearable
+                            options={topLinks}
+                            getOptionLabel={(option) => option.title || ""}
+                            style={{ width: 450 }}
+                            onChange={(event, option) => {
+                                window.location.href = option.link;
+                            }}
+                            renderInput={(params) => {
+                                const { inputProps, InputLabelProps, InputProps, ...rest } = params;
+                                return <StyledInputBase
+                                    ref={params.InputProps.ref}
+                                    placeholder="Search…"
+                                    value={inputProps.value}
+                                    inputProps={{ ...inputProps }}
+                                    {...rest}
+                                />
+                            }}
                         />
                     </Search>
                     <Box sx={{ flexGrow: 1 }} />

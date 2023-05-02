@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { DarkMode } from '../../App';
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
@@ -8,6 +11,8 @@ import './widget.css'
 
 function Widget({ type }) {
 
+  const isDarkModeEnabled = useContext(DarkMode);
+
   let data;
 
   switch (type) {
@@ -17,6 +22,7 @@ function Widget({ type }) {
         isMoney: false,
         amount: 35,
         link: "See All Users",
+        to: "/users",
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -36,6 +42,7 @@ function Widget({ type }) {
         isMoney: false,
         amount: 89,
         link: "View All Orders",
+        to: "/orders",
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
@@ -70,7 +77,8 @@ function Widget({ type }) {
         title: "BALANCE",
         isMoney: true,
         amount: 1054,
-        link: "See Details",
+        link: "Predict Revenue",
+        to: "/prediction",
         icon: (
           <AccountBalanceWalletOutlinedIcon
             className="icon"
@@ -95,7 +103,11 @@ function Widget({ type }) {
         <span className="counter">
           {data.isMoney && "$"} {data.amount}
         </span>
-        <span className="link">{data.link}</span>
+        <Link to={data.to} style={{ textDecoration: "none", color: isDarkModeEnabled ? "#fff" : "#000" }}>
+          <span className="link-style">
+            {data.link}
+          </span>
+        </Link>
       </div>
       <div className="right">
         <div className={`percentage ${data.pos ? "positive" : "negative"}`}>

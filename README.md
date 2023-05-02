@@ -1,5 +1,7 @@
 # Enterprise Resource Planning 🧾
 
+#### Software is written by humans and therefore has bugs  => [Staging](https://github.com/ksalokya/enterprise_resource_planning/tree/staging)
+
 <!---
 ## Enviroments
 #### It's not a bug - it's an undocumented feature.        => [Production]()

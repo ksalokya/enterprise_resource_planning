@@ -22,17 +22,18 @@ public class CalendarController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/api/v1/calendar/get")
-    public ResponseEntity<CalendarResponsePayload> getCalendarController(@RequestBody CalendarRequestPayload calendarRequestPayload) {
+    public ResponseEntity<?> getCalendarController(@RequestBody CalendarRequestPayload calendarRequestPayload) {
         logger.info("getCalendarController method invoked with email :: " + calendarRequestPayload);
         CalendarResponsePayload calendarResponsePayload = calendarService.getSchedules(calendarRequestPayload);
-        return new ResponseEntity<>(calendarResponsePayload, HttpStatus.FOUND);
+        System.out.println(calendarResponsePayload.getCalendarDataList());
+        return new ResponseEntity<>(calendarResponsePayload.getCalendarDataList(), HttpStatus.OK);
     }
 
-//    @CrossOrigin(origins = "http://localhost:3000")
-//    @PostMapping("/api/v1/calendar/modify")
-//    public ResponseEntity<SheetResponsePayload> saveCalendarController(@RequestBody SheetRequestPayload sheetRequestPayload) {
-//        logger.info("saveSheetController method invoked with sheetPayload :: " + sheetRequestPayload);
-//        SheetResponsePayload response = sheetService.updateSheet(sheetRequestPayload);
-//        return new ResponseEntity<>(response, HttpStatus.CREATED);
-//    }
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/api/v1/calendar/modify")
+    public ResponseEntity<?> saveCalendarController(@RequestBody CalendarRequestPayload calendarRequestPayload) {
+        logger.info("saveCalendarController method invoked with calendarPayload :: " + calendarRequestPayload);
+        CalendarResponsePayload response = calendarService.modifySchedules(calendarRequestPayload);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
 }

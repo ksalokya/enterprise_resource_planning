@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document(collection = "calendar")
 public class CalendarModel {
-    @Id
     private String email;
     private CalendarData calendarData;
 }

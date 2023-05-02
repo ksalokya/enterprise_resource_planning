@@ -1,30 +1,28 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { SpreadsheetComponent } from '@syncfusion/ej2-react-spreadsheet';
 import Header from '../header/Header'
 import { debounce } from '../../utils/debounce';
 import './spreadsheet.css'
 
 function Spreadsheet() {
-    // use useState
-    let spreadsheet;
-
-    useEffect(() => {
-        fetch('http://localhost:8080/api/v1/sheet/get', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ Email: "user@gmail.com", Name: spreadsheet.sheets[0].name }),
-        })
-            .then((response) => {
-                if (response.status !== 204) {
-                    response.json().then((data) => {
-                        spreadsheet.openFromJson({ file: data.JSONData });
-                    })
-                }
+    const spreadsheet = useCallback((node) => {
+        if (node !== null) {
+            fetch('http://localhost:8080/api/v1/sheet/get', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ Email: "user@gmail.com", Name: node.sheets[0].name }),
             })
-    }, [])
-
+                .then((response) => {
+                    if (response.status !== 204) {
+                        response.json().then((data) => {
+                            node.openFromJson({ file: data.JSONData });
+                        })
+                    }
+                })
+        }
+    });
 
     const saveSheetToDB = debounce(() => {
         spreadsheet.endEdit();
@@ -41,7 +39,7 @@ function Spreadsheet() {
         <div className='spreadsheet'>
             <Header title="Spreadsheet" />
             <SpreadsheetComponent
-                ref={(scope) => { spreadsheet = scope }}
+                ref={spreadsheet}
                 height="85%"
                 allowOpen={true}
                 openUrl='https://ej2services.syncfusion.com/production/web-services/api/spreadsheet/open'

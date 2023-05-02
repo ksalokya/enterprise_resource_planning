@@ -17,7 +17,7 @@ function Calendar() {
         crossDomain: true
     });
 
-    let dataQuery = new Query().addParams('email', 'user@user.com');
+    let dataQuery = new Query().addParams('Email', 'user@gmail.com');
     const eventSettings = { dataSource: dataManager, query: dataQuery };
 
     return (

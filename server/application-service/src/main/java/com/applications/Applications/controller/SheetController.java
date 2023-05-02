@@ -25,7 +25,7 @@ public class SheetController {
     public ResponseEntity<SheetResponsePayload> getSheetController(@RequestBody SheetRequestPayload sheetRequestPayload) {
         logger.info("getSheetController method invoked with email :: " + sheetRequestPayload);
         SheetResponsePayload sheetResponsePayload = sheetService.getSheet(sheetRequestPayload);
-        return new ResponseEntity<>(sheetResponsePayload, HttpStatus.FOUND);
+        return new ResponseEntity<>(sheetResponsePayload, HttpStatus.OK);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

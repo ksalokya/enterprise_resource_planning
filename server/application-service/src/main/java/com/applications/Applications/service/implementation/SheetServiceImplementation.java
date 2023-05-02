@@ -30,7 +30,7 @@ public class SheetServiceImplementation implements SheetService {
         logger.info("getSheet method invoked with email : " + sheetRequestPayload);
 
         SheetModel sheetModel = sheetRepository.findByEmail(sheetRequestPayload.getEmail())
-                .orElseThrow(() -> new ResourceNotFoundException("Sheet", "User", "user"));
+                .orElseThrow(() -> new ResourceNotFoundException("Sheet", "User", sheetRequestPayload.getEmail()));
 
         return mapToDto(sheetModel);
     }

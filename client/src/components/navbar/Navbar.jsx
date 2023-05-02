@@ -31,6 +31,7 @@ const topLinks = [
 ]
 
 export default function Navbar(props) {
+    const matchesMobile = useMediaQuery('(max-width:600px)');
     const matches = useMediaQuery('(max-width:900px)');
     const isDarkModeEnabled = React.useContext(DarkMode);
 
@@ -214,7 +215,7 @@ export default function Navbar(props) {
                             disableClearable
                             options={topLinks}
                             getOptionLabel={(option) => option.title || ""}
-                            style={{ width: 450 }}
+                            style={{ width: matchesMobile ? 200 : 450 }}
                             onChange={(event, option) => {
                                 window.location.href = option.link;
                             }}
@@ -227,6 +228,14 @@ export default function Navbar(props) {
                                     inputProps={{ ...inputProps }}
                                     {...rest}
                                 />
+                            }}
+                            componentsProps={{
+                                paper: {
+                                    sx: {
+                                        backgroundColor: isDarkModeEnabled ? "#121212" : '',
+                                        color: isDarkModeEnabled ? "#fff" : ''
+                                    }
+                                }
                             }}
                         />
                     </Search>

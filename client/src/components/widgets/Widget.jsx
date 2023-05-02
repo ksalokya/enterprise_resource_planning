@@ -6,7 +6,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import './widget.css'
 
 function Widget({ type }) {
@@ -58,12 +58,13 @@ function Widget({ type }) {
       break;
     case "earning":
       data = {
-        title: "EARNINGS",
-        isMoney: true,
-        amount: 554,
-        link: "View Net Earnings",
+        title: "DELIVERY",
+        isMoney: false,
+        amount: 54,
+        link: "View Delivery Status",
+        to: "/delivery",
         icon: (
-          <MonetizationOnOutlinedIcon
+          <LocalShippingOutlinedIcon
             className="icon"
             style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
           />

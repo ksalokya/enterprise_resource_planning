@@ -47,7 +47,11 @@ public class CalendarServiceImplementation implements CalendarService {
         }
         // case -> Any schedule is Added
         else if (calendarRequestPayload.getChanged().size() > 0) {
-
+            CalendarModel calendarModel = new CalendarModel();
+            calendarModel.setEmail(userEmail);
+            calendarModel.setCalendarData(calendarRequestPayload.getChanged().get(0));
+            calendarRepository.save(calendarModel);
+            System.out.println(calendarModel);
         }
         // case -> one/many schedules are Deleted
         else if (calendarRequestPayload.getDeleted().size() > 0) {

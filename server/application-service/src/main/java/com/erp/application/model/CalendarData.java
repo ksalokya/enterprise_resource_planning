@@ -18,12 +18,14 @@ public class CalendarData{
     private String EndTime;
     @JsonProperty("CategoryColor")
     private String CategoryColor;
-//    @JsonProperty("IsAllDay")
-//    private String isAllDay;
-//    @JsonProperty("StartTimezone")
-//    private String startTimezone;
-//    @JsonProperty("EndTimezone")
-//    private String endTimezone;
-//    @JsonProperty("RecurrenceRule")
-//    private String recurrenceRule;
+    @JsonProperty("IsAllDay")
+    private String isAllDay;
+    @JsonProperty("StartTimezone")
+    private String startTimezone;
+    @JsonProperty("EndTimezone")
+    private String endTimezone;
+    @JsonProperty("RecurrenceRule")
+    private String recurrenceRule;
+    @JsonProperty("Description")
+    private String description;
 }

@@ -13,6 +13,7 @@ import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import LogoutIcon from '@mui/icons-material/Logout';
 import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction';
+import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -51,7 +52,7 @@ function Sidebar(props) {
         <ul>
           <p className="title">MAIN</p>
           <Link to="/home" style={{ textDecoration: "none" }}>
-            <li className={location.pathname === "/" ? "current-selected" : ""} onClick={props.sidebar}>
+            <li className={location.pathname === "/home" ? "current-selected" : ""} onClick={props.sidebar}>
               <DashboardIcon className="icon" />
               <span>Dashboard</span>
             </li>
@@ -112,6 +113,12 @@ function Sidebar(props) {
             <li className={location.pathname === "/health" ? "current-selected" : ""} onClick={props.sidebar}>
               <SettingsSystemDaydreamOutlinedIcon className="icon" />
               <span>System Health</span>
+            </li>
+          </Link>
+          <Link to="/faq" style={{ textDecoration: "none" }}>
+            <li className={location.pathname === "/faq" ? "current-selected" : ""} onClick={props.sidebar}>
+              <QuizOutlinedIcon className="icon" />
+              <span>FAQs</span>
             </li>
           </Link>
           <Link to="/profile" style={{ textDecoration: "none" }}>

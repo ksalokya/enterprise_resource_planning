@@ -100,18 +100,17 @@
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
-    height: 40vh;
-}
-
-.small-charts {
-    padding: 5px 20px;
+    height: 45vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .line-bar-area {
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     border-radius: 15px;
-    height: 40vh;
+    height: 45vh;
 }
 
 .profile-chart {

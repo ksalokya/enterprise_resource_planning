@@ -26,6 +26,7 @@ const Sheet = React.lazy(() => import('./pages/sheet/Sheet'));
 const Editor = React.lazy(() => import('./pages/editor/Editor'));
 const Prediction = React.lazy(() => import('./pages/prediction/Prediction'));
 const Health = React.lazy(() => import('./pages/health/Health'));
+const Faq = React.lazy(() => import('./pages/faq/Faq'));
 const Profile = React.lazy(() => import('./pages/profile/Profile'));
 
 export const DarkMode = createContext();
@@ -157,6 +158,13 @@ function App() {
                   <Route index element={
                     <React.Suspense fallback={<Loader />}>
                       <Health />
+                    </React.Suspense>
+                  } />
+                </Route>
+                <Route path="faq">
+                  <Route index element={
+                    <React.Suspense fallback={<Loader />}>
+                      <Faq />
                     </React.Suspense>
                   } />
                 </Route>

@@ -12,6 +12,8 @@ function Health() {
         direction="row"
         justifyContent="space-between"
         alignItems="center"
+        mt={4}
+        pl={3}
       >
         <Grid item lg={12} md={12} xs={12} >
           <Monitor
@@ -46,7 +48,7 @@ function Health() {
         <Grid item lg={12} >
           <MonitorChart />
         </Grid>
-        <Grid item lg={12} sx={{ mt: 4 }}>
+        <Grid item lg={12} sx={{ mt: 1 }}>
           <MultipleChart />
         </Grid>
       </Grid>
@@ -54,7 +56,7 @@ function Health() {
         <Grid item lg={12} >
           <CustomActiveShapePieChart />
         </Grid>
-        <Grid item lg={12} sx={{ mt: 4 }}>
+        <Grid item lg={12} sx={{ mt: 1 }}>
           <LineBarArea />
         </Grid>
       </Grid>

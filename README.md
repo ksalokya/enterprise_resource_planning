@@ -36,3 +36,6 @@
 - https://www.youtube.com/@LamaDev
 - https://www.youtube.com/@tuattrananh
 - https://www.youtube.com/@ZAINKEEPSCODE
+- https://docs.spring.io/spring-security/reference/index.html
+- https://spring.io/blog/2015/07/14/microservices-with-spring
+- https://microservices.io/

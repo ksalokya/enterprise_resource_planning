@@ -1,8 +1,13 @@
 # Enterprise Resource Planning 🧾
 
 ## Enviroments
-#### It's not a bug - it's an undocumented feature.        => [Production](https://github.com/ksalokya/enterprise_resource_planning)
-#### Software is written by humans and therefore has bugs  => [Staging](https://github.com/ksalokya/enterprise_resource_planning/tree/staging)
+#### 💡 It's not a bug - it's an undocumented feature.        [Production](https://github.com/ksalokya/enterprise_resource_planning)
+#### 🔧 Software is written by humans and therefore has bugs  [Staging](https://github.com/ksalokya/enterprise_resource_planning/tree/staging)
+
+## High Level Backend Design
+<p align="center" width="100%">
+    <img width="80%" src="https://user-images.githubusercontent.com/72447529/236610869-a973a388-94c6-4caa-ad24-315894f1d7ae.jpg"> 
+</p>
 
 ## Screens
 
@@ -26,3 +31,17 @@
 ![sheet](https://user-images.githubusercontent.com/72447529/233855878-cb4d032e-f3d1-4d60-8534-61dbe47a355a.jpg)
 
 ![editor](https://user-images.githubusercontent.com/72447529/233855880-bbd3d527-d089-463a-af2e-91888396c01f.jpg)
+
+### Refernces
+- https://spring.io/blog/2015/06/08/cors-support-in-spring-framework
+- https://mui.com/
+- https://www.syncfusion.com/
+- https://legacy.reactjs.org/docs/code-splitting.html
+- https://www.youtube.com/@javascriptmastery
+- https://www.youtube.com/@LamaDev
+- https://www.youtube.com/@tuattrananh
+- https://www.youtube.com/@ZAINKEEPSCODE
+- https://docs.spring.io/spring-security/reference/index.html
+- https://spring.io/blog/2015/07/14/microservices-with-spring
+- https://microservices.io/
+- https://medium.com/javarevisited/difference-between-api-gateway-and-load-balancer-in-microservices-8c8b552a024 

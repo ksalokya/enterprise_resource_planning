@@ -26,3 +26,13 @@
 ![sheet](https://user-images.githubusercontent.com/72447529/233855878-cb4d032e-f3d1-4d60-8534-61dbe47a355a.jpg)
 
 ![editor](https://user-images.githubusercontent.com/72447529/233855880-bbd3d527-d089-463a-af2e-91888396c01f.jpg)
+
+### Refernces
+- https://spring.io/blog/2015/06/08/cors-support-in-spring-framework
+- https://mui.com/
+- https://www.syncfusion.com/
+- https://legacy.reactjs.org/docs/code-splitting.html
+- https://www.youtube.com/@javascriptmastery
+- https://www.youtube.com/@LamaDev
+- https://www.youtube.com/@tuattrananh
+- https://www.youtube.com/@ZAINKEEPSCODE

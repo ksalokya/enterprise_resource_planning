@@ -32,7 +32,7 @@ public class CalendarController {
     @PostMapping("/api/v1/calendar/modify")
     public ResponseEntity<?> saveCalendarController(@RequestBody CalendarRequestPayload calendarRequestPayload) {
         logger.info("saveCalendarController method invoked with calendarPayload :: " + calendarRequestPayload);
-        CalendarResponsePayload response = calendarService.modifySchedules(calendarRequestPayload);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        calendarService.modifySchedules(calendarRequestPayload);
+        return new ResponseEntity<>("Modified Successfully", HttpStatus.OK);
     }
 }

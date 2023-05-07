@@ -7,17 +7,17 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Data
 public class CalendarData{
     @JsonProperty("Id")
-    private long Id;
+    private long scheduleId;
     @JsonProperty("Subject")
-    private String Subject;
+    private String subject;
     @JsonProperty("Location")
-    private String Location;
+    private String location;
     @JsonProperty("StartTime")
-    private String StartTime;
+    private String startTime;
     @JsonProperty("EndTime")
-    private String EndTime;
+    private String endTime;
     @JsonProperty("CategoryColor")
-    private String CategoryColor;
+    private String categoryColor;
     @JsonProperty("IsAllDay")
     private String isAllDay;
     @JsonProperty("StartTimezone")

@@ -5,5 +5,5 @@ import com.erp.application.payload.response.CalendarResponsePayload;
 
 public interface CalendarService {
     CalendarResponsePayload getSchedules(CalendarRequestPayload calendarRequestPayload);
-    CalendarResponsePayload modifySchedules(CalendarRequestPayload calendarRequestPayload);
+    void modifySchedules(CalendarRequestPayload calendarRequestPayload);
 }

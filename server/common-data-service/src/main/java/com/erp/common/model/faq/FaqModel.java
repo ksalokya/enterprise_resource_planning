@@ -1,4 +1,4 @@
-package com.erp.common.model;
+package com.erp.common.model.faq;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "userdata")
-public class UserModel {
+@Table(name = "faq")
+public class FaqModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String email;
-    // TODO :: One to Many
-    private UserData userData;
+    private int id;
+    private String question;
+    private String answer;
+    // TODO :: Add one to one with username
 }

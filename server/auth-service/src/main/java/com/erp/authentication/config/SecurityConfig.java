@@ -36,7 +36,7 @@ public class SecurityConfig {
         return httpSecurity.csrf().disable()
                 .cors().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/v1/health", "/auth/v1/new", "/auth/v1/authenticate").permitAll()
+                .requestMatchers("/api/v1/auth/health", "/api/v1/auth/new", "/api/v1/auth/authenticate").permitAll()
                 .and().authorizeHttpRequests().requestMatchers("/auth/v1/**").authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

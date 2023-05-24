@@ -5,5 +5,5 @@ import com.erp.common.payload.response.FaqResponsePayload;
 import java.util.List;
 
 public interface FaqService {
-    List<FaqResponsePayload> getAllFaqs();
+    List<FaqResponsePayload> getAllFaqsById(long userId);
 }

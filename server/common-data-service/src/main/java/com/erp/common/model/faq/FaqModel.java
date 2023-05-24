@@ -16,5 +16,5 @@ public class FaqModel {
     private int id;
     private String question;
     private String answer;
-    // TODO :: Add one to one with username
+    private long userId;
 }

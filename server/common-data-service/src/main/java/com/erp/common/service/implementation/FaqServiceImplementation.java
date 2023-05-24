@@ -17,8 +17,9 @@ public class FaqServiceImplementation implements FaqService {
     private FaqRepository faqRepository;
 
     @Override
-    public List<FaqResponsePayload> getAllFaqs() {
-        List<FaqModel> faqModelList = faqRepository.findAll();
+    public List<FaqResponsePayload> getAllFaqsById(long userId) {
+        // TODO :: Handle Exception
+        List<FaqModel> faqModelList = faqRepository.findAllByUserId(userId).orElseThrow();
         return mapToPayload(faqModelList);
     }
 

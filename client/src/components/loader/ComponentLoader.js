@@ -3,7 +3,7 @@ import { DarkMode } from '../../App';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 
-export default function ComponentLoader() {
+export default function ComponentLoader(props) {
     const isDarkModeEnabled = useContext(DarkMode);
     return (
         <Box sx={{
@@ -12,6 +12,8 @@ export default function ComponentLoader() {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
+            zIndex: 99,
+            ...props.style
         }}>
             <Skeleton sx={{ backgroundColor: '#aaaaaa' }} variant="rounded" />
             <Skeleton sx={{ backgroundColor: '#aaaaaa' }} animation="wave" />

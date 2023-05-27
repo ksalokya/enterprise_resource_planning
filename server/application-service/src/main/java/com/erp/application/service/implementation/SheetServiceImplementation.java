@@ -19,7 +19,7 @@ public class SheetServiceImplementation implements SheetService {
     private SheetRepository sheetRepository;
 
     @Bean
-    public ModelMapper modelMapper() {
+    public ModelMapper sheetModelMapper() {
         return new ModelMapper();
     }
 

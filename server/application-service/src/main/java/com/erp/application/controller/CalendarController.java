@@ -32,6 +32,7 @@ public class CalendarController {
     public ResponseEntity<?> saveCalendarController(@RequestBody CalendarRequestPayload calendarRequestPayload) {
         logger.info("saveCalendarController method invoked with calendarPayload :: " + calendarRequestPayload);
         calendarService.modifySchedules(calendarRequestPayload);
+        // TODO :: Optimization
         CalendarResponsePayload calendarResponsePayload = calendarService.getSchedules(calendarRequestPayload);
         return new ResponseEntity<>(calendarResponsePayload.getCalendarDataList(), HttpStatus.OK);
     }

@@ -11,6 +11,7 @@ function Spreadsheet() {
     let spreadsheet;
     const [loader, setLoader] = useState(true);
     useEffect(() => {
+        // TODO :: Change to AXIOS
         fetch('http://localhost:8080/api/v1/sheet/get', {
             method: 'POST',
             headers: {
@@ -27,7 +28,6 @@ function Spreadsheet() {
 
 
     const saveSheetToDB = debounce(() => {
-        console.log("saving res...");
         if (spreadsheet) {
             spreadsheet.endEdit();
             spreadsheet.saveAsJson().then(Json => (fetch('http://localhost:8080/api/v1/sheet/update', {

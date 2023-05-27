@@ -29,7 +29,7 @@ public class EditorServiceImplementation implements EditorService {
     public EditorResponsePayload getEditor(String userName) {
         logger.info("getEditor method invoked with email :: " + userName);
         EditorModel editorModel = editorRepository.findByEmail(userName)
-                .orElseThrow(() -> new ResourceNotFoundException("Sheet", "User", userName));
+                .orElseThrow(() -> new ResourceNotFoundException("Editor", "User", userName));
         return mapToDto(editorModel);
     }
 

@@ -4,6 +4,7 @@ import { DataManager, UrlAdaptor } from '@syncfusion/ej2-data';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import { Button, Grid } from "@mui/material";
 import { kanbanData, kanbanGrid } from './datasource';
+import ComponentLoader from "../loader/ComponentLoader"
 import Header from "../header/Header";
 import './kanban.css'
 
@@ -97,6 +98,8 @@ const KanbanDialogFormTemplate = (props) => {
 }
 
 function Kanban() {
+    const [loader, setLoader] = useState(true);
+
     let data = new DataManager({
         url: 'http://localhost:8080/api/v1/kanban/get/user@gmail.com',
         updateUrl: 'http://localhost:8080/api/v1/kanban/update/user@gmail.com',
@@ -145,7 +148,9 @@ function Kanban() {
                     </Button>
                 </Grid>
             </Grid>
+            <ComponentLoader style={{ display: !loader ? 'none' : '' }} />
             <KanbanComponent
+                style={{ visibility: loader ? 'hidden' : '' }}
                 id="kanban"
                 keyField="Status"
                 height="83%"
@@ -155,7 +160,7 @@ function Kanban() {
                 ref={(kanban) => { kanbanObj = kanban; }}
                 dialogSettings={{ template: dialogTemplate.bind(this) }}
                 enablePersistence={true}
-                dataBound={() => console.log("DONE")}
+                dataBound={() => setLoader(false)}
             >
                 <ColumnsDirective>
                     {kanbanGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}

@@ -1,4 +1,4 @@
-package com.erp.application.model;
+package com.erp.application.model.calendar;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

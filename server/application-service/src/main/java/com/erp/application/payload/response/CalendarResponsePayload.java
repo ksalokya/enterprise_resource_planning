@@ -1,6 +1,6 @@
 package com.erp.application.payload.response;
 
-import com.erp.application.model.CalendarData;
+import com.erp.application.model.calendar.CalendarData;
 import lombok.Data;
 
 import java.util.List;

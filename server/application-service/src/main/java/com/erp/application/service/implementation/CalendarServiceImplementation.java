@@ -1,8 +1,7 @@
 package com.erp.application.service.implementation;
 
 import com.erp.application.exception.ResourceNotFoundException;
-import com.erp.application.model.CalendarData;
-import com.erp.application.model.CalendarModel;
+import com.erp.application.model.calendar.CalendarModel;
 import com.erp.application.payload.request.CalendarRequestPayload;
 import com.erp.application.payload.response.CalendarResponsePayload;
 import com.erp.application.repository.CalendarRepository;
@@ -11,16 +10,12 @@ import com.mongodb.client.result.DeleteResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.FindAndReplaceOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 

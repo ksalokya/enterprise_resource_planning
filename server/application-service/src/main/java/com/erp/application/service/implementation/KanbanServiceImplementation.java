@@ -1,7 +1,7 @@
 package com.erp.application.service.implementation;
 
 import com.erp.application.exception.ResourceNotFoundException;
-import com.erp.application.model.KanbanModel;
+import com.erp.application.model.kanban.KanbanModel;
 import com.erp.application.payload.response.KanbanResponsePayload;
 import com.erp.application.repository.KanbanRepository;
 import com.erp.application.service.KanbanService;

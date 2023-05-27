@@ -1,4 +1,4 @@
-package com.erp.application.model;
+package com.erp.application.model.calendar;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

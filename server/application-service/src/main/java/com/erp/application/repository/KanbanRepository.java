@@ -1,6 +1,6 @@
 package com.erp.application.repository;
 
-import com.erp.application.model.KanbanModel;
+import com.erp.application.model.kanban.KanbanModel;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 

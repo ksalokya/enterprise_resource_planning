@@ -1,6 +1,6 @@
 package com.erp.application.payload.request;
 
-import com.erp.application.model.CalendarData;
+import com.erp.application.model.calendar.CalendarData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 

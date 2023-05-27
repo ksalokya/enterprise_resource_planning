@@ -3,6 +3,7 @@ package com.erp.application.controller;
 import com.erp.application.payload.request.EditorRequestPayload;
 import com.erp.application.payload.response.EditorResponsePayload;
 import com.erp.application.service.EditorService;
+import com.mongodb.client.result.UpdateResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class EditorController {
     @PostMapping("/update")
     public ResponseEntity<?> updateEditorController(@RequestBody EditorRequestPayload editorRequestPayload){
         logger.info("getEditorController method invoked with email :: " + editorRequestPayload);
-        EditorResponsePayload editorResponsePayload = editorService.updateEditor(editorRequestPayload);
-        return new ResponseEntity<>(editorResponsePayload, HttpStatus.OK);
+        UpdateResult updateEditor = editorService.updateEditor(editorRequestPayload);
+        return new ResponseEntity<>(updateEditor, HttpStatus.OK);
     }
 }

@@ -3,6 +3,7 @@ package com.erp.application.controller;
 import com.erp.application.payload.request.SheetRequestPayload;
 import com.erp.application.payload.response.SheetResponsePayload;
 import com.erp.application.service.SheetService;
+import com.mongodb.client.result.UpdateResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,9 @@ public class SheetController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<SheetResponsePayload> saveSheetController(@RequestBody SheetRequestPayload sheetRequestPayload) {
+    public ResponseEntity<?> saveSheetController(@RequestBody SheetRequestPayload sheetRequestPayload) {
         logger.info("saveSheetController method invoked with sheetPayload :: " + sheetRequestPayload);
-        SheetResponsePayload response = sheetService.updateSheet(sheetRequestPayload);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        UpdateResult updateSheet = sheetService.updateSheet(sheetRequestPayload);
+        return new ResponseEntity<>(updateSheet, HttpStatus.CREATED);
     }
 }

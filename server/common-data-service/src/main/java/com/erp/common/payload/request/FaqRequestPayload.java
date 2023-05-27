@@ -1,4 +1,4 @@
-package com.erp.common.payload.response;
+package com.erp.common.payload.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FaqResponsePayload {
+public class FaqRequestPayload {
     private long id;
     private String question;
     private String answer;

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class FaqModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String question;
     private String answer;
     private long userId;

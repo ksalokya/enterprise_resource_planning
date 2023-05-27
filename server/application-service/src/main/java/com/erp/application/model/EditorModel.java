@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document(collection = "editor")
 public class EditorModel {
+    @Id
     private String email;
     private String content;
 }

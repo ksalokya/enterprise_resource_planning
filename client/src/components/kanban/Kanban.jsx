@@ -98,10 +98,10 @@ const KanbanDialogFormTemplate = (props) => {
 
 function Kanban() {
     let data = new DataManager({
-        url: 'http://localhost:5000/get',
-        updateUrl: 'http://localhost:5000/update',
-        insertUrl: 'http://localhost:5000/insert',
-        removeUrl: 'http://localhost:5000/delete',
+        url: 'http://localhost:8080/api/v1/kanban/get/user@gmail.com',
+        updateUrl: 'http://localhost:8080/api/v1/kanban/update/user@gmail.com',
+        insertUrl: 'http://localhost:8080/api/v1/kanban/insert/user@gmail.com',
+        removeUrl: 'http://localhost:8080/api/v1/kanban/delete/user@gmail.com',
         adaptor: new UrlAdaptor(),
         crossDomain: true
     });
@@ -149,8 +149,7 @@ function Kanban() {
                 id="kanban"
                 keyField="Status"
                 height="83%"
-                // dataSource={data}
-                dataSource={kanbanData}
+                dataSource={data}
                 cardSettings={{ contentField: "Summary", headerField: "Id" }}
                 enableTooltip={true}
                 ref={(kanban) => { kanbanObj = kanban; }}

@@ -9,7 +9,7 @@ public class KanbanResponsePayload {
     private String id;
     @JsonProperty("Status")
     private String status;
-    @JsonProperty("summary")
+    @JsonProperty("Summary")
     private String summary;
     @JsonProperty("Priority")
     private String priority;

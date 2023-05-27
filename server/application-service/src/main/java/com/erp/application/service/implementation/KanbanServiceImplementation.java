@@ -1,13 +1,19 @@
 package com.erp.application.service.implementation;
 
 import com.erp.application.exception.ResourceNotFoundException;
+import com.erp.application.model.SheetModel;
 import com.erp.application.model.kanban.KanbanModel;
+import com.erp.application.payload.request.KanbanRequestPayload;
+import com.erp.application.payload.request.SheetRequestPayload;
 import com.erp.application.payload.response.KanbanResponsePayload;
+import com.erp.application.payload.response.SheetResponsePayload;
 import com.erp.application.repository.KanbanRepository;
 import com.erp.application.service.KanbanService;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +26,10 @@ public class KanbanServiceImplementation implements KanbanService {
     @Autowired
     private KanbanRepository kanbanRepository;
 
+    @Bean
+    public ModelMapper kanbanModelMapper() {
+        return new ModelMapper();
+    }
 
     @Override
     public List<KanbanResponsePayload> getKanbans(String user_email) {
@@ -39,5 +49,25 @@ public class KanbanServiceImplementation implements KanbanService {
         }
 
         return kanbanResponsePayloadList;
+    }
+
+    @Override
+    public void insertKanban(String email, KanbanRequestPayload kanbanRequestPayload) {
+        logger.info("insertKanban method invoked with payload : " + kanbanRequestPayload);
+        KanbanModel kanbanModel = KanbanModel.builder()
+                .email(email)
+                .kanbanData(kanbanRequestPayload.getKanbanData())
+                .build();
+        kanbanRepository.save(kanbanModel);
+    }
+
+    private KanbanModel mapToEntity(KanbanRequestPayload kanbanRequestPayload) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(kanbanRequestPayload, KanbanModel.class);
+    }
+
+    private KanbanResponsePayload mapToDto(KanbanModel kanbanModel) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(kanbanModel, KanbanResponsePayload.class);
     }
 }

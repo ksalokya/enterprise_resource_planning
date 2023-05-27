@@ -43,6 +43,22 @@ public class KanbanController {
         return new ResponseEntity<>("Inserted Successfully", HttpStatus.OK);
     }
 
+    @PostMapping("/update/{userName}")
+    public ResponseEntity<?> updateKanbanController(@PathVariable(name  = "userName") String user_name,
+                                                    @RequestBody KanbanRequestPayload kanbanRequestPayload){
+        logger.info("updateKanbanController method invoked with email :: " + user_name);
+        KanbanResponsePayload kanbanResponsePayload = kanbanService.updateKanban(user_name, kanbanRequestPayload);
+        return new ResponseEntity<>(kanbanResponsePayload, HttpStatus.OK);
+    }
+
+    @PostMapping("/delete/{userName}")
+    public ResponseEntity<?> deleteKanbanController(@PathVariable(name  = "userName") String user_name,
+                                                    @RequestBody KanbanRequestPayload kanbanRequestPayload){
+        logger.info("updateKanbanController method invoked with email :: " + user_name);
+        kanbanService.deleteKanban(user_name, kanbanRequestPayload);
+        return new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
+    }
+
 // FOR TESTING
 //    @PostMapping("/insertMany/{userName}")
 //    public ResponseEntity<?> insertManyKanbanController(@PathVariable(name  = "userName") String user_name,

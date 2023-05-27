@@ -7,5 +7,10 @@ import java.util.List;
 
 public interface KanbanService {
     List<KanbanResponsePayload> getKanbans(String email);
+
     void insertKanban(String email, KanbanRequestPayload kanbanRequestPayload);
+
+    KanbanResponsePayload updateKanban(String email, KanbanRequestPayload kanbanRequestPayload);
+
+    void deleteKanban(String email, KanbanRequestPayload kanbanRequestPayload);
 }

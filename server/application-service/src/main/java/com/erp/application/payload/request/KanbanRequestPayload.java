@@ -9,4 +9,5 @@ public class KanbanRequestPayload {
     private KanbanData kanbanData;
     private String table;
     private String action;
+    private String key;
 }

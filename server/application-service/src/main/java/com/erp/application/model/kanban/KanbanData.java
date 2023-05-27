@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class KanbanData {
     @JsonProperty("Id")
-    private String id;
+    private String taskId;
     @JsonProperty("Status")
     private String status;
     @JsonProperty("Priority")

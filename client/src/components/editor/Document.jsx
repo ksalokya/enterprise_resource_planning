@@ -78,7 +78,7 @@ function Document() {
             <Header title='Editor' />
             <ComponentLoader style={{ display: !loader ? 'none' : '' }} />
             <DocumentEditorContainerComponent
-                style={{ display: loader ? 'none' : '' }}
+                style={{ visibility: loader ? 'hidden' : '' }}
                 height={'82%'}
                 serviceUrl="https://ej2services.syncfusion.com/production/web-services/api/documenteditor/"
                 enableToolbar={true}

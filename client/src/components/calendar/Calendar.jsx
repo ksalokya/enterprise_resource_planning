@@ -26,7 +26,7 @@ function Calendar() {
             <Header title="Calendar" />
             <ComponentLoader style={{ display: !loader ? 'none' : '' }} />
             <ScheduleComponent
-                style={{ display: loader ? 'none' : '' }}
+                style={{ visibility: loader ? 'hidden' : '' }}
                 height="85%"
                 selectedDate={new Date(2021, 0, 10)}
                 eventSettings={eventSettings}
@@ -39,7 +39,6 @@ function Calendar() {
                 </ViewsDirective>
                 <Inject services={[Day, Week, WorkWeek, Month, Agenda, Resize, DragAndDrop]} />
             </ScheduleComponent>
-
         </div>
     )
 }

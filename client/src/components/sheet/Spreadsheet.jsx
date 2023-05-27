@@ -72,7 +72,7 @@ function Spreadsheet() {
             <Header title="Spreadsheet" />
             <ComponentLoader style={{ display: !loader ? 'none' : '' }} />
             <SpreadsheetComponent
-                style={{ display: loader ? 'none' : '' }}
+                style={{ visibility: loader ? 'hidden' : '' }}
                 ref={(scope) => { spreadsheet = scope }}
                 height="82%"
                 allowOpen={true}

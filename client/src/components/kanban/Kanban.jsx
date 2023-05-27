@@ -17,7 +17,7 @@ const KanbanDialogFormTemplate = (props) => {
         'Margaret hamilt',
         'Michael Suyama',
     ];
-    let statusData = ['Open', 'InProgress', 'Testing', 'Close'];
+    let statusData = ['To Do', 'In Progress', 'Testing', 'Close'];
     let priorityData = ['Low', 'Normal', 'Critical', 'Release Breaker', 'High'];
 
     const [data, setData] = useState(props);
@@ -155,6 +155,7 @@ function Kanban() {
                 ref={(kanban) => { kanbanObj = kanban; }}
                 dialogSettings={{ template: dialogTemplate.bind(this) }}
                 enablePersistence={true}
+                dataBound={() => console.log("DONE")}
             >
                 <ColumnsDirective>
                     {kanbanGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}

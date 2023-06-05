@@ -1,12 +1,10 @@
 package com.erp.common.service.implementation;
 
-import com.erp.common.controller.FaqController;
 import com.erp.common.model.faq.FaqModel;
 import com.erp.common.payload.request.FaqRequestPayload;
 import com.erp.common.payload.response.FaqResponsePayload;
 import com.erp.common.repository.FaqRepository;
 import com.erp.common.service.FaqService;
-import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

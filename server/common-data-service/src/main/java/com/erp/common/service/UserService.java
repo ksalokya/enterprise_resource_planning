@@ -1,9 +1,17 @@
-//package com.erp.common.service;
+package com.erp.common.service;
+
+import com.erp.common.payload.request.UserRequestPayload;
+import com.erp.common.payload.response.UserResponsePayload;
+
+import java.util.List;
+
+public interface UserService {
+    UserResponsePayload insertUserData(UserRequestPayload userRequestPayload);
+
+    List<UserResponsePayload> findAllUsersByEmail(long userId);
+
+//    UserResponsePayload updateUser(UserRequestPayload userRequestPayload);
 //
-//import com.erp.common.payload.response.UserResponsePayload;
-//
-//import java.util.List;
-//
-//public interface UserService {
-//    List<UserResponsePayload>  findAllUsersByEmail(String email);
-//}
+//    Boolean deleteUser(UserRequestPayload userRequestPayload);
+
+}

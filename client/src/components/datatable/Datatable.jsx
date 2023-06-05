@@ -4,7 +4,6 @@ import { userColumns, userRows } from './datasource.js';
 import './datatable.css'
 
 function Datatable() {
-
     const actionColumn = [
         {
             field: "action",

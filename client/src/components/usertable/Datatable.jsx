@@ -1,4 +1,5 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import axios from "axios";
 import { DarkMode } from '../../App';
 import { Link } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
@@ -9,12 +10,23 @@ import './datatable.css'
 
 function Datatable() {
     const isDarkModeEnabled = useContext(DarkMode);
-    const [data, setData] = useState(userRows);
+    // const [data, setData] = useState(userRows);
     const [open, setOpen] = useState(false);
     const toggleModal = () => setOpen(!open);
 
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/v1/user/get/${1}`)
+            .then((res) => {
+                if (res.status === 200) {
+                    setUsers(res.data);
+                }
+            })
+            .catch((err) => { console.log(err); })
+    }, []);
+
     const handleDelete = (id) => {
-        setData(data.filter((item) => item.id !== id));
+        // setData(data.filter((item) => item.id !== id));
     };
 
     const actionColumn = [
@@ -49,7 +61,7 @@ function Datatable() {
                 </Button>
             </div>
             <DataGrid
-                rows={data}
+                rows={users}
                 columns={userColumns.concat(actionColumn)}
                 pageSize={10}
                 rowsPerPageOptions={[10, 20, 50]}

@@ -31,6 +31,14 @@ public class UserController {
     public ResponseEntity<?> insertUsersController(@RequestBody UserRequestPayload userRequestPayload) {
         logger.info("insertUsersController method invoked with payload :: " + userRequestPayload);
         UserResponsePayload userResponsePayload = userService.insertUserData(userRequestPayload);
-        return new ResponseEntity<>(userResponsePayload, HttpStatus.OK);
+        return new ResponseEntity<>(userResponsePayload, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete/{id}/{userId}")
+    public ResponseEntity<?> deleteUsersController(@PathVariable(name = "id") long id,
+                                                   @PathVariable(name = "userId") long userId) {
+        logger.info("insertUsersController method invoked with id & usersId :: " + id + " " + userId);
+        userService.deleteUser(id, userId);
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 }

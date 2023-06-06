@@ -11,7 +11,6 @@ public interface UserService {
     List<UserResponsePayload> findAllUsersByEmail(long userId);
 
 //    UserResponsePayload updateUser(UserRequestPayload userRequestPayload);
-//
-//    Boolean deleteUser(UserRequestPayload userRequestPayload);
 
+    void deleteUser(long id, long usersId);
 }

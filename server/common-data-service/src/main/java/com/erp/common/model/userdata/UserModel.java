@@ -20,5 +20,5 @@ public class UserModel {
     private String email;
     private String age;
     private String contact;
-    private Integer usersId;
+    private Integer userId;
 }

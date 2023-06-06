@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -34,7 +33,6 @@ public class UserServiceImplementation implements UserService {
     public UserResponsePayload insertUserData(UserRequestPayload userRequestPayload) {
         logger.info("insertUserData method invoked with payload :: " + userRequestPayload);
         UserModel userModel = mapToEntity(userRequestPayload);
-        System.out.println("userModel :: " + userModel);
         UserModel newUserModel = userRepository.save(userModel);
         return mapToDto(newUserModel);
     }
@@ -42,9 +40,15 @@ public class UserServiceImplementation implements UserService {
     @Override
     public List<UserResponsePayload> findAllUsersByEmail(long userId) {
         logger.info("findAllUsersByEmail method invoked with payload :: " + userId);
-        List<UserModel> userModelList = userRepository.getAllUsersByUsersId(userId)
+        List<UserModel> userModelList = userRepository.getAllUsersByUserId(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("UserModel", "userId", userId));
         return mapToListEntity(userModelList);
+    }
+
+    @Override
+    public void deleteUser(long id, long userId) {
+        logger.info("deleteUser method invoked with id and usersID :: " + id + " " + userId);
+        userRepository.removeByIdAndUserId(id, userId);
     }
 
     private UserModel mapToEntity(UserRequestPayload userRequestPayload) {

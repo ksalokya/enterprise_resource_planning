@@ -10,7 +10,7 @@ public interface UserService {
 
     List<UserResponsePayload> findAllUsersByEmail(long userId);
 
-//    UserResponsePayload updateUser(UserRequestPayload userRequestPayload);
+    void updateUser(long id, UserRequestPayload userRequestPayload);
 
     void deleteUser(long id, long usersId);
 }

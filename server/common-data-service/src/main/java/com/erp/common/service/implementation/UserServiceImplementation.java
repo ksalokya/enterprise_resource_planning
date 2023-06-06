@@ -46,6 +46,16 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
+    public void updateUser(long id, UserRequestPayload userRequestPayload) {
+        logger.info("updateUser method invoked with userId & payload :: " + id + " " + userRequestPayload);
+        UserModel userModel = mapToEntity(userRequestPayload);
+        userRepository.saveByIdAndUserId(id, userRequestPayload.getUsername(),
+                userRequestPayload.getImg(), userRequestPayload.getStatus(),
+                userRequestPayload.getEmail(), userRequestPayload.getAge(),
+                userRequestPayload.getContact(), userRequestPayload.getUserId());
+    }
+
+    @Override
     public void deleteUser(long id, long userId) {
         logger.info("deleteUser method invoked with id and usersID :: " + id + " " + userId);
         userRepository.removeByIdAndUserId(id, userId);

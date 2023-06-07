@@ -7,9 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -24,14 +27,17 @@ public class UserController {
     public ResponseEntity<?> getAllUsersController(@PathVariable(name = "userId") long userId) {
         logger.info("getAllUsersController method invoked with userID :: " + userId);
         List<UserResponsePayload> userResponsePayloadList = userService.findAllUsersByEmail(userId);
-        return new ResponseEntity<>(userResponsePayloadList, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(userResponsePayloadList);
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<?> insertUsersController(@RequestBody UserRequestPayload userRequestPayload) {
+    public ResponseEntity<?> insertUsersController(@ModelAttribute UserRequestPayload userRequestPayload,
+                                                   @RequestParam("image") MultipartFile file) throws IOException {
         logger.info("insertUsersController method invoked with payload :: " + userRequestPayload);
-        UserResponsePayload userResponsePayload = userService.insertUserData(userRequestPayload);
-        return new ResponseEntity<>(userResponsePayload, HttpStatus.CREATED);
+        UserResponsePayload userResponsePayload = userService.insertUserData(userRequestPayload, file);
+        return new ResponseEntity<>("", HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")

@@ -15,7 +15,9 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String username;
-    private String img;
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private String image;
     private String status;
     private String email;
     private String age;

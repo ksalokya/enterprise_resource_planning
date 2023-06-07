@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 public class UserRequestPayload {
     private String username;
-    private String img;
     private String status;
     private String email;
     private String age;

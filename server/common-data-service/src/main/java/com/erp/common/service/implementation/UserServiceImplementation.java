@@ -6,16 +6,18 @@ import com.erp.common.payload.request.UserRequestPayload;
 import com.erp.common.payload.response.UserResponsePayload;
 import com.erp.common.repository.UserRepository;
 import com.erp.common.service.UserService;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Arrays;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserServiceImplementation implements UserService {
@@ -24,15 +26,10 @@ public class UserServiceImplementation implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Bean
-    public ModelMapper userDataModelMapper() {
-        return new ModelMapper();
-    }
-
     @Override
-    public UserResponsePayload insertUserData(UserRequestPayload userRequestPayload) {
+    public UserResponsePayload insertUserData(UserRequestPayload userRequestPayload, MultipartFile file) throws IOException {
         logger.info("insertUserData method invoked with payload :: " + userRequestPayload);
-        UserModel userModel = mapToEntity(userRequestPayload);
+        UserModel userModel = mapToEntity(userRequestPayload, file);
         UserModel newUserModel = userRepository.save(userModel);
         return mapToDto(newUserModel);
     }
@@ -47,12 +44,12 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public void updateUser(long id, UserRequestPayload userRequestPayload) {
-        logger.info("updateUser method invoked with userId & payload :: " + id + " " + userRequestPayload);
-        UserModel userModel = mapToEntity(userRequestPayload);
-        userRepository.saveByIdAndUserId(id, userRequestPayload.getUsername(),
-                userRequestPayload.getImg(), userRequestPayload.getStatus(),
-                userRequestPayload.getEmail(), userRequestPayload.getAge(),
-                userRequestPayload.getContact(), userRequestPayload.getUserId());
+//        logger.info("updateUser method invoked with userId & payload :: " + id + " " + userRequestPayload);
+//        UserModel userModel = mapToEntity(userRequestPayload);
+//        userRepository.saveByIdAndUserId(id, userRequestPayload.getUsername(),
+//                userRequestPayload.getImg(), userRequestPayload.getStatus(),
+//                userRequestPayload.getEmail(), userRequestPayload.getAge(),
+//                userRequestPayload.getContact(), userRequestPayload.getUserId());
     }
 
     @Override
@@ -61,20 +58,42 @@ public class UserServiceImplementation implements UserService {
         userRepository.removeByIdAndUserId(id, userId);
     }
 
-    private UserModel mapToEntity(UserRequestPayload userRequestPayload) {
-        ModelMapper modelMapper = new ModelMapper();
-        modelMapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.STRICT);
-        return modelMapper.map(userRequestPayload, UserModel.class);
+    private UserModel mapToEntity(UserRequestPayload userRequestPayload, MultipartFile file) throws IOException {
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        UserModel userModel = new UserModel();
+        userModel.setUsername(userRequestPayload.getUsername());
+        if (fileName.contains("..")) {
+            System.out.println("not a a valid file");
+        }
+        try {
+            userModel.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        userModel.setStatus(userRequestPayload.getStatus());
+        userModel.setEmail(userRequestPayload.getEmail());
+        userModel.setAge(userRequestPayload.getAge());
+        userModel.setContact(userRequestPayload.getContact());
+        userModel.setUserId(userRequestPayload.getUserId());
+        return userModel;
     }
 
     private UserResponsePayload mapToDto(UserModel userModel) {
-        ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(userModel, UserResponsePayload.class);
+        UserResponsePayload userResponsePayload = new UserResponsePayload();
+        userResponsePayload.setUsername(userModel.getUsername());
+        userResponsePayload.setImage(userModel.getImage());
+        userResponsePayload.setStatus(userModel.getStatus());
+        userResponsePayload.setEmail(userModel.getEmail());
+        userResponsePayload.setAge(userModel.getAge());
+        userResponsePayload.setContact(userModel.getContact());
+        return userResponsePayload;
     }
 
     private List<UserResponsePayload> mapToListEntity(List<UserModel> userModelList) {
-        ModelMapper modelMapper = new ModelMapper();
-        return Arrays.asList(modelMapper.map(userModelList, UserResponsePayload[].class));
+        List<UserResponsePayload> userResponsePayloadList = new ArrayList<>();
+        for (UserModel userModel : userModelList) {
+            userResponsePayloadList.add(mapToDto(userModel));
+        }
+        return userResponsePayloadList;
     }
 }

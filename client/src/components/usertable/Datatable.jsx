@@ -22,6 +22,7 @@ function Datatable() {
             .then((res) => {
                 if (res.status === 200) {
                     setUsers(res.data);
+                    console.log(res.data);
                     setLoader(false);
                 }
             })

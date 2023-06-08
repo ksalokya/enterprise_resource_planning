@@ -14,12 +14,17 @@ function Datatable() {
     const [loader, setLoader] = useState(true);
     const [users, setUsers] = useState([]);
     const [open, setOpen] = useState(false);
-    const [rowData, setRowData] = useState([]);
+    const [id, setId] = useState();
+    const [rowData, setRowData] = useState();
     const [image, setImage] = useState();
 
     const toggleModal = () => setOpen(!open);
 
     useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = () => {
         axios.get(`http://localhost:8080/api/v1/user/get/${1}`)
             .then((res) => {
                 if (res.status === 200) {
@@ -28,13 +33,11 @@ function Datatable() {
                 }
             })
             .catch((err) => { console.log(err); })
-    }, []);
+    }
 
     const handleDelete = (id) => {
         axios.delete(`http://localhost:8080/api/v1/user/delete/${id}/${1}`)
-            .then((res) => {
-                setUsers(users.filter((item) => item.id !== id));
-            })
+            .then(() => { setUsers(users.filter((item) => item.id !== id)); })
             .catch((err) => { console.log(err); });
     };
 
@@ -93,6 +96,7 @@ function Datatable() {
                                 onClick={() => {
                                     prepareRowData(params.row);
                                     toggleModal();
+                                    setId(params.row.id)
                                 }}
                             >
                                 Update</div>
@@ -134,7 +138,14 @@ function Datatable() {
                         />
                     </>
             }
-            <NewUserModal open={open} toggleModal={toggleModal} rowData={rowData} image={image} />
+            <NewUserModal
+                open={open}
+                toggleModal={toggleModal}
+                rowData={rowData}
+                image={image}
+                fetchData={fetchData}
+                rowId={id}
+            />
         </div>
     )
 }

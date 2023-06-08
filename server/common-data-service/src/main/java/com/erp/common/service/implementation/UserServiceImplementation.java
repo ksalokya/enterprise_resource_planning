@@ -52,6 +52,14 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
+    public void updateUserWithOutImage(long id, UserRequestPayload userRequestPayload) {
+        logger.info("updateUserWithOutImage method invoked with userId & payload :: " + id + " " + userRequestPayload);
+        userRepository.saveByIdAndUserIdWithOutImage(id, userRequestPayload.getUsername(),
+                userRequestPayload.getStatus(), userRequestPayload.getEmail(), userRequestPayload.getAge(),
+                userRequestPayload.getContact(), userRequestPayload.getUserId());
+    }
+
+    @Override
     public void deleteUser(long id, long userId) {
         logger.info("deleteUser method invoked with id and usersID :: " + id + " " + userId);
         userRepository.removeByIdAndUserId(id, userId);

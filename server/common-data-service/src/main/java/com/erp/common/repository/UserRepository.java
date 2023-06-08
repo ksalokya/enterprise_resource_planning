@@ -23,5 +23,14 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
                            @Param("userId") long userId);
 
     @Transactional
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
+    @Query("update UserModel u set u.username = :username, u.status = :status, u.email = :email, u.age = :age, u.contact = :contact where u.id = :id and u.userId = :userId")
+    void saveByIdAndUserIdWithOutImage(@Param("id") long id,
+                                       @Param("username") String username,
+                                       @Param("status") String status, @Param("email") String email,
+                                       @Param("age") String age, @Param("contact") String contact,
+                                       @Param("userId") long userId);
+
+    @Transactional
     void removeByIdAndUserId(long id, long userId);
 }

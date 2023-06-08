@@ -14,5 +14,7 @@ public interface UserService {
 
     void updateUser(long id, UserRequestPayload userRequestPayload, MultipartFile file);
 
+    void updateUserWithOutImage(long id, UserRequestPayload userRequestPayload);
+
     void deleteUser(long id, long usersId);
 }

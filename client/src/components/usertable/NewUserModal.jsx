@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import { DarkMode } from '../../App'
 import './modal.css';
 import NoImage from './no_image.jpg'
+import axios from "axios";
 
 const inputs = [
     {
@@ -46,17 +47,88 @@ export default function NewUser(props) {
     const matches650px = useMediaQuery('(max-width: 650px)')
 
     const [open, setOpen] = useState(false);
-    const [file, setFile] = useState("");
+
+    const [username, setUserName] = useState("");
+    const [file, setFile] = useState();
+    const [status, setStatus] = useState("");
+    const [email, setEmail] = useState("");
+    const [age, setAge] = useState("");
+    const [contact, setContact] = useState("");
+
+    // TODO :: Hanlde with global state management
+    const [userId, setUserId] = useState("1");
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => {
         setOpen(false);
         props.toggleModal();
+        setFile("");
     }
 
     useEffect(() => {
         if (props.open === true) handleOpen();
-    }, [props.open])
+        if (props.rowData) {
+            props.rowData.map((val) => {
+                setData(val.label, val.value);
+            })
+        }
+    }, [props.open, props.rowData])
+
+    function setData(field, data) {
+        switch (field) {
+            case "Full Name": setUserName(data);
+                break
+            case "Email": setEmail(data);
+                break
+            case "Phone": setContact(data);
+                break
+            case "Status": setStatus(data);
+                break
+            default: setAge(data);
+        }
+    }
+
+    function resetDataAndClodeModal() {
+        props.fetchData();
+        handleClose();
+    }
+
+    function sendData(event) {
+        event.preventDefault();
+        let bodyFormData = new FormData();
+        bodyFormData.append('username', username);
+        bodyFormData.append('status', status);
+        bodyFormData.append('email', email);
+        bodyFormData.append('age', age);
+        bodyFormData.append('contact', contact);
+        bodyFormData.append('userId', userId)
+        if (!props.rowData) {
+            bodyFormData.append('image', file);;
+            axios.post("http://localhost:8080/api/v1/user/insert", bodyFormData, { "Content-Type": "multipart/form-data" })
+                .then((res) => {
+                    if (res.status === 201) {
+                        resetDataAndClodeModal();
+                    }
+                }).catch((err) => { console.log(err); })
+        } else {
+            if (!file) {
+                axios.put(`http://localhost:8080/api/v1/user/update/${props.rowId}`, bodyFormData, { "Content-Type": "multipart/form-data" })
+                    .then((res) => {
+                        if (res.status === 202) {
+                            resetDataAndClodeModal();
+                        }
+                    }).catch((err) => { console.log(err); })
+            } else {
+                bodyFormData.append('image', file);
+                axios.put(`http://localhost:8080/api/v1/user/update/image/${props.rowId}`, bodyFormData, { "Content-Type": "multipart/form-data" })
+                    .then((res) => {
+                        if (res.status === 202) {
+                            resetDataAndClodeModal();
+                        }
+                    }).catch((err) => { console.log(err); })
+            }
+        }
+    }
 
     return (
         <div>
@@ -92,7 +164,7 @@ export default function NewUser(props) {
                                     />
                                 </div>
                                 <div className="right">
-                                    <form>
+                                    <form onSubmit={(e) => sendData(e)}>
                                         <div className="formInput">
                                             <label htmlFor="file">
                                                 Image: <DriveFolderUploadOutlinedIcon className="icon" />
@@ -109,14 +181,23 @@ export default function NewUser(props) {
                                                 props.rowData.map((input) => (
                                                     <div className="formInput" key={input.id}>
                                                         <label>{input.label}</label>
-                                                        <input type={input.type} placeholder={input.placeholder} defaultValue={input.value} />
+                                                        <input
+                                                            type={input.type}
+                                                            placeholder={input.placeholder}
+                                                            defaultValue={input.value}
+                                                            onChange={(e) => setData(input.label, e.target.value)}
+                                                        />
                                                     </div>
                                                 ))
                                                 :
                                                 inputs.map((input) => (
                                                     <div className="formInput" key={input.id}>
                                                         <label>{input.label}</label>
-                                                        <input type={input.type} placeholder={input.placeholder} />
+                                                        <input
+                                                            type={input.type}
+                                                            placeholder={input.placeholder}
+                                                            onChange={(e) => setData(input.label, e.target.value)}
+                                                        />
                                                     </div>
                                                 ))
                                         }

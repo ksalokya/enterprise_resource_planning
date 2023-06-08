@@ -40,12 +40,20 @@ public class UserController {
         return new ResponseEntity<>("", HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/image/{id}")
     public ResponseEntity<?> putUsersController(@PathVariable(name = "id") long id,
                                                 @ModelAttribute UserRequestPayload userRequestPayload,
                                                 @RequestParam("image") MultipartFile file) {
         logger.info("insertUsersController method invoked with userId & payload :: " + id + " " + userRequestPayload);
         userService.updateUser(id, userRequestPayload, file);
+        return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> putUsersWithOutImageController(@PathVariable(name = "id") long id,
+                                                @ModelAttribute UserRequestPayload userRequestPayload) {
+        logger.info("insertUsersController method invoked with userId & payload :: " + id + " " + userRequestPayload);
+        userService.updateUserWithOutImage(id, userRequestPayload);
         return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
     }
 

@@ -16,7 +16,7 @@ public class UserModel {
     private Integer id;
     private String username;
     @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
+    @Column(columnDefinition = "LONGBLOB")
     private String image;
     private String status;
     private String email;

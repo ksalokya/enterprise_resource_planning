@@ -10,46 +10,34 @@ import NoImage from './no_image.jpg'
 const inputs = [
     {
         id: 1,
-        label: "Username",
-        type: "text",
-        placeholder: "john_doe",
-    },
-    {
-        id: 2,
         label: "Full Name",
         type: "text",
         placeholder: "John Doe",
     },
     {
-        id: 3,
+        id: 2,
         label: "Email",
         type: "mail",
         placeholder: "john_doe@gmail.com",
     },
     {
-        id: 4,
+        id: 3,
         label: "Phone",
         type: "text",
         placeholder: "+91 234 567 89",
     },
     {
+        id: 4,
+        label: "Status",
+        type: "text",
+        placeholder: "active"
+    },
+    {
         id: 5,
-        label: "Password",
-        type: "password",
-        placeholder: "********"
-    },
-    {
-        id: 6,
-        label: "Address",
+        label: "Age",
         type: "text",
-        placeholder: "216, CP, New Delhi",
-    },
-    {
-        id: 7,
-        label: "Country",
-        type: "text",
-        placeholder: "India",
-    },
+        placeholder: "24",
+    }
 ];
 
 export default function NewUser(props) {
@@ -99,7 +87,7 @@ export default function NewUser(props) {
                             <div className={`bottom ${isDarkModeEnabled ? 'bottom-dark' : ''}`}>
                                 <div className="left">
                                     <img
-                                        src={file ? URL.createObjectURL(file) : NoImage}
+                                        src={file ? URL.createObjectURL(file) : (props.image ? `data:image/png;base64, ${props.image}` : NoImage)}
                                         alt=""
                                     />
                                 </div>
@@ -116,12 +104,22 @@ export default function NewUser(props) {
                                                 style={{ display: "none" }}
                                             />
                                         </div>
-                                        {inputs.map((input) => (
-                                            <div className="formInput" key={input.id}>
-                                                <label>{input.label}</label>
-                                                <input type={input.type} placeholder={input.placeholder} />
-                                            </div>
-                                        ))}
+                                        {
+                                            props.rowData ?
+                                                props.rowData.map((input) => (
+                                                    <div className="formInput" key={input.id}>
+                                                        <label>{input.label}</label>
+                                                        <input type={input.type} placeholder={input.placeholder} defaultValue={input.value} />
+                                                    </div>
+                                                ))
+                                                :
+                                                inputs.map((input) => (
+                                                    <div className="formInput" key={input.id}>
+                                                        <label>{input.label}</label>
+                                                        <input type={input.type} placeholder={input.placeholder} />
+                                                    </div>
+                                                ))
+                                        }
                                         <button>Upload</button>
                                     </form>
                                 </div>

@@ -34,7 +34,7 @@ public class UserController {
 
     @PostMapping("/insert")
     public ResponseEntity<?> insertUsersController(@ModelAttribute UserRequestPayload userRequestPayload,
-                                                   @RequestParam("image") MultipartFile file) throws IOException {
+                                                   @RequestParam("image") MultipartFile file) {
         logger.info("insertUsersController method invoked with payload :: " + userRequestPayload);
         UserResponsePayload userResponsePayload = userService.insertUserData(userRequestPayload, file);
         return new ResponseEntity<>("", HttpStatus.CREATED);
@@ -42,9 +42,10 @@ public class UserController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<?> putUsersController(@PathVariable(name = "id") long id,
-                                                @RequestBody UserRequestPayload userRequestPayload) {
+                                                @ModelAttribute UserRequestPayload userRequestPayload,
+                                                @RequestParam("image") MultipartFile file) {
         logger.info("insertUsersController method invoked with userId & payload :: " + id + " " + userRequestPayload);
-        userService.updateUser(id, userRequestPayload);
+        userService.updateUser(id, userRequestPayload, file);
         return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
     }
 

@@ -27,7 +27,7 @@ public class UserServiceImplementation implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public UserResponsePayload insertUserData(UserRequestPayload userRequestPayload, MultipartFile file) throws IOException {
+    public UserResponsePayload insertUserData(UserRequestPayload userRequestPayload, MultipartFile file) {
         logger.info("insertUserData method invoked with payload :: " + userRequestPayload);
         UserModel userModel = mapToEntity(userRequestPayload, file);
         UserModel newUserModel = userRepository.save(userModel);
@@ -43,13 +43,12 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void updateUser(long id, UserRequestPayload userRequestPayload) {
-//        logger.info("updateUser method invoked with userId & payload :: " + id + " " + userRequestPayload);
-//        UserModel userModel = mapToEntity(userRequestPayload);
-//        userRepository.saveByIdAndUserId(id, userRequestPayload.getUsername(),
-//                userRequestPayload.getImg(), userRequestPayload.getStatus(),
-//                userRequestPayload.getEmail(), userRequestPayload.getAge(),
-//                userRequestPayload.getContact(), userRequestPayload.getUserId());
+    public void updateUser(long id, UserRequestPayload userRequestPayload, MultipartFile file) {
+        logger.info("updateUser method invoked with userId & payload :: " + id + " " + userRequestPayload);
+        userRepository.saveByIdAndUserId(id, userRequestPayload.getUsername(),
+                convertImage(file), userRequestPayload.getStatus(),
+                userRequestPayload.getEmail(), userRequestPayload.getAge(),
+                userRequestPayload.getContact(), userRequestPayload.getUserId());
     }
 
     @Override
@@ -58,18 +57,24 @@ public class UserServiceImplementation implements UserService {
         userRepository.removeByIdAndUserId(id, userId);
     }
 
-    private UserModel mapToEntity(UserRequestPayload userRequestPayload, MultipartFile file) throws IOException {
+    private String convertImage(MultipartFile file) {
+        String image = "";
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-        UserModel userModel = new UserModel();
-        userModel.setUsername(userRequestPayload.getUsername());
         if (fileName.contains("..")) {
-            System.out.println("not a a valid file");
+            System.out.println("Not a valid file");
         }
         try {
-            userModel.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+            image = Base64.getEncoder().encodeToString(file.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return image;
+    }
+
+    private UserModel mapToEntity(UserRequestPayload userRequestPayload, MultipartFile file) {
+        UserModel userModel = new UserModel();
+        userModel.setUsername(userRequestPayload.getUsername());
+        userModel.setImage(convertImage(file));
         userModel.setStatus(userRequestPayload.getStatus());
         userModel.setEmail(userRequestPayload.getEmail());
         userModel.setAge(userRequestPayload.getAge());
@@ -80,6 +85,7 @@ public class UserServiceImplementation implements UserService {
 
     private UserResponsePayload mapToDto(UserModel userModel) {
         UserResponsePayload userResponsePayload = new UserResponsePayload();
+        userResponsePayload.setId(userModel.getId());
         userResponsePayload.setUsername(userModel.getUsername());
         userResponsePayload.setImage(userModel.getImage());
         userResponsePayload.setStatus(userModel.getStatus());

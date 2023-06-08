@@ -14,6 +14,8 @@ function Datatable() {
     const [loader, setLoader] = useState(true);
     const [users, setUsers] = useState([]);
     const [open, setOpen] = useState(false);
+    const [rowData, setRowData] = useState([]);
+    const [image, setImage] = useState();
 
     const toggleModal = () => setOpen(!open);
 
@@ -22,7 +24,6 @@ function Datatable() {
             .then((res) => {
                 if (res.status === 200) {
                     setUsers(res.data);
-                    console.log(res.data);
                     setLoader(false);
                 }
             })
@@ -37,6 +38,47 @@ function Datatable() {
             .catch((err) => { console.log(err); });
     };
 
+    function prepareRowData(data) {
+        setRowData([
+            {
+                id: 1,
+                label: "Full Name",
+                type: "text",
+                placeholder: "John Doe",
+                value: data.username
+            },
+            {
+                id: 2,
+                label: "Email",
+                type: "mail",
+                placeholder: "john_doe@gmail.com",
+                value: data.email
+            },
+            {
+                id: 3,
+                label: "Phone",
+                type: "text",
+                placeholder: "+91 234 567 89",
+                value: data.contact
+            },
+            {
+                id: 4,
+                label: "Status",
+                type: "text",
+                placeholder: "active",
+                value: data.status
+            },
+            {
+                id: 5,
+                label: "Age",
+                type: "text",
+                placeholder: "24",
+                value: data.age
+            }
+        ]);
+        setImage(data.image);
+    }
+
     const actionColumn = [
         {
             field: "action",
@@ -46,7 +88,14 @@ function Datatable() {
                 return (
                     <div className="cellAction">
                         <Link style={{ textDecoration: "none" }}>
-                            <div className={`viewButton ${isDarkModeEnabled ? "dark-mode-viewbutton" : ""}`}>Update</div>
+                            <div
+                                className={`viewButton ${isDarkModeEnabled ? "dark-mode-viewbutton" : ""}`}
+                                onClick={() => {
+                                    prepareRowData(params.row);
+                                    toggleModal();
+                                }}
+                            >
+                                Update</div>
                         </Link>
                         <div
                             className={`deleteButton ${isDarkModeEnabled ? "dark-mode-deleteButton" : ""}`}
@@ -69,7 +118,7 @@ function Datatable() {
                     <>
                         <div className="datatableTitle">
                             Add New User
-                            <Button onClick={toggleModal} className="link" variant="text">
+                            <Button onClick={() => { toggleModal(); setRowData(undefined) }} className="link" variant="text">
                                 Add New
                             </Button>
                         </div>
@@ -85,7 +134,7 @@ function Datatable() {
                         />
                     </>
             }
-            <NewUserModal open={open} toggleModal={toggleModal} />
+            <NewUserModal open={open} toggleModal={toggleModal} rowData={rowData} image={image} />
         </div>
     )
 }

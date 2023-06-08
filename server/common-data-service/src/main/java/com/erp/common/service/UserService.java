@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
-    UserResponsePayload insertUserData(UserRequestPayload userRequestPayload, MultipartFile file) throws IOException;
+    UserResponsePayload insertUserData(UserRequestPayload userRequestPayload, MultipartFile file);
 
     List<UserResponsePayload> findAllUsersByEmail(long userId);
 
-    void updateUser(long id, UserRequestPayload userRequestPayload);
+    void updateUser(long id, UserRequestPayload userRequestPayload, MultipartFile file);
 
     void deleteUser(long id, long usersId);
 }

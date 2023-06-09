@@ -1,4 +1,4 @@
-package com.erp.common.model.order;
+package com.erp.common.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,17 +9,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "orders")
-public class OrderModel {
+@Table(name = "userdata")
+public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String product;
-    private String img;
-    private String customerName;
-    private String date;
-    private long amount;
-    private String method;
+    private String username;
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private String image;
     private String status;
+    private String email;
+    private String age;
+    private String contact;
     private long userId;
 }

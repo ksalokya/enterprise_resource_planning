@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class DeliveryResponsePayload {
-    private Integer id;
+    private long id;
     private String code;
-    private Integer value;
+    private long value;
     private String name;
-    private Integer population;
-    private Integer density;
+    private long population;
+    private long density;
 }

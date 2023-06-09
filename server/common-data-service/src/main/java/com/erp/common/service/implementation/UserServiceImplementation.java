@@ -1,7 +1,7 @@
 package com.erp.common.service.implementation;
 
 import com.erp.common.exception.ResourceNotFoundException;
-import com.erp.common.model.userdata.UserModel;
+import com.erp.common.model.UserModel;
 import com.erp.common.payload.request.UserRequestPayload;
 import com.erp.common.payload.response.UserResponsePayload;
 import com.erp.common.repository.UserRepository;

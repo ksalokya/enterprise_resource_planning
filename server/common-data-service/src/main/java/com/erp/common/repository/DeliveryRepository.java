@@ -1,6 +1,6 @@
 package com.erp.common.repository;
 
-import com.erp.common.model.delivery.DeliveryModel;
+import com.erp.common.model.DeliveryModel;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

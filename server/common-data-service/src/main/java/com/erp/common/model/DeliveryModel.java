@@ -1,4 +1,4 @@
-package com.erp.common.model.delivery;
+package com.erp.common.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

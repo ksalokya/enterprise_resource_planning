@@ -82,12 +82,12 @@ function Profile() {
           </div>
         </Grid>
         <Grid item lg={8} md={8} xs={12} className="profile-right">
-          <ProfileChart/>
+          <ProfileChart />
         </Grid>
       </Grid>
       <Grid container item lg={12} md={12} xs={12} className="profile-bottom">
-        <h1 className="profile-title">Last Transactions</h1>
-        <List rows={rows} type={"Address"} />
+        <h1 className="profile-title">Recent Transactions</h1>
+        <List />
       </Grid>
     </Grid>
   )

@@ -3,7 +3,6 @@ import StackedChart from '../../components/chart/StackedChart'
 import MixedBarChart from '../../components/chart/MixedBarChart'
 import TwoLevelPieChart from '../../components/chart/TwoLevelPieChart'
 import Product from '../../components/order/Order'
-import {orders} from './orderData'
 
 function Orders() {
   return (
@@ -18,7 +17,7 @@ function Orders() {
         <TwoLevelPieChart />
       </Grid>
       <Grid item lg={12} md={12} xs={12}>
-        <Product rows={orders} type={"Order"} />
+        <Product />
       </Grid>
     </Grid>
   )

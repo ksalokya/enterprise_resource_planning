@@ -1,6 +1,6 @@
 package com.erp.common.service.implementation;
 
-import com.erp.common.model.faq.FaqModel;
+import com.erp.common.model.FaqModel;
 import com.erp.common.payload.request.FaqRequestPayload;
 import com.erp.common.payload.response.FaqResponsePayload;
 import com.erp.common.repository.FaqRepository;
@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

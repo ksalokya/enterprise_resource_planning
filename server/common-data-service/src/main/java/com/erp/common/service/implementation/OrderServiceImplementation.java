@@ -1,12 +1,10 @@
 package com.erp.common.service.implementation;
 
-import com.erp.common.model.delivery.DeliveryModel;
-import com.erp.common.model.order.OrderModel;
+import com.erp.common.model.OrderModel;
 import com.erp.common.payload.request.OrderRequestPayload;
 import com.erp.common.payload.response.OrderResponsePayload;
 import com.erp.common.repository.OrderRepository;
 import com.erp.common.service.OrderService;
-import jakarta.persistence.criteria.Order;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;

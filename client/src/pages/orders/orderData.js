@@ -17,7 +17,7 @@ export const orders = [
         date: "1 March",
         amount: 900,
         method: "Online Payment",
-        status: "Pending",
+        status: "Pending"
     },
     {
         id: 2342353,

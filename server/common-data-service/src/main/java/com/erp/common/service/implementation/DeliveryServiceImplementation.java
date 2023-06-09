@@ -1,6 +1,6 @@
 package com.erp.common.service.implementation;
 
-import com.erp.common.model.delivery.DeliveryModel;
+import com.erp.common.model.DeliveryModel;
 import com.erp.common.payload.request.DeliveryRequestPayload;
 import com.erp.common.payload.response.DeliveryResponsePayload;
 import com.erp.common.repository.DeliveryRepository;

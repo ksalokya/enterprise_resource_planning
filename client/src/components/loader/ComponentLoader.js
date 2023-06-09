@@ -8,7 +8,7 @@ export default function ComponentLoader(props) {
     return (
         <Box sx={{
             width: 600,
-            position: 'absolute',
+            position: props.position ? 'relative' : 'absolute',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',

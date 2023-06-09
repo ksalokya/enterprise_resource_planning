@@ -1,7 +1,6 @@
 package com.erp.common.repository;
 
-import com.erp.common.model.faq.FaqModel;
-import com.erp.common.model.order.OrderModel;
+import com.erp.common.model.OrderModel;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

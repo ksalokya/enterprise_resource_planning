@@ -4,12 +4,12 @@ import lombok.Data;
 
 @Data
 public class OrderResponsePayload {
-    private Long id;
+    private long id;
     private String product;
     private String img;
     private String customerName;
     private String date;
-    private Long amount;
+    private long amount;
     private String method;
     private String status;
 }

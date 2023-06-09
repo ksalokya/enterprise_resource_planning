@@ -33,4 +33,20 @@ public class DeliveryController {
         DeliveryResponsePayload deliveryResponsePayload = deliveryService.createDeliveryData(deliveryRequestPayload);
         return new ResponseEntity<>(deliveryResponsePayload, HttpStatus.OK);
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> putUsersWithOutImageController(@PathVariable(name = "id") long id,
+                                                            @RequestBody DeliveryRequestPayload deliveryRequestPayload) {
+        logger.info("insertUsersController method invoked with userId & payload :: " + id + " " + deliveryRequestPayload);
+        deliveryService.updateDeliveryData(id, deliveryRequestPayload);
+        return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/delete/{id}/{userId}")
+    public ResponseEntity<?> deleteUsersController(@PathVariable(name = "id") long id,
+                                                   @PathVariable(name = "userId") long userId) {
+        logger.info("insertUsersController method invoked with id & usersId :: " + id + " " + userId);
+        deliveryService.deleteDeliveryData(id, userId);
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
 }

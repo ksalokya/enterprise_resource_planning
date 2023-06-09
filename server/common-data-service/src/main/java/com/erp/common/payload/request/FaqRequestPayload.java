@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FaqRequestPayload {
-    private long id;
     private String question;
     private String answer;
+    private Integer userId;
 }

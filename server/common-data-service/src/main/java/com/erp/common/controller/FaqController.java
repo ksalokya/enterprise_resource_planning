@@ -28,20 +28,18 @@ public class FaqController {
         return new ResponseEntity<>(faqResponsePayloadList, HttpStatus.OK);
     }
 
-    @PostMapping("/insert/{userId}")
-    public ResponseEntity<?> insertFaqController(@PathVariable(name = "userId") long user_id,
-                                                 @RequestBody FaqRequestPayload faqRequestPayload) {
-        logger.info("insertFaqController method invoked with user id :: " + user_id);
-        FaqResponsePayload faqResponsePayloadList = faqService.insertFaq(user_id, faqRequestPayload);
+    @PostMapping("/insert")
+    public ResponseEntity<?> insertFaqController(@RequestBody FaqRequestPayload faqRequestPayload) {
+        logger.info("insertFaqController method invoked with payload :: " + faqRequestPayload);
+        FaqResponsePayload faqResponsePayloadList = faqService.insertFaq(faqRequestPayload);
         return new ResponseEntity<>(faqResponsePayloadList, HttpStatus.OK);
     }
 
-    @PatchMapping("/patch/{userId}/{faqId}")
-    public ResponseEntity<?> patchFaqController(@PathVariable(name = "userId") long user_id,
-                                                @PathVariable(name = "faqId") long faq_id,
-                                                @RequestBody FaqRequestPayload faqRequestPayload) {
-        logger.info("patchFaqController method invoked with user id :: " + user_id);
-        faqService.updateFaq(user_id, faq_id, faqRequestPayload);
+    @PutMapping("/update/{faqId}")
+    public ResponseEntity<?> updateFaqController(@PathVariable(name = "faqId") long faq_id,
+                                                 @RequestBody FaqRequestPayload faqRequestPayload) {
+        logger.info("patchFaqController method invoked with faqId :: " + faq_id);
+        faqService.updateFaq(faq_id, faqRequestPayload);
         return new ResponseEntity<>("Updated Successfully", HttpStatus.OK);
     }
 

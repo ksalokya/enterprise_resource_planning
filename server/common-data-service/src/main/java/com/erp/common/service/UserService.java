@@ -16,5 +16,5 @@ public interface UserService {
 
     void updateUserWithOutImage(long id, UserRequestPayload userRequestPayload);
 
-    void deleteUser(long id, long usersId);
+    void deleteUser(long id, long userId);
 }

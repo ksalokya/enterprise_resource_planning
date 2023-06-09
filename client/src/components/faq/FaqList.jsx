@@ -15,14 +15,16 @@ export default function FaqList() {
     const [currentIndex, setCurrentIndex] = useState(-1);
 
     const [faqs, setFaqs] = useState();
+
+    // TODO :: Handle userID
     useEffect(() => {
-        axios.get("http://localhost:8080/api/v1/faq/get/1")
+        axios.get(`http://localhost:8080/api/v1/faq/get/${1}`)
             .then((res) => {
-                setFaqs(res.data);
+                if (res.status === 200) {
+                    setFaqs(res.data);
+                }
             })
-            .catch((err) => {
-                console.log(err);
-            })
+            .catch((err) => console.log(err))
     }, [])
 
     const handleChange = (panel, index) => (event, isExpanded) => {
@@ -30,9 +32,7 @@ export default function FaqList() {
         setExpanded(isExpanded ? panel : false);
     };
 
-    const handleIndex = (index) => {
-        setCurrentIndex(index);
-    }
+    const handleIndex = (index) => setCurrentIndex(index);
 
     return (
         <div>

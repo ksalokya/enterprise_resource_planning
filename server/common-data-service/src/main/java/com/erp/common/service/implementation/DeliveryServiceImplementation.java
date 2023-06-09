@@ -45,6 +45,21 @@ public class DeliveryServiceImplementation implements DeliveryService {
         return mapToDtoList(deliveryModels);
     }
 
+    @Override
+    public void updateDeliveryData(long deliveryDataId, DeliveryRequestPayload deliveryRequestPayload) {
+        logger.info("updateDeliveryData method invoked with id :: " + deliveryDataId);
+        deliveryRepository.saveByIdAndUserId(deliveryDataId, deliveryRequestPayload.getUserId(),
+                deliveryRequestPayload.getCode(), deliveryRequestPayload.getValue(),
+                deliveryRequestPayload.getName(), deliveryRequestPayload.getPopulation(),
+                deliveryRequestPayload.getDensity());
+    }
+
+    @Override
+    public void deleteDeliveryData(long id, long userId) {
+        logger.info("deleteDeliveryData method invoked with id and usersID :: " + id + " " + userId);
+        deliveryRepository.removeByIdAndUserId(id, userId);
+    }
+
     private DeliveryModel mapToEntity(DeliveryRequestPayload deliveryRequestPayload) {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);

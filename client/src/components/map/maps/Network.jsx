@@ -2,8 +2,8 @@ import {
     MapsComponent, LayersDirective, LayerDirective, Inject, NavigationLine, NavigationLinesDirective,
     NavigationLineDirective, MarkersDirective, MarkerDirective, Marker
 } from '@syncfusion/ej2-react-maps';
-import { world_map } from './world_map.js';
-import './map.css'
+import { world_map } from '../metadata/world_map.js';
+import '../map.css'
 
 function Network() {
     return (

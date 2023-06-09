@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class DeliveryResponsePayload {
+    private Integer id;
     private String code;
     private Integer value;
     private String name;

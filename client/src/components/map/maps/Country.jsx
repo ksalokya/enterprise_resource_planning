@@ -1,17 +1,17 @@
 import { MapsComponent, LayersDirective, LayerDirective, Inject } from '@syncfusion/ej2-react-maps';
 import { BubblesDirective, BubbleDirective, Bubble } from '@syncfusion/ej2-react-maps';
-import { world_map } from './world_map.js';
-import { population_density } from './data.js';
-import './map.css'
+import { world_map } from '../metadata/world_map';
+// import { population_density } from '../metadata/data.js';
+import '../map.css'
 
-function Country() {
+function Country(props) {
     return (
         <div className="country">
             <MapsComponent id="maps">
                 <Inject services={[Bubble]} />
                 <LayersDirective>
                     <LayerDirective shapeData={world_map} shapeDataPath="name" shapePropertyPath="name"
-                        dataSource={population_density} shapeSettings={{
+                        dataSource={props.deliveryData} shapeSettings={{
                             colorValuePath: 'density',
                             colorMapping: [
                                 {

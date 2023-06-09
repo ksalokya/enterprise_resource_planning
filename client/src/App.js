@@ -7,8 +7,8 @@ import {
 } from "react-router-dom";
 
 import "./app.css"
-import { lightMode } from "./components/map/light.js";
-import { darkMode } from "./components/map/dark.js";
+import { lightMode } from "./components/map/theme/light.js";
+import { darkMode } from "./components/map/theme/dark.js";
 import { c3DarkMode } from './components/chart/c3';
 import Signup from './pages/signup/Signup';
 import Loader from './components/loader/Loader';

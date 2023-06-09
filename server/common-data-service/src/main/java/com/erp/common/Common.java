@@ -11,3 +11,8 @@ public class Common {
 	}
 
 }
+
+
+// Add redis
+// Add exception
+// check for sout

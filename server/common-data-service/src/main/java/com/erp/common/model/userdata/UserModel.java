@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
     private String username;
     @Lob
     @Column(columnDefinition = "LONGBLOB")
@@ -22,5 +22,5 @@ public class UserModel {
     private String email;
     private String age;
     private String contact;
-    private Integer userId;
+    private long userId;
 }

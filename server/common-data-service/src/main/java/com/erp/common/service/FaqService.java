@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface FaqService {
     List<FaqResponsePayload> getAllFaqsById(long userId);
-    FaqResponsePayload insertFaq(long userId, FaqRequestPayload faqRequestPayload);
+    FaqResponsePayload insertFaq(FaqRequestPayload faqRequestPayload);
 
-    void updateFaq(long userId, long faqId, FaqRequestPayload faqRequestPayload);
+    void updateFaq(long faqId, FaqRequestPayload faqRequestPayload);
 
     void deleteFaq(long userId, long faqId);
 }

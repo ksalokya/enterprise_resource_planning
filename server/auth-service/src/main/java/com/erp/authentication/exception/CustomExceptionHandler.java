@@ -1,6 +1,6 @@
 package com.erp.authentication.exception;
 
-import com.erp.authentication.dto.ErrorDetails;
+import com.erp.authentication.payload.ErrorDetails;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

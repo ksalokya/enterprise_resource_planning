@@ -24,12 +24,7 @@ public class SystemController {
 //        System.out.println("Memory :: " + hal.getMemory());
 //        System.out.println("Traffic :: " + hal.getNetworkIFs());
 //        System.out.println("Disk :: " + hal.getDiskStores());
-
-        System.out.println(os.getFamily());
-
-
-
-
+//        System.out.println(os.getFamily());
 //        System.out.println(hal.getComputerSystem());
 //        System.out.println(hal.getProcessor());
 //        System.out.println(hal.getMemory());
@@ -47,6 +42,6 @@ public class SystemController {
     @GetMapping("/get")
     public ResponseEntity<?> getOsInfo() {
         getSystemInfo();
-        return new ResponseEntity<>("Hello", HttpStatus.OK);
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 }

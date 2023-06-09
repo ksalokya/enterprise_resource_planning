@@ -1,6 +1,6 @@
 package com.erp.authentication.controller;
 
-import com.erp.authentication.dto.AuthRequest;
+import com.erp.authentication.payload.AuthRequest;
 import com.erp.authentication.entity.UserInfo;
 import com.erp.authentication.repository.UserInfoRepository;
 import com.erp.authentication.service.JwtService;

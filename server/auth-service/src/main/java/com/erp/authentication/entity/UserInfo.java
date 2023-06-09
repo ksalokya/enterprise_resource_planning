@@ -9,14 +9,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table (name = "USERS")
+@Table(name = "users")
 public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(unique=true)
+    private long id;
+    @Column(unique = true)
     private String email;
-    @Column(unique=true)
+    @Column(unique = true)
     private String username;
     private String password;
     private String role;

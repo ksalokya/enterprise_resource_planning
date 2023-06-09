@@ -1,4 +1,4 @@
-package com.erp.authentication.dto;
+package com.erp.authentication.payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

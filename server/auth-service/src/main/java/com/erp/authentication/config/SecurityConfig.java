@@ -27,7 +27,7 @@ public class SecurityConfig {
     private AuthFilter authFilter;
 
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         return new UserInfoDetailsService();
     }
 
@@ -46,12 +46,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());

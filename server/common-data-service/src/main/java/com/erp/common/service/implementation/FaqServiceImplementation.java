@@ -31,7 +31,7 @@ public class FaqServiceImplementation implements FaqService {
     }
 
     @Override
-    public List<FaqResponsePayload> getAllFaqsById(long userId) {
+    public List<FaqResponsePayload> getAllFaqs(long userId) {
         // TODO :: Handle Exception
         logger.info("getAllFaqsById method invoked with user id :: " + userId);
         List<FaqModel> faqModelList = faqRepository.findAllByUserId(userId).orElseThrow();

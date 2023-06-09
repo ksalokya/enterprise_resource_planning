@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<UserModel, Long> {
-    Optional<List<UserModel>> getAllUsersByUserId(long userId);
+    Optional<List<UserModel>> findAllByUserId(long userId);
 
     @Transactional
     @Modifying(clearAutomatically = true, flushAutomatically = true)

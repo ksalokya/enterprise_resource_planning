@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DeliveryRepository extends JpaRepository<DeliveryModel, Long> {
-    Optional<List<DeliveryModel>> getAllByUserId(long userId);
+    Optional<List<DeliveryModel>> findAllByUserId(long userId);
 
     @Transactional
     @Modifying(clearAutomatically = true, flushAutomatically = true)

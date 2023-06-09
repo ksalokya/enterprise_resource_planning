@@ -30,14 +30,14 @@ public class UserServiceImplementation implements UserService {
     public UserResponsePayload insertUserData(UserRequestPayload userRequestPayload, MultipartFile file) {
         logger.info("insertUserData method invoked with payload :: " + userRequestPayload);
         UserModel userModel = mapToEntity(userRequestPayload, file);
-        UserModel newUserModel = userRepository.save(userModel);
-        return mapToDto(newUserModel);
+        UserModel insertedUserModel = userRepository.save(userModel);
+        return mapToDto(insertedUserModel);
     }
 
     @Override
     public List<UserResponsePayload> findAllUsersByEmail(long userId) {
         logger.info("findAllUsersByEmail method invoked with payload :: " + userId);
-        List<UserModel> userModelList = userRepository.getAllUsersByUserId(userId)
+        List<UserModel> userModelList = userRepository.findAllByUserId(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("UserModel", "userId", userId));
         return mapToListEntity(userModelList);
     }

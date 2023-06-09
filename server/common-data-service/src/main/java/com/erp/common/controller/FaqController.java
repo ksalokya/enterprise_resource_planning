@@ -24,7 +24,7 @@ public class FaqController {
     @GetMapping("/get/{userId}")
     public ResponseEntity<?> getAllFaqsController(@PathVariable(name = "userId") long user_id) {
         logger.info("getAllFaqsController method invoked with user id :: " + user_id);
-        List<FaqResponsePayload> faqResponsePayloadList = faqService.getAllFaqsById(user_id);
+        List<FaqResponsePayload> faqResponsePayloadList = faqService.getAllFaqs(user_id);
         return new ResponseEntity<>(faqResponsePayloadList, HttpStatus.OK);
     }
 
@@ -46,7 +46,7 @@ public class FaqController {
     @DeleteMapping("/delete/{userId}/{faqId}")
     public ResponseEntity<?> deleteFaqController(@PathVariable(name = "userId") long user_id,
                                                  @PathVariable(name = "faqId") long faq_id) {
-        logger.info("insertFaqController method invoked with user id :: " + user_id);
+        logger.info("deleteFaqController method invoked with user id :: " + user_id);
         faqService.deleteFaq(user_id, faq_id);
         return new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
     }

@@ -30,17 +30,17 @@ public class DeliveryServiceImplementation implements DeliveryService {
 
     @Override
     public DeliveryResponsePayload createDeliveryData(DeliveryRequestPayload deliveryRequestPayload) {
-        logger.info("getDeliveryData method invoked with payload :: " + deliveryRequestPayload);
+        logger.info("createDeliveryData method invoked with payload :: " + deliveryRequestPayload);
         DeliveryModel deliveryModel = mapToEntity(deliveryRequestPayload);
-        DeliveryModel newDeliveryModel = deliveryRepository.save(deliveryModel);
-        return mapToDto(newDeliveryModel);
+        DeliveryModel insertedDeliveryModel = deliveryRepository.save(deliveryModel);
+        return mapToDto(insertedDeliveryModel);
     }
 
     @Override
     public List<DeliveryResponsePayload> getDeliveryData(long userId) {
         logger.info("getDeliveryData method invoked with user id :: " + userId);
         // TODO :: Handle Exception
-        List<DeliveryModel> deliveryModels = deliveryRepository.getAllByUserId(userId)
+        List<DeliveryModel> deliveryModels = deliveryRepository.findAllByUserId(userId)
                 .orElseThrow();
         return mapToDtoList(deliveryModels);
     }

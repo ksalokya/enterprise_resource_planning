@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { BarChart, Bar, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import ComponentLoader from '../loader/ComponentLoader';
 import './chart.css'
 
 const data = [
@@ -47,27 +49,34 @@ const data = [
 ];
 
 function MixedBarChart() {
+    const [loader, setLoader] = useState(true);
+
     return (
         <div className="mixed-bar-chart">
-            <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                    width={500}
-                    height={300}
-                    data={data}
-                    margin={{
-                        top: 20,
-                        right: 10,
-                        left: 10,
-                        bottom: 5,
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
-                    <Bar dataKey="pv" stackId="a" fill="#8884d8" />
-                    <Bar dataKey="amt" stackId="a" fill="#82ca9d" />
-                    <Bar dataKey="uv" fill="#ffc658" />
-                </BarChart>
-            </ResponsiveContainer>
+            {
+                loader ?
+                    <ComponentLoader position="relative" width={400} />
+                    :
+                    <ResponsiveContainer width="100%" height="100%">
+                        <BarChart
+                            width={500}
+                            height={300}
+                            data={data}
+                            margin={{
+                                top: 20,
+                                right: 10,
+                                left: 10,
+                                bottom: 5,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <Tooltip />
+                            <Bar dataKey="pv" stackId="a" fill="#8884d8" />
+                            <Bar dataKey="amt" stackId="a" fill="#82ca9d" />
+                            <Bar dataKey="uv" fill="#ffc658" />
+                        </BarChart>
+                    </ResponsiveContainer>
+            }
         </div>
     )
 }

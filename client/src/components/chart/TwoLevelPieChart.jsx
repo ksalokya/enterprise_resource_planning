@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { PieChart, Pie, ResponsiveContainer } from 'recharts';
+import ComponentLoader from '../loader/ComponentLoader';
 import './chart.css'
 
 const data01 = [
@@ -22,14 +24,21 @@ const data02 = [
 ];
 
 function TwoLevelPieChart() {
+    const [loader, setLoader] = useState(true);
+
     return (
         <div className="two-level-pie-chart">
-            <ResponsiveContainer width="100%" height="100%">
-                <PieChart width={400} height={400}>
-                    <Pie data={data01} dataKey="value" cx="50%" cy="50%" outerRadius={70} fill="#8884d8" />
-                    <Pie data={data02} dataKey="value" cx="50%" cy="50%" innerRadius={80} outerRadius={100} fill="#82ca9d" label />
-                </PieChart>
-            </ResponsiveContainer>
+            {
+                loader ?
+                    <ComponentLoader position="relative" width={400} />
+                    :
+                    <ResponsiveContainer width="100%" height="100%">
+                        <PieChart width={400} height={400}>
+                            <Pie data={data01} dataKey="value" cx="50%" cy="50%" outerRadius={70} fill="#8884d8" />
+                            <Pie data={data02} dataKey="value" cx="50%" cy="50%" innerRadius={80} outerRadius={100} fill="#82ca9d" label />
+                        </PieChart>
+                    </ResponsiveContainer>
+            }
         </div>
     )
 }

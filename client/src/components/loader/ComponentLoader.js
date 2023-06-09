@@ -7,8 +7,8 @@ export default function ComponentLoader(props) {
     const isDarkModeEnabled = useContext(DarkMode);
     return (
         <Box sx={{
-            width: 600,
-            position: props.position ? 'relative' : 'absolute',
+            width: props.width || 600,
+            position: props.position || 'absolute',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',

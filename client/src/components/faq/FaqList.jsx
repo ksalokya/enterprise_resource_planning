@@ -18,7 +18,7 @@ export default function FaqList() {
 
     // TODO :: Handle userID
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/v1/faq/get/${1}`)
+        axios.get(`http://localhost:8004/api/v1/faq/get/${1}`)
             .then((res) => {
                 if (res.status === 200) {
                     setFaqs(res.data);

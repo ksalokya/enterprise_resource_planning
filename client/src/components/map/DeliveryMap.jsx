@@ -15,7 +15,7 @@ function DeliveryMap() {
 
     // TODO ::  Handle UserID
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/v1/delivery/get/${1}`)
+        axios.get(`http://localhost:8004/api/v1/delivery/get/${1}`)
             .then((res) => {
                 if (res.status === 200) {
                     setDeliveryData(res.data);

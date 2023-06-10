@@ -20,9 +20,8 @@ function Order() {
   const [loader, setLoader] = useState(true);
 
   // TODO :: Handle userID
-  // Add optimization for call from profile
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/v1/order/get/${1}`)
+    axios.get(`http://localhost:8004/api/v1/order/get/${1}`)
       .then((res) => {
         if (res.status === 200) {
           let data = res.data;

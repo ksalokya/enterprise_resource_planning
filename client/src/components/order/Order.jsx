@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { useLocation } from "react-router-dom";
 import { DarkMode } from '../../App';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,6 +13,8 @@ import ComponentLoader from '../loader/ComponentLoader';
 import './order.css'
 
 function Order() {
+  const location = useLocation();
+  let currentPath = location.pathname;
   const isDarkModeEnabled = useContext(DarkMode);
   const [rows, setRows] = useState();
   const [loader, setLoader] = useState(true);
@@ -22,7 +25,8 @@ function Order() {
     axios.get(`http://localhost:8080/api/v1/order/get/${1}`)
       .then((res) => {
         if (res.status === 200) {
-          setRows(res.data);
+          let data = res.data;
+          setRows(currentPath === "/profile" ? data.sort().reverse().splice(0, 5) : data);
           setLoader(false);
         }
       })
@@ -33,7 +37,7 @@ function Order() {
     <>
       {
         loader ?
-          <ComponentLoader position='relative' style={{ top : "100%"}}/>
+          <ComponentLoader position='relative' style={{ top: "100%" }} />
           :
           <TableContainer component={Paper} className="table" sx={{
             backgroundColor: isDarkModeEnabled ? '#121212' : '',
@@ -41,7 +45,12 @@ function Order() {
             <Table sx={{ minWidth: 650, color: isDarkModeEnabled ? '#fff' : '' }} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>Tracking ID</TableCell>
+                  <TableCell
+                    sx={{
+                      color: isDarkModeEnabled ? '#fff' : '',
+                      display: currentPath === "/profile" ? 'none' : ''
+                    }}
+                  >Tracking ID</TableCell>
                   <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>Product</TableCell>
                   <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>Customer Name</TableCell>
                   <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>Date</TableCell>
@@ -53,14 +62,17 @@ function Order() {
               <TableBody  >
                 {rows.map((row) => (
                   <TableRow key={row.id}>
-                    <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>{row.id}</TableCell>
+                    <TableCell sx={{
+                      color: isDarkModeEnabled ? '#fff' : '',
+                      display: currentPath === "/profile" ? 'none' : ''
+                    }}>{row.id}</TableCell>
                     <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>
                       <div className="cellWrapper">
                         <img src={row.img} alt="" className="image" />
                         {row.product}
                       </div>
                     </TableCell>
-                    <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>{row.type}</TableCell>
+                    <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>{row.customerName}</TableCell>
                     <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>{row.date}</TableCell>
                     <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>{row.amount}</TableCell>
                     <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>{row.method}</TableCell>

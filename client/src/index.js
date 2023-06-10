@@ -12,3 +12,4 @@ root.render(
 // separate files for api calls
 // use env for enpoint and port
 // use logger
+// remove static data

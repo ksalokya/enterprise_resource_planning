@@ -46,8 +46,7 @@ function Order() {
                 <TableRow>
                   <TableCell
                     sx={{
-                      color: isDarkModeEnabled ? '#fff' : '',
-                      display: currentPath === "/profile" ? 'none' : ''
+                      color: isDarkModeEnabled ? '#fff' : ''
                     }}
                   >Tracking ID</TableCell>
                   <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>Product</TableCell>
@@ -62,8 +61,7 @@ function Order() {
                 {rows.map((row) => (
                   <TableRow key={row.id}>
                     <TableCell sx={{
-                      color: isDarkModeEnabled ? '#fff' : '',
-                      display: currentPath === "/profile" ? 'none' : ''
+                      color: isDarkModeEnabled ? '#fff' : ''
                     }}>{row.id}</TableCell>
                     <TableCell sx={{ color: isDarkModeEnabled ? '#fff' : '' }}>
                       <div className="cellWrapper">

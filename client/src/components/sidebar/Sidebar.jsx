@@ -37,10 +37,10 @@ function Sidebar(props) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
+
   const logOut = () => {
-    console.log("log out");
     localStorage.clear();
+    props.handleUserContext(undefined, undefined, undefined);
   }
 
   return (
@@ -135,7 +135,7 @@ function Sidebar(props) {
           </Link>
           <Link to="/signin" style={{ textDecoration: "none" }} onClick={logOut}>
             <li>
-              <LogoutIcon className="icon"/>
+              <LogoutIcon className="icon" />
               <span>Logout</span>
             </li>
           </Link>

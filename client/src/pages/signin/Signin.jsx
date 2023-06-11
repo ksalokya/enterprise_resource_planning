@@ -15,7 +15,7 @@ import { DarkMode } from '../../App'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-export default function Signin() {
+export default function Signin(props) {
     const navigate = useNavigate();
     const isDarkModeEnabled = useContext(DarkMode);
     const matches = useMediaQuery('(max-width:900px)');
@@ -71,13 +71,12 @@ export default function Signin() {
         })
             .then((res) => {
                 if (res.status === 200) {
-                    navigate("/home");
                     let userInfo = res.data;
-                    localStorage.setItem('username', userInfo.username);
-                    localStorage.setItem('isLoggedIn', userInfo.isLoggedIn);
                     if (remembeMe) {
-                        localStorage.setItem('token', userInfo.token);
+                        localStorage.setItem('token', userInfo.isLoggedIn);
                     }
+                    props.handleUserContext(userInfo.username, userInfo.token, userInfo.isLoggedIn);
+                    navigate("/home");
                 } else {
                     setSignInError(res.data.message);
                     handleAuthError();

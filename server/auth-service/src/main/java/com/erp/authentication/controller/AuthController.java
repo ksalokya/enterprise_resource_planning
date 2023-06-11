@@ -1,5 +1,6 @@
 package com.erp.authentication.controller;
 
+import com.erp.authentication.config.UserInfoUserDetails;
 import com.erp.authentication.entity.UserInfo;
 import com.erp.authentication.payload.AuthRequest;
 import com.erp.authentication.payload.AuthResponse;
@@ -14,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -66,9 +68,14 @@ public class AuthController {
     @PostMapping("/authenticate")
     public AuthResponse authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         logger.info("authenticateAndGetToken method invoked with username :: " + authRequest.getUsername());
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(authRequest.getUsername(),
+                        authRequest.getPassword()));
+
         if (authentication.isAuthenticated()) {
+            UserInfoUserDetails userInfoUserDetails = (UserInfoUserDetails) authentication.getPrincipal();
             return new AuthResponse(
+                    userInfoUserDetails.getId(),
                     authRequest.getUsername(),
                     jwtService.generateToken(authRequest.getUsername()),
                     true);

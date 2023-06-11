@@ -1,7 +1,7 @@
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import "./chart.css"
+import "../chart.css"
 
 const data = [
   { name: 'Wholesale', value: 400 },

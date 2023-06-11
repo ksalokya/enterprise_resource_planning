@@ -22,7 +22,6 @@ function Order(props) {
   const [rows, setRows] = useState();
   const [loader, setLoader] = useState(true);
 
-  // TODO :: Handle userID
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/order/get/${parseInt(userContext?.userId)}`)
       .then((res) => {

@@ -9,7 +9,7 @@ import {
 import "./app.css"
 import { lightMode } from "./components/map/theme/light.js";
 import { darkMode } from "./components/map/theme/dark.js";
-import { c3DarkMode } from './components/chart/c3';
+import { c3DarkMode } from './components/chart/home/c3';
 import Signup from './pages/signup/Signup';
 import Loader from './components/loader/Loader';
 import Layout from './layout/Layout';
@@ -34,7 +34,7 @@ export const UserContext = createContext();
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('dark') === 'true' ? true : false);
-  const [userContext, setUserContext] = useState({ userId: undefined, username: undefined, token: undefined, isLoggedIn: undefined })
+  const [userContext, setUserContext] = useState({ userId: 1, username: undefined, token: undefined, isLoggedIn: true })
   const handleDarkMode = () => setIsDarkMode(!isDarkMode);
   const handleUserContext = (userId, name, token, status) => {
     setUserContext({

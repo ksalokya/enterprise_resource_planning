@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { DarkMode } from '../../App';
 import Grid from '@mui/material/Grid';
-import BarChart from '../../components/chart/BarChart'
-import PieChart from '../../components/chart/PieChart'
 import Widget from '../../components/widgets/Widget'
-import C3Chart from '../../components/chart/C3Chart'
+import C3Chart from '../../components/chart/home/C3Chart'
+import BarChart from '../../components/chart/home/BarChart'
+import PieChart from '../../components/chart/home/PieChart'
 
 function Home() {
   const isDarkModeEnabled = useContext(DarkMode);

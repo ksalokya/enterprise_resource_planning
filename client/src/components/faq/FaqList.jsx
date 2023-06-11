@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
+import { UserContext } from '../../App';
 import axios from 'axios';
 import { DarkMode } from '../../App';
 import Accordion from '@mui/material/Accordion';
@@ -10,15 +11,15 @@ import ComponentLoader from "../loader/ComponentLoader"
 
 
 export default function FaqList() {
+    const userContext = useContext(UserContext);
     const isDarkModeEnabled = useContext(DarkMode);
     const [expanded, setExpanded] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(-1);
 
     const [faqs, setFaqs] = useState();
 
-    // TODO :: Handle userID
     useEffect(() => {
-        axios.get(`http://localhost:8004/api/v1/faq/get/${1}`)
+        axios.get(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/faq/get/${userContext?.userId}`)
             .then((res) => {
                 if (res.status === 200) {
                     setFaqs(res.data);

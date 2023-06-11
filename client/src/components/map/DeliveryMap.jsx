@@ -26,7 +26,6 @@ function DeliveryMap() {
             .catch((err) => console.log(err))
     }, []);
 
-    // TODO :  Fix grid issue
     return (
         <>
             {

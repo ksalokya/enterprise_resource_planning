@@ -1,5 +1,5 @@
 import { BarChart, Bar, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import "./chart.css"
+import "../chart.css"
 
 const data = [
   {

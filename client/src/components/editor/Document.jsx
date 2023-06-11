@@ -28,7 +28,6 @@ function Document() {
         else setDisplayPropertiesPane(true);
     }, [matches])
 
-    // TODO :: Handle username
     let baseUrl = process.env.REACT_APP_APPLICATION_SERVICE_URL;
     function fetchData() {
         axios.get(`${baseUrl}/editor/get/${userContext?.username}`)

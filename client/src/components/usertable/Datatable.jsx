@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from "axios";
 import { DarkMode } from '../../App';
+import { UserContext } from '../../App';
 import { Link } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
@@ -10,6 +11,7 @@ import ComponentLoader from "../loader/ComponentLoader"
 import './datatable.css'
 
 function Datatable() {
+    const userContext = useContext(UserContext);
     const isDarkModeEnabled = useContext(DarkMode);
     const [loader, setLoader] = useState(true);
     const [users, setUsers] = useState([]);
@@ -25,7 +27,7 @@ function Datatable() {
     }, []);
 
     const fetchData = () => {
-        axios.get(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/user/get/${1}`)
+        axios.get(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/user/get/${parseInt(userContext?.userId)}`)
             .then((res) => {
                 if (res.status === 200) {
                     setUsers(res.data);
@@ -36,7 +38,7 @@ function Datatable() {
     }
 
     const handleDelete = (id) => {
-        axios.delete(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/user/delete/${id}/${1}`)
+        axios.delete(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/user/delete/${id}/${parseInt(userContext?.userId)}`)
             .then(() => { setUsers(users.filter((item) => item.id !== id)); })
             .catch((err) => { console.log(err); });
     };

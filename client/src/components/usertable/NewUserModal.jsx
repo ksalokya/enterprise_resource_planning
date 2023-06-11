@@ -4,6 +4,7 @@ import { useMediaQuery } from "@mui/material";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import Modal from '@mui/material/Modal';
 import { DarkMode } from '../../App'
+import { UserContext } from '../../App';
 import './modal.css';
 import NoImage from './no_image.jpg'
 import axios from "axios";
@@ -42,6 +43,7 @@ const inputs = [
 ];
 
 export default function NewUser(props) {
+    const userContext = useContext(UserContext);
     let isDarkModeEnabled = useContext(DarkMode);
     const matches400px = useMediaQuery('(max-width: 400px)')
     const matches650px = useMediaQuery('(max-width: 650px)')
@@ -54,9 +56,6 @@ export default function NewUser(props) {
     const [email, setEmail] = useState("");
     const [age, setAge] = useState("");
     const [contact, setContact] = useState("");
-
-    // TODO :: Hanlde with global state management
-    const [userId, setUserId] = useState("1");
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => {
@@ -101,7 +100,7 @@ export default function NewUser(props) {
         bodyFormData.append('email', email);
         bodyFormData.append('age', age);
         bodyFormData.append('contact', contact);
-        bodyFormData.append('userId', userId)
+        bodyFormData.append('userId', userContext?.userId)
         if (!props.rowData) {
             bodyFormData.append('image', file);;
             axios.post(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/user/insert`, bodyFormData, { "Content-Type": "multipart/form-data" })

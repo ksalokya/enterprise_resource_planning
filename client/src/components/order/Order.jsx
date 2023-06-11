@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation } from "react-router-dom";
 import { DarkMode } from '../../App';
-import { useMediaQuery } from "@mui/material";
+import { UserContext } from '../../App';
 import Grid from '@mui/material/Grid';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,7 +15,7 @@ import ComponentLoader from '../loader/ComponentLoader';
 import './order.css'
 
 function Order(props) {
-  // const matches = useMediaQuery('(max-width:1200px)');
+  const userContext = useContext(UserContext);
   const location = useLocation();
   let currentPath = location.pathname;
   const isDarkModeEnabled = useContext(DarkMode);
@@ -24,7 +24,7 @@ function Order(props) {
 
   // TODO :: Handle userID
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/order/get/${1}`)
+    axios.get(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/order/get/${parseInt(userContext?.userId)}`)
       .then((res) => {
         if (res.status === 200) {
           let data = res.data;

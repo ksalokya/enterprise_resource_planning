@@ -75,7 +75,7 @@ export default function Signin(props) {
                     if (remembeMe) {
                         localStorage.setItem('token', userInfo.isLoggedIn);
                     }
-                    props.handleUserContext(userInfo.username, userInfo.token, userInfo.isLoggedIn);
+                    props.handleUserContext(userInfo.id, userInfo.username, userInfo.token, userInfo.isLoggedIn);
                     navigate("/home");
                 } else {
                     setSignInError(res.data.message);

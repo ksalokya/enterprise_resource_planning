@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useMediaQuery } from '@mui/material';
+import { UserContext } from '../../App';
 import axios from "axios";
 import Grid from '@mui/material/Grid';
 import WorldMap from './maps/Worldmap';
@@ -8,14 +9,14 @@ import Network from './maps/Network';
 import ComponentLoader from "../loader/ComponentLoader"
 
 function DeliveryMap() {
+    const userContext = useContext(UserContext);
     const matches = useMediaQuery('(max-width:900px)')
 
     const [loading, setLoading] = useState(true)
     const [deliveryData, setDeliveryData] = useState();
 
-    // TODO ::  Handle UserID
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/delivery/get/${1}`)
+        axios.get(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/delivery/get/${parseInt(userContext?.userId)}`)
             .then((res) => {
                 if (res.status === 200) {
                     setDeliveryData(res.data);
@@ -25,6 +26,7 @@ function DeliveryMap() {
             .catch((err) => console.log(err))
     }, []);
 
+    // TODO :  Fix grid issue
     return (
         <>
             {

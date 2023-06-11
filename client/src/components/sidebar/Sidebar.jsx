@@ -40,7 +40,7 @@ function Sidebar(props) {
 
   const logOut = () => {
     localStorage.clear();
-    props.handleUserContext(undefined, undefined, undefined);
+    props.handleUserContext(undefined, undefined, undefined, undefined);
   }
 
   return (

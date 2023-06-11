@@ -34,10 +34,11 @@ export const UserContext = createContext();
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('dark') === 'true' ? true : false);
-  const [userContext, setUserContext] = useState({ username: undefined, token: undefined, isLoggedIn: undefined })
+  const [userContext, setUserContext] = useState({ userId: undefined, username: undefined, token: undefined, isLoggedIn: undefined })
   const handleDarkMode = () => setIsDarkMode(!isDarkMode);
-  const handleUserContext = (name, token, status) => {
+  const handleUserContext = (userId, name, token, status) => {
     setUserContext({
+      userId : userId,
       username: name,
       token: token,
       isLoggedIn: status

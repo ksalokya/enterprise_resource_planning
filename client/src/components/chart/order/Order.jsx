@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../../../App';
 import axios from "axios";
 import Grid from '@mui/material/Grid';
 import StackedChart from './charts/StackedChart'
@@ -6,19 +7,19 @@ import MixedBarChart from './charts/MixedBarChart'
 import TwoLevelPieChart from './charts/TwoLevelPieChart'
 
 function Order() {
+    const userContext = useContext(UserContext);
     const [mixedOrStackData, setMixedOrStack] = useState();
     const [twoLevelPieData, setTwoLevelPieData] = useState();
 
-    // TODO ::  Handle UserID
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_CHART_DATA_SERVICE_URL}/mixed-stack/get/${1}`)
+        axios.get(`${process.env.REACT_APP_CHART_DATA_SERVICE_URL}/mixed-stack/get/${parseInt(userContext?.userId)}`)
             .then((res) => {
                 if (res.status === 200) {
                     setMixedOrStack(res.data);
                 }
             })
             .catch((err) => console.log(err))
-        axios.get(`${process.env.REACT_APP_CHART_DATA_SERVICE_URL}/two-level-pie/get/${1}`)
+        axios.get(`${process.env.REACT_APP_CHART_DATA_SERVICE_URL}/two-level-pie/get/${parseInt(userContext?.userId)}`)
             .then((res) => {
                 if (res.status === 200) {
                     setTwoLevelPieData(res.data);

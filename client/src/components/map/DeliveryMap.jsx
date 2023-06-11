@@ -33,7 +33,7 @@ function DeliveryMap() {
                 loading ?
                     <ComponentLoader />
                     :
-                    <Grid direction={matches ? "column" : ''} container sx={{ paddingLeft: 2, paddingRight: 2 }} columnSpacing={2}>
+                    <Grid container sx={{ paddingLeft: 2, paddingRight: 2 }} columnSpacing={2}>
                         <Grid item lg={6} md={6} xs={6} >
                             <WorldMap deliveryData={deliveryData} />
                         </Grid>

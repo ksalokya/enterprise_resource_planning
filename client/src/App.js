@@ -45,8 +45,6 @@ function App() {
     })
   };
 
-  console.log("From App :: ", userContext);
-
   useEffect(() => {
     if (isDarkMode) {
       document.body.style.background = '#121212';

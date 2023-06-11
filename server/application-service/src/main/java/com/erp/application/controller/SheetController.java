@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/api/v1/sheet")
+@RequestMapping("/api/v1/application/sheet")
 public class SheetController {
     Logger logger = LoggerFactory.getLogger(SheetController.class);
 

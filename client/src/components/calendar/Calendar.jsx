@@ -11,9 +11,11 @@ function Calendar() {
         arg.navigation.enable = true;
     }
 
+    let baseUrl = process.env.REACT_APP_APPLICATION_SERVICE_URL;
+    // TODO :: Handle username
     let dataManager = new DataManager({
-        url: 'http://localhost:8080/api/v1/calendar/get',
-        crudUrl: 'http://localhost:8080/api/v1/calendar/update',
+        url: `${baseUrl}/calendar/get`,
+        crudUrl: `${baseUrl}/calendar/update`,
         adaptor: new UrlAdaptor(),
         crossDomain: true
     });

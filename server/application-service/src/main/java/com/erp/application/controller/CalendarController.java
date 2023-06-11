@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/calendar")
+@RequestMapping("/api/v1/application/calendar")
 public class CalendarController {
     Logger logger = LoggerFactory.getLogger(CalendarController.class);
 

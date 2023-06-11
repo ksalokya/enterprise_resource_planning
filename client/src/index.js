@@ -13,3 +13,4 @@ root.render(
 // use env for enpoint and port
 // use logger
 // remove static data
+// Hide signup route

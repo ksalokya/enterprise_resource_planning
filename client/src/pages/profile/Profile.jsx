@@ -81,13 +81,13 @@ function Profile() {
             </div>
           </div>
         </Grid>
-        <Grid item lg={8} md={8} xs={12} className="profile-right">
+        <Grid item lg={8} md={6} xs={12} className="profile-right">
           <ProfileChart />
         </Grid>
       </Grid>
       <Grid container item lg={12} md={12} xs={12} className="profile-bottom">
         <h1 className="profile-title">Recent Transactions</h1>
-        <List />
+        <List position='relative'/>
       </Grid>
     </Grid>
   )

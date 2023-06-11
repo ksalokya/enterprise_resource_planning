@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/two-level-pie")
+@RequestMapping("api/v1/chart/two-level-pie")
 public class TwoLevelPieController {
     Logger logger = LoggerFactory.getLogger(TwoLevelPieController.class);
 

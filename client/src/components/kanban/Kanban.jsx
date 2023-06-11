@@ -99,12 +99,14 @@ const KanbanDialogFormTemplate = (props) => {
 
 function Kanban() {
     const [loader, setLoader] = useState(true);
+    let baseUrl = process.env.REACT_APP_APPLICATION_SERVICE_URL;
 
+    // TODO :: Handle username
     let data = new DataManager({
-        url: 'http://localhost:8080/api/v1/kanban/get/user@gmail.com',
-        updateUrl: 'http://localhost:8080/api/v1/kanban/update/user@gmail.com',
-        insertUrl: 'http://localhost:8080/api/v1/kanban/insert/user@gmail.com',
-        removeUrl: 'http://localhost:8080/api/v1/kanban/delete/user@gmail.com',
+        url: `${baseUrl}/kanban/get/${"user@gmail.com"}`,
+        updateUrl: `${baseUrl}/kanban/update/user@gmail.com`,
+        insertUrl: `${baseUrl}/kanban/insert/user@gmail.com`,
+        removeUrl: `${baseUrl}/kanban/delete/user@gmail.com`,
         adaptor: new UrlAdaptor(),
         crossDomain: true
     });

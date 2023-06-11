@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/editor")
+@RequestMapping("/api/v1/application/editor")
 public class EditorController {
     Logger logger = LoggerFactory.getLogger(EditorController.class);
 

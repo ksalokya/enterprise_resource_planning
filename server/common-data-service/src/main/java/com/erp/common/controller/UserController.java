@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/common/user")
 public class UserController {
     Logger logger = LoggerFactory.getLogger(UserController.class);
 

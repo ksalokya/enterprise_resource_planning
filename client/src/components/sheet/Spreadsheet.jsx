@@ -10,9 +10,12 @@ import './spreadsheet.css'
 function Spreadsheet() {
     let spreadsheet;
     const [loader, setLoader] = useState(true);
+
+    let baseUrl = process.env.REACT_APP_APPLICATION_SERVICE_URL;
+    // TODO :: Handle username
     useEffect(() => {
         // TODO :: Change to AXIOS
-        fetch('http://localhost:8080/api/v1/sheet/get', {
+        fetch(`${baseUrl}/sheet/get`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +33,7 @@ function Spreadsheet() {
     const saveSheetToDB = debounce(() => {
         if (spreadsheet) {
             spreadsheet.endEdit();
-            spreadsheet.saveAsJson().then(Json => (fetch('http://localhost:8080/api/v1/sheet/update', {
+            spreadsheet.saveAsJson().then(Json => (fetch(`${baseUrl}/sheet/update`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

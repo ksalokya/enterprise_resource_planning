@@ -11,14 +11,14 @@ function Order() {
 
     // TODO ::  Handle UserID
     useEffect(() => {
-        axios.get(`http://localhost:8003/api/v1/mixed-stack/get/${1}`)
+        axios.get(`${process.env.REACT_APP_CHART_DATA_SERVICE_URL}/mixed-stack/get/${1}`)
             .then((res) => {
                 if (res.status === 200) {
                     setMixedOrStack(res.data);
                 }
             })
             .catch((err) => console.log(err))
-        axios.get(`http://localhost:8003/api/v1/two-level-pie/get/${1}`)
+        axios.get(`${process.env.REACT_APP_CHART_DATA_SERVICE_URL}/two-level-pie/get/${1}`)
             .then((res) => {
                 if (res.status === 200) {
                     setTwoLevelPieData(res.data);

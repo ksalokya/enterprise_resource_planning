@@ -25,7 +25,7 @@ function Datatable() {
     }, []);
 
     const fetchData = () => {
-        axios.get(`http://localhost:8004/api/v1/user/get/${1}`)
+        axios.get(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/user/get/${1}`)
             .then((res) => {
                 if (res.status === 200) {
                     setUsers(res.data);
@@ -36,7 +36,7 @@ function Datatable() {
     }
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:8004/api/v1/user/delete/${id}/${1}`)
+        axios.delete(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/user/delete/${id}/${1}`)
             .then(() => { setUsers(users.filter((item) => item.id !== id)); })
             .catch((err) => { console.log(err); });
     };

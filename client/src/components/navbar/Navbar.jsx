@@ -137,7 +137,7 @@ export default function Navbar(props) {
                 </IconButton>
                 <p>Dark Mode</p>
             </MenuItem>
-            <MenuItem>
+            {/* <MenuItem>
                 <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                     <Badge badgeContent={4} color="error">
                         <MailIcon />
@@ -156,7 +156,7 @@ export default function Navbar(props) {
                     </Badge>
                 </IconButton>
                 <p>Notifications</p>
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem onClick={navigateToProfile}>
                 <IconButton
                     size="large"
@@ -244,7 +244,7 @@ export default function Navbar(props) {
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={props.handleDarkMode}>
                             <DarkModeOutlinedIcon className="icon" />
                         </IconButton>
-                        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                        {/* <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={4} color="error">
                                 <MailIcon />
                             </Badge>
@@ -257,7 +257,7 @@ export default function Navbar(props) {
                             <Badge badgeContent={17} color="error">
                                 <NotificationsIcon />
                             </Badge>
-                        </IconButton>
+                        </IconButton> */}
                         <Link to="/profile" style={{ textDecoration: "none" }}>
                             <IconButton
                                 size="large"

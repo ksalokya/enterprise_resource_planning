@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/kanban")
+@RequestMapping("/api/v1/application/kanban")
 public class KanbanController {
 
     Logger logger = LoggerFactory.getLogger(EditorController.class);

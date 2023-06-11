@@ -104,7 +104,7 @@ export default function NewUser(props) {
         bodyFormData.append('userId', userId)
         if (!props.rowData) {
             bodyFormData.append('image', file);;
-            axios.post("http://localhost:8004/api/v1/user/insert", bodyFormData, { "Content-Type": "multipart/form-data" })
+            axios.post(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/user/insert`, bodyFormData, { "Content-Type": "multipart/form-data" })
                 .then((res) => {
                     if (res.status === 201) {
                         resetDataAndClodeModal();
@@ -112,7 +112,7 @@ export default function NewUser(props) {
                 }).catch((err) => { console.log(err); })
         } else {
             if (!file) {
-                axios.put(`http://localhost:8004/api/v1/user/update/${props.rowId}`, bodyFormData, { "Content-Type": "multipart/form-data" })
+                axios.put(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/user/update/${props.rowId}`, bodyFormData, { "Content-Type": "multipart/form-data" })
                     .then((res) => {
                         if (res.status === 202) {
                             resetDataAndClodeModal();
@@ -120,7 +120,7 @@ export default function NewUser(props) {
                     }).catch((err) => { console.log(err); })
             } else {
                 bodyFormData.append('image', file);
-                axios.put(`http://localhost:8004/api/v1/user/update/image/${props.rowId}`, bodyFormData, { "Content-Type": "multipart/form-data" })
+                axios.put(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/user/update/image/${props.rowId}`, bodyFormData, { "Content-Type": "multipart/form-data" })
                     .then((res) => {
                         if (res.status === 202) {
                             resetDataAndClodeModal();

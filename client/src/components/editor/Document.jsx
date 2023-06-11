@@ -25,8 +25,10 @@ function Document() {
         else setDisplayPropertiesPane(true);
     }, [matches])
 
+    // TODO :: Handle username
+    let baseUrl = process.env.REACT_APP_APPLICATION_SERVICE_URL;
     function fetchData() {
-        axios.get(`http://localhost:8080/api/v1/editor/get/${'user@gmail.com'}`)
+        axios.get(`${baseUrl}/editor/get/${'user@gmail.com'}`)
             .then((res) => {
                 if (res.status === 200) {
                     container.documentEditor.open(res?.data.content);
@@ -40,7 +42,7 @@ function Document() {
 
     const saveEditorToDB = debounce(() => {
         let requestObj = { email: "user@gmail.com", content: container.documentEditor.serialize() };
-        axios.post("http://localhost:8080/api/v1/editor/update", JSON.stringify(requestObj), {
+        axios.post(`${baseUrl}/editor/update`, JSON.stringify(requestObj), {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8'
             }

@@ -25,7 +25,7 @@ import '../../chart.css'
 // ];
 
 function TwoLevelPieChart(props) {
-    const [loader, setLoader] = useState(false);
+    const [loader, setLoader] = useState(true);
     useEffect(() => {
         props.data && props.group && setLoader(false);
     }, [props.data, props.group])

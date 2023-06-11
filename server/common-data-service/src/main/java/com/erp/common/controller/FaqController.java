@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/faq")
+@RequestMapping("/api/v1/common/faq")
 public class FaqController {
     Logger logger = LoggerFactory.getLogger(FaqController.class);
 

@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation } from "react-router-dom";
 import { DarkMode } from '../../App';
+import { useMediaQuery } from "@mui/material";
+import Grid from '@mui/material/Grid';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -12,7 +14,8 @@ import Paper from "@mui/material/Paper";
 import ComponentLoader from '../loader/ComponentLoader';
 import './order.css'
 
-function Order() {
+function Order(props) {
+  // const matches = useMediaQuery('(max-width:1200px)');
   const location = useLocation();
   let currentPath = location.pathname;
   const isDarkModeEnabled = useContext(DarkMode);
@@ -21,7 +24,7 @@ function Order() {
 
   // TODO :: Handle userID
   useEffect(() => {
-    axios.get(`http://localhost:8004/api/v1/order/get/${1}`)
+    axios.get(`${process.env.REACT_APP_COMMON_DATA_SERVICE_URL}/order/get/${1}`)
       .then((res) => {
         if (res.status === 200) {
           let data = res.data;
@@ -33,10 +36,10 @@ function Order() {
   }, [])
 
   return (
-    <>
+    <Grid container item lg={12} md={12} xs={12}>
       {
         loader ?
-          <ComponentLoader position='relative' style={{ top: "100%" }} />
+          <ComponentLoader position={props.position} />
           :
           <TableContainer component={Paper} className="table" sx={{
             backgroundColor: isDarkModeEnabled ? '#121212' : '',
@@ -82,7 +85,7 @@ function Order() {
             </Table>
           </TableContainer>
       }
-    </>
+    </Grid>
   )
 }
 

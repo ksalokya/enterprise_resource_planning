@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/mixed-stack")
+@RequestMapping("api/v1/chart/mixed-stack")
 public class MixedStackController {
     Logger logger = LoggerFactory.getLogger(MixedStackController.class);
 

@@ -91,7 +91,7 @@ function App() {
                 } />
               </Route>
               <Route element={<Layout handleDarkMode={handleDarkMode} />}>
-                <Route path="home">
+                <Route exact path="home">
                   <Route index element={
                     <React.Suspense fallback={<Loader />}>
                       <Home />

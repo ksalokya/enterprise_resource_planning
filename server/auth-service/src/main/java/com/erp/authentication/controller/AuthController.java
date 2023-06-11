@@ -1,7 +1,8 @@
 package com.erp.authentication.controller;
 
-import com.erp.authentication.payload.AuthRequest;
 import com.erp.authentication.entity.UserInfo;
+import com.erp.authentication.payload.AuthRequest;
+import com.erp.authentication.payload.AuthResponse;
 import com.erp.authentication.repository.UserInfoRepository;
 import com.erp.authentication.service.JwtService;
 import org.slf4j.Logger;
@@ -63,11 +64,14 @@ public class AuthController {
     }
 
     @PostMapping("/authenticate")
-    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+    public AuthResponse authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
         logger.info("authenticateAndGetToken method invoked with username :: " + authRequest.getUsername());
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(authRequest.getUsername());
+            return new AuthResponse(
+                    authRequest.getUsername(),
+                    jwtService.generateToken(authRequest.getUsername()),
+                    true);
         } else {
             throw new UsernameNotFoundException("Invalid user request");
         }

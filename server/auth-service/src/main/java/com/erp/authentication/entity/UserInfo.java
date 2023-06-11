@@ -1,5 +1,6 @@
 package com.erp.authentication.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,8 +15,8 @@ public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(unique = true)
-    private String email;
+    private String name;
+    @JsonProperty("email")
     @Column(unique = true)
     private String username;
     private String password;

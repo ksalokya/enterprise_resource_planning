@@ -5,14 +5,18 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from "@mui/material/Button";
 import TextField from '@mui/material/TextField';
+import Alert from '@mui/material/Alert';
 import Lottie from 'react-lottie';
 import Typography from '@mui/material/Typography';
 import * as animationData from "./animation.json"
 import { Link } from "react-router-dom";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { DarkMode } from '../../App'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signin() {
+    const navigate = useNavigate();
     const isDarkModeEnabled = useContext(DarkMode);
     const matches = useMediaQuery('(max-width:900px)');
     const [displayLottie, setDisplayLottie] = useState('default');
@@ -28,6 +32,67 @@ export default function Signin() {
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
         }
+    };
+
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [remembeMe, setRememberMe] = useState(false);
+    const [signInError, setSignInError] = useState();
+    const [signInBtnText, setSignInBtnText] = useState("Sign In");
+    const [isSignInBtnEnable, setIsSignInBtnEnable] = useState(false);
+
+    const userTyping = (type, e) => {
+        switch (type) {
+            case "email":
+                setEmail(e.target.value);
+                break;
+            case "password":
+                setPassword(e.target.value);
+                break;
+            default:
+                break;
+        }
+    };
+
+    const handleAuthError = () => {
+        setSignInBtnText("Sign In");
+        setIsSignInBtnEnable(false);
+    }
+
+    const submitSignIn = e => {
+        e.preventDefault();
+
+        setSignInBtnText("Please Wait...");
+        setIsSignInBtnEnable(true);
+
+        axios.post(`${process.env.REACT_APP_AUTHENTICATION_SERVICE_URL}/authenticate`, {
+            "email": email,
+            "password": password,
+        })
+            .then((res) => {
+                if (res.status === 200) {
+                    navigate("/home");
+                    let userInfo = res.data;
+                    localStorage.setItem('username', userInfo.username);
+                    localStorage.setItem('isLoggedIn', userInfo.isLoggedIn);
+                    if (remembeMe) {
+                        localStorage.setItem('token', userInfo.token);
+                    }
+                } else {
+                    setSignInError(res.data.message);
+                    handleAuthError();
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                if (err.response.status === 401) {
+                    setSignInError(err.response.data.message);
+                }
+                else {
+                    setSignInError("Something went wrong");
+                }
+                handleAuthError();
+            })
     };
 
     return (
@@ -50,60 +115,75 @@ export default function Signin() {
                                     <Link to="/signup">Sign Up</Link>
                                 </Typography>
                             </div>
-                            <form />
-                            <Grid container spacing={3} sx={{ marginTop: 5 }}>
-                                <Grid item xs={12}>
-                                    <h4 className='top-header'>
-                                        Enter your credentials to continue...
-                                    </h4>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        style={{ color: "#ffffff" }}
-                                        variant="outlined"
-                                        required={true}
-                                        fullWidth
-                                        id="email"
-                                        label="Email Address"
-                                        name="email"
-                                        autoComplete="off"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        variant="outlined"
-                                        required={true}
-                                        fullWidth
-                                        name="password"
-                                        label="Password"
-                                        type="password"
-                                        id="password"
-                                        autoComplete="off"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <input type="checkbox" />
-                                    <span>&nbsp; Remember me.</span>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Button
-                                        type="submit"
-                                        fullWidth
-                                        variant="contained"
-                                        color="primary"
-                                        className='register-btn'
-                                    >
-                                        Sign In
-                                    </Button>
-                                </Grid>
-                                <Grid item xs={12}>
+                            <form onSubmit={submitSignIn}>
+                                <Grid container spacing={3} sx={{ marginTop: 5 }}>
+                                    <Grid item xs={12}>
+                                        <h4 className='top-header'>
+                                            Enter your credentials to continue...
+                                        </h4>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            style={{ color: "#ffffff" }}
+                                            variant="outlined"
+                                            required={true}
+                                            fullWidth
+                                            id="email"
+                                            label="Email Address"
+                                            name="email"
+                                            autoComplete="off"
+                                            onChange={e => userTyping("email", e)}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            variant="outlined"
+                                            required={true}
+                                            fullWidth
+                                            name="password"
+                                            label="Password"
+                                            type="password"
+                                            id="password"
+                                            autoComplete="off"
+                                            onChange={e => userTyping("password", e)}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <input type="checkbox" onChange={e => setRememberMe(e.target.value)} />
+                                        <span>&nbsp; Remember me</span>
+                                    </Grid>
+                                    {signInError ? (
+                                        <Grid container justifyContent="center">
+                                            <Grid item>
+                                                <Alert severity="error">
+                                                    <span
+                                                        className="errorText">{signInError}
+                                                    </span>
+                                                </Alert>
+                                            </Grid>
+                                        </Grid>
+                                    ) : null}
+                                    <Grid item xs={12}>
+                                        <Button
+                                            type="submit"
+                                            fullWidth
+                                            variant="contained"
+                                            color="primary"
+                                            className='register-btn'
+                                            disabled={isSignInBtnEnable}
+                                        >
+                                            {signInBtnText}
+                                        </Button>
+                                    </Grid>
+                                    {/* <Grid item xs={12}>
                                     <div className="forgot-password">
                                         <Typography>
                                             <Link to="/reset">Forgot Password?</Link>
                                         </Typography>
                                     </div>
+                                </Grid> */}
                                 </Grid>
-                            </Grid>
+                            </form>
                         </Grid>
                     </Grid>
                 </Box >

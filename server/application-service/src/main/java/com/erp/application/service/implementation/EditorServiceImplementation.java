@@ -6,12 +6,12 @@ import com.erp.application.payload.request.EditorRequestPayload;
 import com.erp.application.payload.response.EditorResponsePayload;
 import com.erp.application.repository.EditorRepository;
 import com.erp.application.service.EditorService;
-import com.mongodb.client.result.UpdateResult;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -33,14 +33,19 @@ public class EditorServiceImplementation implements EditorService {
         return new ModelMapper();
     }
 
-    private UpdateResult updateEditorData(EditorModel editorModel) {
+    private EditorModel updateEditorData(EditorModel editorModel) {
         logger.info("updateEditorData method invoked with payload : " + editorModel);
         Query query = new Query()
                 .addCriteria(Criteria.where("email").is(editorModel.getEmail()));
 
         Update update = new Update();
         update.set("content", editorModel.getContent());
-        return mongoTemplate.upsert(query, update, EditorModel.class);
+
+        FindAndModifyOptions options = new FindAndModifyOptions();
+        options.upsert(true);
+        options.returnNew(true);
+
+        return mongoTemplate.findAndModify(query, update, options, EditorModel.class);
     }
 
     @Override
@@ -52,7 +57,7 @@ public class EditorServiceImplementation implements EditorService {
     }
 
     @Override
-    public UpdateResult updateEditor(EditorRequestPayload editorRequestPayload) {
+    public EditorModel updateEditor(EditorRequestPayload editorRequestPayload) {
         logger.info("updateEditor method invoked with payload :: " + editorRequestPayload);
         EditorModel editorModel = mapToEntity(editorRequestPayload);
         return updateEditorData(editorModel);

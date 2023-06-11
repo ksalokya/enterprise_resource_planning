@@ -1,4 +1,5 @@
-import { useState, useEffect, forwardRef } from "react";
+import { useState, useEffect, useContext, forwardRef } from "react";
+import { UserContext } from '../../App';
 import {
     DocumentEditorContainerComponent,
     Toolbar,
@@ -11,11 +12,13 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import './document.css'
+import { metadata } from "./metadata";
 
 DocumentEditorContainerComponent.Inject(Toolbar);
 
 function Document() {
     let container;
+    const userContext = useContext(UserContext);
     const matches = useMediaQuery('(max-width:900px)');
     const [loader, setLoader] = useState(true);
     const [displayPropertiesPane, setDisplayPropertiesPane] = useState(true);
@@ -28,12 +31,14 @@ function Document() {
     // TODO :: Handle username
     let baseUrl = process.env.REACT_APP_APPLICATION_SERVICE_URL;
     function fetchData() {
-        axios.get(`${baseUrl}/editor/get/${'user@gmail.com'}`)
+        axios.get(`${baseUrl}/editor/get/${userContext?.username}`)
             .then((res) => {
                 if (res.status === 200) {
                     container.documentEditor.open(res?.data.content);
-                    setLoader(false);
+                } else {
+                    container.documentEditor.open(metadata)
                 }
+                setLoader(false);
             })
             .catch((err) => {
                 console.log(err);
@@ -41,7 +46,7 @@ function Document() {
     };
 
     const saveEditorToDB = debounce(() => {
-        let requestObj = { email: "user@gmail.com", content: container.documentEditor.serialize() };
+        let requestObj = { email: userContext?.username, content: container.documentEditor.serialize() };
         axios.post(`${baseUrl}/editor/update`, JSON.stringify(requestObj), {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8'

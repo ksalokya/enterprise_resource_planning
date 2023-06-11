@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { ScheduleComponent, ViewsDirective, ViewDirective, Day, Week, WorkWeek, Month, Agenda, Inject, Resize, DragAndDrop } from '@syncfusion/ej2-react-schedule';
 import { DataManager, UrlAdaptor, Query } from '@syncfusion/ej2-data';
+import { UserContext } from '../../App';
 import ComponentLoader from "../loader/ComponentLoader"
 import Header from "../header/Header";
 import './calendar.css'
 
 function Calendar() {
+    const userContext = useContext(UserContext);
     const [loader, setLoader] = useState(true);
     const onDragStart = (arg) => {
         arg.navigation.enable = true;
     }
 
     let baseUrl = process.env.REACT_APP_APPLICATION_SERVICE_URL;
-    // TODO :: Handle username
     let dataManager = new DataManager({
         url: `${baseUrl}/calendar/get`,
         crudUrl: `${baseUrl}/calendar/update`,
@@ -20,7 +21,7 @@ function Calendar() {
         crossDomain: true
     });
 
-    let dataQuery = new Query().addParams('Email', 'user@gmail.com');
+    let dataQuery = new Query().addParams('Email', userContext?.username);
     const eventSettings = { dataSource: dataManager, query: dataQuery };
 
     return (

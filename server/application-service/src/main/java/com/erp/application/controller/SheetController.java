@@ -1,5 +1,6 @@
 package com.erp.application.controller;
 
+import com.erp.application.model.SheetModel;
 import com.erp.application.payload.request.SheetRequestPayload;
 import com.erp.application.payload.response.SheetResponsePayload;
 import com.erp.application.service.SheetService;
@@ -32,7 +33,7 @@ public class SheetController {
     @PostMapping("/update")
     public ResponseEntity<?> saveSheetController(@RequestBody SheetRequestPayload sheetRequestPayload) {
         logger.info("saveSheetController method invoked with sheetPayload :: " + sheetRequestPayload);
-        UpdateResult updateSheet = sheetService.updateSheet(sheetRequestPayload);
-        return new ResponseEntity<>(updateSheet, HttpStatus.CREATED);
+        SheetModel updatedSheet = sheetService.updateSheet(sheetRequestPayload);
+        return new ResponseEntity<>(updatedSheet, HttpStatus.CREATED);
     }
 }

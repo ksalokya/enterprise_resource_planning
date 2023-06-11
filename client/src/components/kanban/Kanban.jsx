@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { KanbanComponent, ColumnsDirective, ColumnDirective } from "@syncfusion/ej2-react-kanban";
+import { UserContext } from '../../App';
 import { DataManager, UrlAdaptor } from '@syncfusion/ej2-data';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import { Button, Grid } from "@mui/material";
@@ -18,7 +19,7 @@ const KanbanDialogFormTemplate = (props) => {
         'Margaret hamilt',
         'Michael Suyama',
     ];
-    let statusData = ['To Do', 'In Progress', 'Testing', 'Close'];
+    let statusData = ['Open', 'In Progress', 'Testing', 'Close'];
     let priorityData = ['Low', 'Normal', 'Critical', 'Release Breaker', 'High'];
 
     const [data, setData] = useState(props);
@@ -98,15 +99,15 @@ const KanbanDialogFormTemplate = (props) => {
 }
 
 function Kanban() {
+    const userContext = useContext(UserContext);
     const [loader, setLoader] = useState(true);
     let baseUrl = process.env.REACT_APP_APPLICATION_SERVICE_URL;
 
-    // TODO :: Handle username
     let data = new DataManager({
-        url: `${baseUrl}/kanban/get/${"user@gmail.com"}`,
-        updateUrl: `${baseUrl}/kanban/update/user@gmail.com`,
-        insertUrl: `${baseUrl}/kanban/insert/user@gmail.com`,
-        removeUrl: `${baseUrl}/kanban/delete/user@gmail.com`,
+        url: `${baseUrl}/kanban/get/${userContext?.username}`,
+        updateUrl: `${baseUrl}/kanban/update/${userContext?.username}`,
+        insertUrl: `${baseUrl}/kanban/insert/${userContext?.username}`,
+        removeUrl: `${baseUrl}/kanban/delete/${userContext?.username}`,
         adaptor: new UrlAdaptor(),
         crossDomain: true
     });
@@ -121,7 +122,7 @@ function Kanban() {
         const cardCount = Math.max.apply(Math, cardIds) + 1;
 
         const cardDetails = {
-            Id: 'Task ' + cardCount,
+            Id: 'Task ' + (cardCount < 0 ? 1 : cardCount),
             Status: '',
             Priority: '',
             Assignee: '',

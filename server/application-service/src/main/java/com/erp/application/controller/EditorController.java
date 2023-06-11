@@ -1,5 +1,6 @@
 package com.erp.application.controller;
 
+import com.erp.application.model.EditorModel;
 import com.erp.application.payload.request.EditorRequestPayload;
 import com.erp.application.payload.response.EditorResponsePayload;
 import com.erp.application.service.EditorService;
@@ -29,7 +30,7 @@ public class EditorController {
     @PostMapping("/update")
     public ResponseEntity<?> updateEditorController(@RequestBody EditorRequestPayload editorRequestPayload){
         logger.info("getEditorController method invoked with email :: " + editorRequestPayload);
-        UpdateResult updateEditor = editorService.updateEditor(editorRequestPayload);
-        return new ResponseEntity<>(updateEditor, HttpStatus.OK);
+        EditorModel updatedEditor = editorService.updateEditor(editorRequestPayload);
+        return new ResponseEntity<>(updatedEditor, HttpStatus.OK);
     }
 }

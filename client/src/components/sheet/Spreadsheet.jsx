@@ -1,4 +1,5 @@
-import { useEffect, useState, forwardRef } from 'react';
+import { useEffect, useState, useContext, forwardRef } from 'react';
+import { UserContext } from '../../App';
 import { SpreadsheetComponent } from '@syncfusion/ej2-react-spreadsheet';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
@@ -6,25 +7,30 @@ import Header from '../header/Header'
 import { debounce } from "../../utils/debounce"
 import ComponentLoader from "../loader/ComponentLoader"
 import './spreadsheet.css'
+import { metadata } from "./metadata"
+
 
 function Spreadsheet() {
     let spreadsheet;
     const [loader, setLoader] = useState(true);
+    const userContext = useContext(UserContext);
 
     let baseUrl = process.env.REACT_APP_APPLICATION_SERVICE_URL;
-    // TODO :: Handle username
     useEffect(() => {
-        // TODO :: Change to AXIOS
         fetch(`${baseUrl}/sheet/get`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ Email: "user@gmail.com", Name: spreadsheet.sheets[0].name }),
+            body: JSON.stringify({ Email: userContext?.username, Name: spreadsheet.sheets[0].name }),
         })
             .then((response) => response.json())
             .then((data) => {
                 spreadsheet.openFromJson({ file: data.JSONData });
+                setLoader(false);
+            })
+            .catch((err) => {
+                spreadsheet.openFromJson({ file: metadata });
                 setLoader(false);
             })
     }, [])
@@ -38,9 +44,9 @@ function Spreadsheet() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ Email: "user@gmail.com", Name: spreadsheet.sheets[0].name, JSONData: JSON.stringify(Json.jsonObject), ContentType: "Xlsx", VersionType: "Xlsx" }),
+                body: JSON.stringify({ Email: userContext?.username, Name: spreadsheet.sheets[0].name, JSONData: JSON.stringify(Json.jsonObject), ContentType: "Xlsx", VersionType: "Xlsx" }),
             })
-                .then(() => {
+                .then((res) => {
                     openSnackBar();
                 })))
         }

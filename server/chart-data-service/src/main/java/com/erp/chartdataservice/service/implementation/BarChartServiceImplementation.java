@@ -10,7 +10,6 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -24,15 +23,10 @@ public class BarChartServiceImplementation implements BarChartService {
     @Autowired
     private BarChartRepository barChartRepository;
 
-    @Bean
-    public ModelMapper barChartModelMapper() {
-        return new ModelMapper();
-    }
 
     @Override
     public List<BarChartResponsePayload> getAllBarChartData(long userId) {
         // TODO :: Handle Exception
-        logger.info("getAllBarChartData method invoked with user id :: " + userId);
         List<BarChartModel> barChartModels = barChartRepository.findAllByUserId(userId)
                 .orElseThrow();
         return mapToDtoList(barChartModels);
@@ -40,7 +34,6 @@ public class BarChartServiceImplementation implements BarChartService {
 
     @Override
     public BarChartResponsePayload insertBarChartData(BarChartRequestPayload barChartRequestPayload) {
-        logger.info("insertBarChartData method invoked with payload :: " + barChartRequestPayload);
         BarChartModel barChartModel = mapToEntity(barChartRequestPayload);
         BarChartModel insertedBarChartModel = barChartRepository.save(barChartModel);
         return mapToDto(insertedBarChartModel);

@@ -10,7 +10,6 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -23,15 +22,9 @@ public class MixedStackServiceImplementation implements MixedStackService {
     @Autowired
     private MixedStackRepository mixedStackRepository;
 
-    @Bean
-    public ModelMapper mixedStackModelMapper() {
-        return new ModelMapper();
-    }
-
     @Override
     public List<MixedStackResponsePayload> getAllMixedStackData(long userId) {
         // TODO :: Handle Exception
-        logger.info("getAllMixedStackData method invoked with user id :: " + userId);
         List<MixedStackModel> MixedStackModels = mixedStackRepository.findAllByUserId(userId)
                 .orElseThrow();
         return mapToDtoList(MixedStackModels);
@@ -39,7 +32,6 @@ public class MixedStackServiceImplementation implements MixedStackService {
 
     @Override
     public MixedStackResponsePayload insertMixedStackData(MixedStackRequestPayload MixedStackRequestPayload) {
-        logger.info("insertMixedStackData method invoked with payload :: " + MixedStackRequestPayload);
         MixedStackModel MixedStackModel = mapToEntity(MixedStackRequestPayload);
         MixedStackModel insertedMixedStackModel = mixedStackRepository.save(MixedStackModel);
         return mapToDto(insertedMixedStackModel);

@@ -100,10 +100,11 @@ export default function Signin(props) {
             <Container maxWidth="lg" className='box'>
                 <Box sx={{ bgcolor: 'rgba(255, 255, 255, .5)', borderRadius: '20px' }}>
                     <Grid container>
-                        <Grid item lg={6} md={6} sx={{ marginTop: 2, display: displayLottie }}>
+                        <Grid item lg={6} md={6} sx={{ display: displayLottie }}>
                             <Lottie
                                 options={defaultOptions}
                                 isClickToPauseDisabled={true}
+                                width="90%"
                             />
                         </Grid>
                         <Grid item lg={6} md={6} xs={12} sx={{ padding: 4, bgcolor: "#fff" }}>
@@ -115,7 +116,7 @@ export default function Signin(props) {
                                 </Typography>
                             </div>
                             <form onSubmit={submitSignIn}>
-                                <Grid container spacing={3} sx={{ marginTop: 5 }}>
+                                <Grid container spacing={4} sx={{ marginTop: 5 }}>
                                     <Grid item xs={12}>
                                         <h4 className='top-header'>
                                             Enter your credentials to continue...
@@ -162,7 +163,7 @@ export default function Signin(props) {
                                             </Grid>
                                         </Grid>
                                     ) : null}
-                                    <Grid item xs={12}>
+                                    <Grid item xs={12} sx={{ paddingTop: "40px !important" }}>
                                         <Button
                                             type="submit"
                                             fullWidth

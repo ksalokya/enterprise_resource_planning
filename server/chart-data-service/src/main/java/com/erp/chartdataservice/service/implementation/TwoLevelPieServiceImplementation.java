@@ -11,7 +11,6 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -24,15 +23,9 @@ public class TwoLevelPieServiceImplementation implements TwoLevelPieService {
     @Autowired
     private TwoLevelPieRepository twoLevelPieRepository;
 
-    @Bean
-    public ModelMapper twoLevelPieModelMapper() {
-        return new ModelMapper();
-    }
-
     @Override
     public TwoLevelPieResponsePayload getAllTwoLevelPieData(long userId) {
         // TODO :: Handle Exception
-        logger.info("getAllTwoLevelPieData method invoked with user id :: " + userId);
         List<TwoLevelPieModel> twoLevelPieModelsOfGroup = twoLevelPieRepository.findAllByTypeAndUserId("GROUP", userId)
                 .orElseThrow();
         List<TwoLevelPieModel> twoLevelPieModelsOfData = twoLevelPieRepository.findAllByTypeAndUserId("DATA", userId)
@@ -42,7 +35,6 @@ public class TwoLevelPieServiceImplementation implements TwoLevelPieService {
 
     @Override
     public TwoLevelPieChartData insertTwoLevelPieData(TwoLevelPieRequestPayload twoLevelPieRequestPayload) {
-        logger.info("insertTwoLevelPieData method invoked with payload :: " + twoLevelPieRequestPayload);
         TwoLevelPieModel twoLevelPieModel = mapToEntity(twoLevelPieRequestPayload);
         TwoLevelPieModel insertedTwoLevelPieModel = twoLevelPieRepository.save(twoLevelPieModel);
         return mapToDto(insertedTwoLevelPieModel);

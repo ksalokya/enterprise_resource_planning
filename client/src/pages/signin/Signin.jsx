@@ -36,7 +36,7 @@ export default function Signin(props) {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [remembeMe, setRememberMe] = useState(false);
+    // const [remembeMe, setRememberMe] = useState(false);
     const [signInError, setSignInError] = useState();
     const [signInBtnText, setSignInBtnText] = useState("Sign In");
     const [isSignInBtnEnable, setIsSignInBtnEnable] = useState(false);
@@ -72,9 +72,9 @@ export default function Signin(props) {
             .then((res) => {
                 if (res.status === 200) {
                     let userInfo = res.data;
-                    if (remembeMe) {
-                        localStorage.setItem('token', userInfo.isLoggedIn);
-                    }
+                    // if (remembeMe) {
+                    //     localStorage.setItem('token', userInfo.isLoggedIn);
+                    // }
                     props.handleUserContext(userInfo.id, userInfo.username, userInfo.token, userInfo.isLoggedIn);
                     navigate("/home");
                 } else {
@@ -147,10 +147,10 @@ export default function Signin(props) {
                                             onChange={e => userTyping("password", e)}
                                         />
                                     </Grid>
-                                    <Grid item xs={12}>
+                                    {/* <Grid item xs={12}>
                                         <input type="checkbox" onChange={e => setRememberMe(e.target.value)} />
                                         <span>&nbsp; Remember me</span>
-                                    </Grid>
+                                    </Grid> */}
                                     {signInError ? (
                                         <Grid container justifyContent="center">
                                             <Grid item>

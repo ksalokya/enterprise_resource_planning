@@ -28,17 +28,18 @@ const Prediction = React.lazy(() => import('./pages/prediction/Prediction'));
 const Health = React.lazy(() => import('./pages/health/Health'));
 const Faq = React.lazy(() => import('./pages/faq/Faq'));
 const Profile = React.lazy(() => import('./pages/profile/Profile'));
+const About = React.lazy(() => import('./pages/about/About'));
 
 export const DarkMode = createContext();
 export const UserContext = createContext();
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('dark') === 'true' ? true : false);
-  const [userContext, setUserContext] = useState({ userId: undefined, username: undefined, token: undefined, isLoggedIn: undefined })
+  const [userContext, setUserContext] = useState({ userId: 1, username: undefined, token: undefined, isLoggedIn: true })
   const handleDarkMode = () => setIsDarkMode(!isDarkMode);
   const handleUserContext = (userId, name, token, status) => {
     setUserContext({
-      userId : userId,
+      userId: userId,
       username: name,
       token: token,
       isLoggedIn: status
@@ -185,6 +186,13 @@ function App() {
                         <Route index element={
                           <React.Suspense fallback={<Loader />}>
                             <Profile />
+                          </React.Suspense>
+                        } />
+                      </Route>
+                      <Route path="about">
+                        <Route index element={
+                          <React.Suspense fallback={<Loader />}>
+                            <About />
                           </React.Suspense>
                         } />
                       </Route>

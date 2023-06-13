@@ -17,7 +17,6 @@ import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-
 import './sidebar.css'
 
 const style = {
@@ -139,7 +138,7 @@ function Sidebar(props) {
               <span>Logout</span>
             </li>
           </Link>
-          <Modal
+          {/* <Modal
             open={open}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
@@ -153,11 +152,17 @@ function Sidebar(props) {
                 Dashboard is an information management tool used to track KPIs , metrics, and key data points that are relevant to your business, department, or a specific process.
               </Typography>
             </Box>
-          </Modal>
-          <li onClick={handleOpen} >
+          </Modal> */}
+          <Link to="/about" style={{ textDecoration: "none" }}>
+            <li>
+              <InfoIcon className="icon" />
+              <span>About</span>
+            </li>
+          </Link>
+          {/* <li onClick={handleOpen} >
             <InfoIcon className="icon" />
             <span>About</span>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

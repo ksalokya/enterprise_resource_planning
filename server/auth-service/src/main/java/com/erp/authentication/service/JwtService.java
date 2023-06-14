@@ -5,6 +5,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -16,8 +18,8 @@ import java.util.function.Function;
 
 @Component
 public class JwtService {
-    // TODO ::  Push to env vars
-    public static final String SECRET = "5A7134743777217A25432A462D4A614E645266556A586E3272357538782F413F";
+    @Autowired
+    private Environment env;
 
     public String generateToken(String userName) {
         Map<String, Object> claims = new HashMap<>();
@@ -67,7 +69,7 @@ public class JwtService {
 
     private Key getSignKey() {
         // https://www.allkeysgenerator.com/random/security-encryption-key-generator.aspx
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET);
+        byte[] keyBytes = Decoders.BASE64.decode(env.getProperty("ERP_SECRET_AUTH_KEY"));
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }

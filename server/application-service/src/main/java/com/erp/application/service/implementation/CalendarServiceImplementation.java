@@ -7,8 +7,6 @@ import com.erp.application.payload.response.CalendarResponsePayload;
 import com.erp.application.repository.CalendarRepository;
 import com.erp.application.service.CalendarService;
 import com.mongodb.client.result.DeleteResult;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndReplaceOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -27,10 +25,7 @@ public class CalendarServiceImplementation implements CalendarService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    Logger logger = LoggerFactory.getLogger(CalendarServiceImplementation.class);
-
     private CalendarModel updateScheduleData(CalendarModel calendarModel) {
-        logger.info("updateScheduleData method invoked with payload : " + calendarModel);
         Query query = new Query()
                 .addCriteria(Criteria.where("email").is(calendarModel.getEmail()))
                 .addCriteria(Criteria.where("calendarData.scheduleId").is(calendarModel.getCalendarData().getScheduleId()));
@@ -39,7 +34,6 @@ public class CalendarServiceImplementation implements CalendarService {
     }
 
     private void deleteCalendarModel(CalendarModel calendarModel) {
-        logger.info("deleteCalendarModel method invoked with payload : " + calendarModel);
         Query query = new Query()
                 .addCriteria(Criteria.where("email").is(calendarModel.getEmail()))
                 .addCriteria(Criteria.where("calendarData.scheduleId").is(calendarModel.getCalendarData().getScheduleId()));
@@ -47,7 +41,6 @@ public class CalendarServiceImplementation implements CalendarService {
     }
 
     private void deleteManyCalendarModels(List<CalendarModel> calendarModelList) {
-        logger.info("deleteManyCalendarModels method invoked with payload : " + calendarModelList);
         String userEmail = calendarModelList.get(0).getEmail();
         List<Long> ids = calendarModelList.stream()
                 .map(calendarModel -> calendarModel.getCalendarData().getScheduleId())
@@ -60,7 +53,6 @@ public class CalendarServiceImplementation implements CalendarService {
 
     @Override
     public CalendarResponsePayload getSchedules(CalendarRequestPayload calendarRequestPayload) {
-        logger.info("getSchedules method invoked with payload : " + calendarRequestPayload);
         List<CalendarModel> calendarModelList = calendarRepository.findAllByEmail(calendarRequestPayload.getEmail())
                 .orElseThrow(() -> new ResourceNotFoundException("Sheet", "User", calendarRequestPayload.getEmail()));
         return mapToCalendarResponse(calendarModelList);
@@ -68,7 +60,6 @@ public class CalendarServiceImplementation implements CalendarService {
 
     @Override
     public void modifySchedules(CalendarRequestPayload calendarRequestPayload) {
-        logger.info("modifySchedules method invoked with payload : " + calendarRequestPayload);
         if (calendarRequestPayload.getAdded().size() > 0) {
             CalendarModel calendarModel = mapToCalendarModel(calendarRequestPayload, "added");
             calendarRepository.save(calendarModel);

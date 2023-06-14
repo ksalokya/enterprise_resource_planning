@@ -7,8 +7,6 @@ import com.erp.application.payload.response.SheetResponsePayload;
 import com.erp.application.repository.SheetRepository;
 import com.erp.application.service.SheetService;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -28,13 +26,10 @@ public class SheetServiceImplementation implements SheetService {
         return new ModelMapper();
     }
 
-    Logger logger = LoggerFactory.getLogger(SheetServiceImplementation.class);
-
     @Autowired
     private MongoTemplate mongoTemplate;
 
     private SheetModel updateSheetData(SheetModel sheetModel) {
-        logger.info("updateEditorData method invoked with payload : " + sheetModel);
         Query query = new Query()
                 .addCriteria(Criteria.where("email").is(sheetModel.getEmail()));
 
@@ -50,8 +45,6 @@ public class SheetServiceImplementation implements SheetService {
 
     @Override
     public SheetResponsePayload getSheet(SheetRequestPayload sheetRequestPayload) {
-        logger.info("getSheet method invoked with email : " + sheetRequestPayload);
-
         SheetModel sheetModel = sheetRepository.findByEmail(sheetRequestPayload.getEmail())
                 .orElseThrow(() -> new ResourceNotFoundException("Sheet", "User", sheetRequestPayload.getEmail()));
 
@@ -60,7 +53,6 @@ public class SheetServiceImplementation implements SheetService {
 
     @Override
     public SheetModel updateSheet(SheetRequestPayload sheetRequestPayload) {
-        logger.info("updateSheet method invoked with sheetPayload : " + sheetRequestPayload);
         SheetModel sheetModel = mapToEntity(sheetRequestPayload);
         return updateSheetData(sheetModel);
     }

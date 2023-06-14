@@ -1,5 +1,6 @@
 package com.erp.chartdataservice.service.implementation;
 
+import com.erp.chartdataservice.exception.ResourceNotFoundException;
 import com.erp.chartdataservice.model.TwoLevelPieModel;
 import com.erp.chartdataservice.payload.request.TwoLevelPieRequestPayload;
 import com.erp.chartdataservice.payload.response.twolevelpie.TwoLevelPieChartData;
@@ -25,11 +26,10 @@ public class TwoLevelPieServiceImplementation implements TwoLevelPieService {
 
     @Override
     public TwoLevelPieResponsePayload getAllTwoLevelPieData(long userId) {
-        // TODO :: Handle Exception
         List<TwoLevelPieModel> twoLevelPieModelsOfGroup = twoLevelPieRepository.findAllByTypeAndUserId("GROUP", userId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("TwoLevelPieModel", "userId", userId));
         List<TwoLevelPieModel> twoLevelPieModelsOfData = twoLevelPieRepository.findAllByTypeAndUserId("DATA", userId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("TwoLevelPieModel", "userId", userId));
         return new TwoLevelPieResponsePayload(mapToDtoList(twoLevelPieModelsOfGroup), mapToDtoList(twoLevelPieModelsOfData));
     }
 

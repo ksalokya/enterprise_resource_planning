@@ -19,7 +19,6 @@ public class TwoLevelPieController {
     @Autowired
     private TwoLevelPieService twoLevelPieService;
 
-    // TODO :: Add Redis
     @GetMapping("/get/{userId}")
     public ResponseEntity<?> getAllTwoLevelPiesController(@PathVariable(name = "userId") long user_id) {
         logger.info("getAllTwoLevelPiesController method invoked with user id :: " + user_id);
@@ -29,7 +28,7 @@ public class TwoLevelPieController {
 
     @PostMapping("/insert")
     public ResponseEntity<?> insertTwoLevelPieController(@RequestBody TwoLevelPieRequestPayload twoLevelPieRequestPayload) {
-        logger.info("insertTwoLevelPieController method invoked with payload :: " + twoLevelPieRequestPayload);
+        logger.info("insertTwoLevelPieController method invoked with user id :: " + twoLevelPieRequestPayload.getUserId());
         TwoLevelPieChartData twoLevelPieChartData = twoLevelPieService.insertTwoLevelPieData(twoLevelPieRequestPayload);
         return new ResponseEntity<>(twoLevelPieChartData, HttpStatus.OK);
     }

@@ -20,7 +20,6 @@ public class MixedStackController {
     @Autowired
     private MixedStackService mixedStackService;
 
-    // TODO :: Add Redis
     @GetMapping("/get/{userId}")
     public ResponseEntity<?> getAllMixedStacksController(@PathVariable(name = "userId") long user_id) {
         logger.info("getAllMixedStacksController method invoked with user id :: " + user_id);
@@ -29,9 +28,9 @@ public class MixedStackController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<?> insertMixedStackController(@RequestBody MixedStackRequestPayload MixedStackRequestPayload) {
-        logger.info("insertMixedStackController method invoked with payload :: " + MixedStackRequestPayload);
-        MixedStackResponsePayload MixedStackResponsePayloadList = mixedStackService.insertMixedStackData(MixedStackRequestPayload);
+    public ResponseEntity<?> insertMixedStackController(@RequestBody MixedStackRequestPayload mixedStackRequestPayload) {
+        logger.info("insertMixedStackController method invoked with user id :: " + mixedStackRequestPayload.getUserId());
+        MixedStackResponsePayload MixedStackResponsePayloadList = mixedStackService.insertMixedStackData(mixedStackRequestPayload);
         return new ResponseEntity<>(MixedStackResponsePayloadList, HttpStatus.OK);
     }
 }

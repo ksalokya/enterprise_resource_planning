@@ -1,5 +1,6 @@
 package com.erp.chartdataservice.service.implementation;
 
+import com.erp.chartdataservice.exception.ResourceNotFoundException;
 import com.erp.chartdataservice.model.PieChartModel;
 import com.erp.chartdataservice.payload.request.PieChartRequestPayload;
 import com.erp.chartdataservice.payload.response.PieChartResponsePayload;
@@ -25,7 +26,7 @@ public class PieChartServiceImplementation implements PieChartService {
     @Override
     public List<PieChartResponsePayload> getAllPieChartData(long userId) {
         List<PieChartModel> pieChartModels = pieChartRepository.findAllByUserId(userId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("PieChartModel", "userId", userId));
         return mapToDtoList(pieChartModels);
     }
 

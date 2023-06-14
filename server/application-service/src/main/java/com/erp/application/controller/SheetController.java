@@ -25,14 +25,14 @@ public class SheetController {
 
     @PostMapping("/get")
     public ResponseEntity<SheetResponsePayload> getSheetController(@RequestBody SheetRequestPayload sheetRequestPayload){
-        logger.info("getSheetController method invoked with email :: " + sheetRequestPayload);
+        logger.info("getSheetController method invoked with email :: " + sheetRequestPayload.getEmail());
         SheetResponsePayload sheetResponsePayload = sheetService.getSheet(sheetRequestPayload);
         return new ResponseEntity<>(sheetResponsePayload, HttpStatus.OK);
     }
 
     @PostMapping("/update")
     public ResponseEntity<?> saveSheetController(@RequestBody SheetRequestPayload sheetRequestPayload) {
-        logger.info("saveSheetController method invoked with sheetPayload :: " + sheetRequestPayload);
+        logger.info("saveSheetController method invoked with email :: " + sheetRequestPayload.getEmail());
         SheetModel updatedSheet = sheetService.updateSheet(sheetRequestPayload);
         return new ResponseEntity<>(updatedSheet, HttpStatus.CREATED);
     }

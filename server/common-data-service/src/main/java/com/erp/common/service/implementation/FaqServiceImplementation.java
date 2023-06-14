@@ -1,5 +1,6 @@
 package com.erp.common.service.implementation;
 
+import com.erp.common.exception.ResourceNotFoundException;
 import com.erp.common.model.FaqModel;
 import com.erp.common.payload.request.FaqRequestPayload;
 import com.erp.common.payload.response.FaqResponsePayload;
@@ -7,8 +8,6 @@ import com.erp.common.repository.FaqRepository;
 import com.erp.common.service.FaqService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
@@ -18,8 +17,6 @@ import java.util.List;
 
 @Service
 public class FaqServiceImplementation implements FaqService {
-
-    Logger logger = LoggerFactory.getLogger(FaqServiceImplementation.class);
 
     @Autowired
     private FaqRepository faqRepository;
@@ -31,15 +28,13 @@ public class FaqServiceImplementation implements FaqService {
 
     @Override
     public List<FaqResponsePayload> getAllFaqs(long userId) {
-        // TODO :: Handle Exception
-        logger.info("getAllFaqsById method invoked with user id :: " + userId);
-        List<FaqModel> faqModelList = faqRepository.findAllByUserId(userId).orElseThrow();
+        List<FaqModel> faqModelList = faqRepository.findAllByUserId(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("FaqModel", "userId", userId));
         return mapToDtoList(faqModelList);
     }
 
     @Override
     public FaqResponsePayload insertFaq(FaqRequestPayload faqRequestPayload) {
-        logger.info("insertFaq method invoked with payload :: " + faqRequestPayload);
         FaqModel faqModel = mapToEntity(faqRequestPayload);
         FaqModel insertedFaqModel = faqRepository.save(faqModel);
         return mapToDto(insertedFaqModel);
@@ -47,14 +42,12 @@ public class FaqServiceImplementation implements FaqService {
 
     @Override
     public void updateFaq(long faqId, FaqRequestPayload faqRequestPayload) {
-        logger.info("updateFaq method invoked with faqId :: " + faqId);
         faqRepository.saveByIdAndUserId(faqId, faqRequestPayload.getUserId(),
                 faqRequestPayload.getQuestion(), faqRequestPayload.getAnswer());
     }
 
     @Override
     public void deleteFaq(long userId, long faqId) {
-        logger.info("deleteFaq method invoked with user id :: " + userId);
         faqRepository.removeByIdAndUserId(faqId, userId);
     }
 

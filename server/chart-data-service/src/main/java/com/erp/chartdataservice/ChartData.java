@@ -11,8 +11,3 @@ public class ChartData {
 	}
 
 }
-
-// Add redis
-// Add exception
-// check for sout
-// update HLD diagram

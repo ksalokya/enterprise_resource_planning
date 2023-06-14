@@ -29,22 +29,22 @@ public class DeliveryController {
 
     @PostMapping("/insert")
     public ResponseEntity<?> insertDeliveryDataController(@RequestBody DeliveryRequestPayload deliveryRequestPayload) {
-        logger.info("insertDeliveryDataController method invoked with payload :: " + deliveryRequestPayload);
+        logger.info("insertDeliveryDataController method invoked with user id :: " + deliveryRequestPayload.getUserId());
         DeliveryResponsePayload deliveryResponsePayload = deliveryService.createDeliveryData(deliveryRequestPayload);
         return new ResponseEntity<>(deliveryResponsePayload, HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateDeliveryDataController(@PathVariable(name = "id") long id,
-                                                            @RequestBody DeliveryRequestPayload deliveryRequestPayload) {
-        logger.info("updateDeliveryDataController method invoked with userId & payload :: " + id + " " + deliveryRequestPayload);
+                                                          @RequestBody DeliveryRequestPayload deliveryRequestPayload) {
+        logger.info("updateDeliveryDataController method invoked with id & userId :: " + id + " " + deliveryRequestPayload.getUserId());
         deliveryService.updateDeliveryData(id, deliveryRequestPayload);
         return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/delete/{id}/{userId}")
     public ResponseEntity<?> deleteDeliveryDataController(@PathVariable(name = "id") long id,
-                                                   @PathVariable(name = "userId") long userId) {
+                                                          @PathVariable(name = "userId") long userId) {
         logger.info("deleteDeliveryDataController method invoked with id & userId :: " + id + " " + userId);
         deliveryService.deleteDeliveryData(id, userId);
         return new ResponseEntity<>("success", HttpStatus.OK);

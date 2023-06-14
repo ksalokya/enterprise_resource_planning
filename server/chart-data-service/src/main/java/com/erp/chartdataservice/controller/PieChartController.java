@@ -20,7 +20,6 @@ public class PieChartController {
     @Autowired
     private PieChartService pieChartService;
 
-    // TODO :: Add Redis
     @GetMapping("/get/{userId}")
     public ResponseEntity<?> getAllPieChartsController(@PathVariable(name = "userId") long user_id) {
         logger.info("getAllPieChartsController method invoked with user id :: " + user_id);
@@ -29,9 +28,9 @@ public class PieChartController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<?> insertPieChartController(@RequestBody PieChartRequestPayload PieChartRequestPayload) {
-        logger.info("insertPieChartController method invoked with payload :: " + PieChartRequestPayload);
-        PieChartResponsePayload PieChartResponsePayloadList = pieChartService.insertPieChartData(PieChartRequestPayload);
+    public ResponseEntity<?> insertPieChartController(@RequestBody PieChartRequestPayload pieChartRequestPayload) {
+        logger.info("insertPieChartController method invoked with payload :: " + pieChartRequestPayload.getUserId());
+        PieChartResponsePayload PieChartResponsePayloadList = pieChartService.insertPieChartData(pieChartRequestPayload);
         return new ResponseEntity<>(PieChartResponsePayloadList, HttpStatus.OK);
     }
 }

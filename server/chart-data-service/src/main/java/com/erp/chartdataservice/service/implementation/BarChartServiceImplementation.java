@@ -1,5 +1,6 @@
 package com.erp.chartdataservice.service.implementation;
 
+import com.erp.chartdataservice.exception.ResourceNotFoundException;
 import com.erp.chartdataservice.model.BarChartModel;
 import com.erp.chartdataservice.payload.request.BarChartRequestPayload;
 import com.erp.chartdataservice.payload.response.BarChartResponsePayload;
@@ -26,9 +27,8 @@ public class BarChartServiceImplementation implements BarChartService {
 
     @Override
     public List<BarChartResponsePayload> getAllBarChartData(long userId) {
-        // TODO :: Handle Exception
         List<BarChartModel> barChartModels = barChartRepository.findAllByUserId(userId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("BarChartModel", "userId", userId));
         return mapToDtoList(barChartModels);
     }
 

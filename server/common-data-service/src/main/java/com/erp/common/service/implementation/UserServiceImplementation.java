@@ -6,8 +6,6 @@ import com.erp.common.payload.request.UserRequestPayload;
 import com.erp.common.payload.response.UserResponsePayload;
 import com.erp.common.repository.UserRepository;
 import com.erp.common.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -21,14 +19,11 @@ import java.util.Objects;
 
 @Service
 public class UserServiceImplementation implements UserService {
-    Logger logger = LoggerFactory.getLogger(UserServiceImplementation.class);
-
     @Autowired
     private UserRepository userRepository;
 
     @Override
     public UserResponsePayload insertUserData(UserRequestPayload userRequestPayload, MultipartFile file) {
-        logger.info("insertUserData method invoked with payload :: " + userRequestPayload);
         UserModel userModel = mapToEntity(userRequestPayload, file);
         UserModel insertedUserModel = userRepository.save(userModel);
         return mapToDto(insertedUserModel);
@@ -36,7 +31,6 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public List<UserResponsePayload> findAllUsersByEmail(long userId) {
-        logger.info("findAllUsersByEmail method invoked with payload :: " + userId);
         List<UserModel> userModelList = userRepository.findAllByUserId(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("UserModel", "userId", userId));
         return mapToListEntity(userModelList);
@@ -44,7 +38,6 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public void updateUser(long id, UserRequestPayload userRequestPayload, MultipartFile file) {
-        logger.info("updateUser method invoked with userId & payload :: " + id + " " + userRequestPayload);
         userRepository.saveByIdAndUserId(id, userRequestPayload.getUsername(),
                 convertImage(file), userRequestPayload.getStatus(),
                 userRequestPayload.getEmail(), userRequestPayload.getAge(),
@@ -53,7 +46,6 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public void updateUserWithOutImage(long id, UserRequestPayload userRequestPayload) {
-        logger.info("updateUserWithOutImage method invoked with userId & payload :: " + id + " " + userRequestPayload);
         userRepository.saveByIdAndUserIdWithOutImage(id, userRequestPayload.getUsername(),
                 userRequestPayload.getStatus(), userRequestPayload.getEmail(), userRequestPayload.getAge(),
                 userRequestPayload.getContact(), userRequestPayload.getUserId());
@@ -61,7 +53,6 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public void deleteUser(long id, long userId) {
-        logger.info("deleteUser method invoked with id and usersID :: " + id + " " + userId);
         userRepository.removeByIdAndUserId(id, userId);
     }
 

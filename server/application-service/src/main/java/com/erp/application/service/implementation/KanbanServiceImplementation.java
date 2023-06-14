@@ -8,8 +8,6 @@ import com.erp.application.repository.KanbanRepository;
 import com.erp.application.service.KanbanService;
 import com.mongodb.client.result.DeleteResult;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.FindAndReplaceOptions;
@@ -23,7 +21,6 @@ import java.util.List;
 
 @Service
 public class KanbanServiceImplementation implements KanbanService {
-    Logger logger = LoggerFactory.getLogger(CalendarServiceImplementation.class);
 
     @Autowired
     private KanbanRepository kanbanRepository;
@@ -37,7 +34,6 @@ public class KanbanServiceImplementation implements KanbanService {
     private MongoTemplate mongoTemplate;
 
     private KanbanModel updateKanbanData(KanbanModel kanbanModel) {
-        logger.info("updateScheduleData method invoked with payload : " + kanbanModel);
         Query query = new Query()
                 .addCriteria(Criteria.where("email").is(kanbanModel.getEmail()))
                 .addCriteria(Criteria.where("kanbanData.taskId").is(kanbanModel.getKanbanData().getTaskId()));
@@ -46,7 +42,6 @@ public class KanbanServiceImplementation implements KanbanService {
     }
 
     private void deleteKanbanModel(String email, String taskId) {
-        logger.info("deleteCalendarModel method invoked with email : " + email);
         Query query = new Query()
                 .addCriteria(Criteria.where("email").is(email))
                 .addCriteria(Criteria.where("kanbanData.taskId").is(taskId));
@@ -55,7 +50,6 @@ public class KanbanServiceImplementation implements KanbanService {
 
     @Override
     public List<KanbanResponsePayload> getKanbans(String user_email) {
-        logger.info("getKanbans method invoked with payload : " + user_email);
         List<KanbanModel> kanbanModelList = kanbanRepository.findAllByEmail(user_email)
                 .orElseThrow(() -> new ResourceNotFoundException("Sheet", "User", user_email));
 
@@ -68,7 +62,6 @@ public class KanbanServiceImplementation implements KanbanService {
 
     @Override
     public void insertKanban(String email, KanbanRequestPayload kanbanRequestPayload) {
-        logger.info("insertKanban method invoked with payload : " + kanbanRequestPayload);
         KanbanModel kanbanModel = KanbanModel.builder()
                 .email(email)
                 .kanbanData(kanbanRequestPayload.getKanbanData())
@@ -78,7 +71,6 @@ public class KanbanServiceImplementation implements KanbanService {
 
     @Override
     public KanbanResponsePayload updateKanban(String email, KanbanRequestPayload kanbanRequestPayload) {
-        logger.info("updateKanban method invoked with payload : " + kanbanRequestPayload);
         KanbanModel kanbanModel = KanbanModel.builder()
                 .email(email)
                 .kanbanData(kanbanRequestPayload.getKanbanData())
@@ -89,7 +81,6 @@ public class KanbanServiceImplementation implements KanbanService {
 
     @Override
     public void deleteKanban(String email, KanbanRequestPayload kanbanRequestPayload) {
-        logger.info("deleteKanban method invoked with payload : " + kanbanRequestPayload);
         deleteKanbanModel(email, kanbanRequestPayload.getKey());
     }
 

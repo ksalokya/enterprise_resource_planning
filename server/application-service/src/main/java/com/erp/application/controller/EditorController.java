@@ -4,7 +4,6 @@ import com.erp.application.model.EditorModel;
 import com.erp.application.payload.request.EditorRequestPayload;
 import com.erp.application.payload.response.EditorResponsePayload;
 import com.erp.application.service.EditorService;
-import com.mongodb.client.result.UpdateResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +20,15 @@ public class EditorController {
     private EditorService editorService;
 
     @GetMapping("/get/{user_name}")
-    public ResponseEntity<?> getEditorController(@PathVariable(name  = "user_name") String user_name){
+    public ResponseEntity<?> getEditorController(@PathVariable(name = "user_name") String user_name) {
         logger.info("getEditorController method invoked with email :: " + user_name);
         EditorResponsePayload editorResponsePayload = editorService.getEditor(user_name);
         return new ResponseEntity<>(editorResponsePayload, HttpStatus.OK);
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> updateEditorController(@RequestBody EditorRequestPayload editorRequestPayload){
-        logger.info("getEditorController method invoked with email :: " + editorRequestPayload);
+    public ResponseEntity<?> updateEditorController(@RequestBody EditorRequestPayload editorRequestPayload) {
+        logger.info("updateEditorController method invoked with email :: " + editorRequestPayload.getEmail());
         EditorModel updatedEditor = editorService.updateEditor(editorRequestPayload);
         return new ResponseEntity<>(updatedEditor, HttpStatus.OK);
     }

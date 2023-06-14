@@ -3,11 +3,11 @@ package com.erp.common;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class CommonTests {
+@SpringBootTest(classes = ApplicationTests.class)
+class ApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }

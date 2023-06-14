@@ -22,17 +22,16 @@ public class CalendarController {
     private CalendarService calendarService;
 
     @PostMapping("/get")
-    public ResponseEntity<?> getCalendarController(@RequestBody CalendarRequestPayload calendarRequestPayload){
-        logger.info("getCalendarController method invoked with email :: " + calendarRequestPayload);
+    public ResponseEntity<?> getCalendarController(@RequestBody CalendarRequestPayload calendarRequestPayload) {
+        logger.info("getCalendarController method invoked with email :: " + calendarRequestPayload.getEmail());
         CalendarResponsePayload calendarResponsePayload = calendarService.getSchedules(calendarRequestPayload);
         return new ResponseEntity<>(calendarResponsePayload.getCalendarDataList(), HttpStatus.OK);
     }
 
     @PostMapping("/update")
     public ResponseEntity<?> saveCalendarController(@RequestBody CalendarRequestPayload calendarRequestPayload) {
-        logger.info("saveCalendarController method invoked with calendarPayload :: " + calendarRequestPayload);
+        logger.info("saveCalendarController method invoked with email :: " + calendarRequestPayload.getEmail());
         calendarService.modifySchedules(calendarRequestPayload);
-        // TODO :: Optimization
         CalendarResponsePayload calendarResponsePayload = calendarService.getSchedules(calendarRequestPayload);
         return new ResponseEntity<>(calendarResponsePayload.getCalendarDataList(), HttpStatus.OK);
     }

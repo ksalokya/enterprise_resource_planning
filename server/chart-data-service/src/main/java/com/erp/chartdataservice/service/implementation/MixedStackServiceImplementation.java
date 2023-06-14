@@ -1,5 +1,6 @@
 package com.erp.chartdataservice.service.implementation;
 
+import com.erp.chartdataservice.exception.ResourceNotFoundException;
 import com.erp.chartdataservice.model.MixedStackModel;
 import com.erp.chartdataservice.payload.request.MixedStackRequestPayload;
 import com.erp.chartdataservice.payload.response.MixedStackResponsePayload;
@@ -24,9 +25,8 @@ public class MixedStackServiceImplementation implements MixedStackService {
 
     @Override
     public List<MixedStackResponsePayload> getAllMixedStackData(long userId) {
-        // TODO :: Handle Exception
         List<MixedStackModel> MixedStackModels = mixedStackRepository.findAllByUserId(userId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("MixedStackModel", "userId", userId));
         return mapToDtoList(MixedStackModels);
     }
 

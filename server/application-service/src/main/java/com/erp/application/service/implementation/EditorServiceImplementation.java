@@ -7,8 +7,6 @@ import com.erp.application.payload.response.EditorResponsePayload;
 import com.erp.application.repository.EditorRepository;
 import com.erp.application.service.EditorService;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -20,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EditorServiceImplementation implements EditorService {
-    Logger logger = LoggerFactory.getLogger(EditorServiceImplementation.class);
 
     @Autowired
     private EditorRepository editorRepository;
@@ -34,7 +31,6 @@ public class EditorServiceImplementation implements EditorService {
     }
 
     private EditorModel updateEditorData(EditorModel editorModel) {
-        logger.info("updateEditorData method invoked with payload : " + editorModel);
         Query query = new Query()
                 .addCriteria(Criteria.where("email").is(editorModel.getEmail()));
 
@@ -50,7 +46,6 @@ public class EditorServiceImplementation implements EditorService {
 
     @Override
     public EditorResponsePayload getEditor(String userName) {
-        logger.info("getEditor method invoked with email :: " + userName);
         EditorModel editorModel = editorRepository.findByEmail(userName)
                 .orElseThrow(() -> new ResourceNotFoundException("Editor", "User", userName));
         return mapToDto(editorModel);
@@ -58,7 +53,6 @@ public class EditorServiceImplementation implements EditorService {
 
     @Override
     public EditorModel updateEditor(EditorRequestPayload editorRequestPayload) {
-        logger.info("updateEditor method invoked with payload :: " + editorRequestPayload);
         EditorModel editorModel = mapToEntity(editorRequestPayload);
         return updateEditorData(editorModel);
     }

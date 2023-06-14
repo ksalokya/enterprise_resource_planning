@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -25,7 +24,7 @@ public class UserController {
 
     @GetMapping("/get/{userId}")
     public ResponseEntity<?> getAllUsersController(@PathVariable(name = "userId") long userId) {
-        logger.info("getAllUsersController method invoked with userID :: " + userId);
+        logger.info("getAllUsersController method invoked with user id :: " + userId);
         List<UserResponsePayload> userResponsePayloadList = userService.findAllUsersByEmail(userId);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -35,24 +34,24 @@ public class UserController {
     @PostMapping("/insert")
     public ResponseEntity<?> insertUsersController(@ModelAttribute UserRequestPayload userRequestPayload,
                                                    @RequestParam("image") MultipartFile file) {
-        logger.info("insertUsersController method invoked with payload :: " + userRequestPayload);
+        logger.info("insertUsersController method invoked with user id :: " + userRequestPayload.getUserId());
         UserResponsePayload userResponsePayload = userService.insertUserData(userRequestPayload, file);
         return new ResponseEntity<>("", HttpStatus.CREATED);
     }
 
     @PutMapping("/update/image/{id}")
-    public ResponseEntity<?> updateUsersController(@PathVariable(name = "id") long id,
-                                                @ModelAttribute UserRequestPayload userRequestPayload,
-                                                @RequestParam("image") MultipartFile file) {
-        logger.info("updateUsersController method invoked with userId & payload :: " + id + " " + userRequestPayload);
+    public ResponseEntity<?> updateUserController(@PathVariable(name = "id") long id,
+                                                  @ModelAttribute UserRequestPayload userRequestPayload,
+                                                  @RequestParam("image") MultipartFile file) {
+        logger.info("updateUserController method invoked with id & user id :: " + id + " " + userRequestPayload.getUserId());
         userService.updateUser(id, userRequestPayload, file);
         return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> putUsersWithOutImageController(@PathVariable(name = "id") long id,
-                                                @ModelAttribute UserRequestPayload userRequestPayload) {
-        logger.info("putUsersWithOutImageController method invoked with userId & payload :: " + id + " " + userRequestPayload);
+    public ResponseEntity<?> updatedUserWithOutImageController(@PathVariable(name = "id") long id,
+                                                               @ModelAttribute UserRequestPayload userRequestPayload) {
+        logger.info("updatedUserWithOutImageController method invoked with id & user id :: " + id + " " + userRequestPayload.getUserId());
         userService.updateUserWithOutImage(id, userRequestPayload);
         return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
     }
@@ -60,7 +59,7 @@ public class UserController {
     @DeleteMapping("/delete/{id}/{userId}")
     public ResponseEntity<?> deleteUsersController(@PathVariable(name = "id") long id,
                                                    @PathVariable(name = "userId") long userId) {
-        logger.info("deleteUsersController method invoked with id & usersId :: " + id + " " + userId);
+        logger.info("deleteUsersController method invoked with id & user id :: " + id + " " + userId);
         userService.deleteUser(id, userId);
         return new ResponseEntity<>("success", HttpStatus.OK);
     }

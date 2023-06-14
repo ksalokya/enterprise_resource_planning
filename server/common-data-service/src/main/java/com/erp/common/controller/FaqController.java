@@ -20,7 +20,6 @@ public class FaqController {
     @Autowired
     private FaqService faqService;
 
-    // TODO :: Add Redis
     @GetMapping("/get/{userId}")
     public ResponseEntity<?> getAllFaqsController(@PathVariable(name = "userId") long user_id) {
         logger.info("getAllFaqsController method invoked with user id :: " + user_id);
@@ -30,7 +29,7 @@ public class FaqController {
 
     @PostMapping("/insert")
     public ResponseEntity<?> insertFaqController(@RequestBody FaqRequestPayload faqRequestPayload) {
-        logger.info("insertFaqController method invoked with payload :: " + faqRequestPayload);
+        logger.info("insertFaqController method invoked with user id :: " + faqRequestPayload.getUserId());
         FaqResponsePayload faqResponsePayloadList = faqService.insertFaq(faqRequestPayload);
         return new ResponseEntity<>(faqResponsePayloadList, HttpStatus.OK);
     }
@@ -38,7 +37,7 @@ public class FaqController {
     @PutMapping("/update/{faqId}")
     public ResponseEntity<?> updateFaqController(@PathVariable(name = "faqId") long faq_id,
                                                  @RequestBody FaqRequestPayload faqRequestPayload) {
-        logger.info("patchFaqController method invoked with faqId :: " + faq_id);
+        logger.info("updateFaqController method invoked with faq id :: " + faq_id);
         faqService.updateFaq(faq_id, faqRequestPayload);
         return new ResponseEntity<>("Updated Successfully", HttpStatus.OK);
     }

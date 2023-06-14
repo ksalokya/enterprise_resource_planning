@@ -29,15 +29,15 @@ public class OrderController {
 
     @PostMapping("/insert")
     public ResponseEntity<?> insertOrderController(@RequestBody OrderRequestPayload orderRequestPayload) {
-        logger.info("insertOrderController method invoked with payload :: " + orderRequestPayload);
+        logger.info("insertOrderController method invoked with user id :: " + orderRequestPayload.getUserId());
         OrderResponsePayload orderResponsePayload = orderService.insertOrder(orderRequestPayload);
         return new ResponseEntity<>(orderResponsePayload, HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateOrderController(@PathVariable(name = "id") long id,
-                                                            @RequestBody OrderRequestPayload orderRequestPayload) {
-        logger.info("updateOrderController method invoked with userId & payload :: " + id + " " + orderRequestPayload);
+                                                   @RequestBody OrderRequestPayload orderRequestPayload) {
+        logger.info("updateOrderController method invoked with id & user id :: " + id + " " + orderRequestPayload.getUserId());
         orderService.updateOrder(id, orderRequestPayload);
         return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
     }
@@ -45,7 +45,7 @@ public class OrderController {
     @DeleteMapping("/delete/{id}/{userId}")
     public ResponseEntity<?> deleteOrderController(@PathVariable(name = "id") long id,
                                                    @PathVariable(name = "userId") long userId) {
-        logger.info("deleteOrderController method invoked with id & usersId :: " + id + " " + userId);
+        logger.info("deleteOrderController method invoked with id & userId :: " + id + " " + userId);
         orderService.deleteOrder(id, userId);
         return new ResponseEntity<>("success", HttpStatus.OK);
     }

@@ -20,7 +20,6 @@ public class BarChartController {
     @Autowired
     private BarChartService barChartService;
 
-    // TODO :: Add Redis
     @GetMapping("/get/{userId}")
     public ResponseEntity<?> getAllBarChartsController(@PathVariable(name = "userId") long user_id) {
         logger.info("getAllBarChartsController method invoked with user id :: " + user_id);
@@ -30,7 +29,7 @@ public class BarChartController {
 
     @PostMapping("/insert")
     public ResponseEntity<?> insertBarChartController(@RequestBody BarChartRequestPayload BarChartRequestPayload) {
-        logger.info("insertBarChartController method invoked with payload :: " + BarChartRequestPayload);
+        logger.info("insertBarChartController method invoked with user id :: " + BarChartRequestPayload.getUserId());
         BarChartResponsePayload BarChartResponsePayloadList = barChartService.insertBarChartData(BarChartRequestPayload);
         return new ResponseEntity<>(BarChartResponsePayloadList, HttpStatus.OK);
     }

@@ -5,16 +5,16 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>3.1.0</version>
+        <relativePath/>
     </parent>
     <groupId>com.erp</groupId>
     <artifactId>authentication</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>auth</name>
+    <name>Authentication</name>
     <description>Authentication</description>
     <properties>
-        <java.version>19</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>

@@ -68,7 +68,6 @@ public class JwtService {
     }
 
     private Key getSignKey() {
-        // https://www.allkeysgenerator.com/random/security-encryption-key-generator.aspx
         byte[] keyBytes = Decoders.BASE64.decode(env.getProperty("ERP_SECRET_AUTH_KEY"));
         return Keys.hmacShaKeyFor(keyBytes);
     }

@@ -55,6 +55,7 @@ export default function Signin(props) {
     };
 
     const handleAuthError = () => {
+        setSignInError("Something went wrong");
         setSignInBtnText("Sign In");
         setIsSignInBtnEnable(false);
     }
@@ -78,18 +79,10 @@ export default function Signin(props) {
                     props.handleUserContext(userInfo.id, userInfo.username, userInfo.token, userInfo.isLoggedIn);
                     navigate("/home");
                 } else {
-                    setSignInError(res.data.message);
                     handleAuthError();
                 }
             })
-            .catch((err) => {
-                console.log(err);
-                if (err.response.status === 401) {
-                    setSignInError(err.response.data.message);
-                }
-                else {
-                    setSignInError("Something went wrong");
-                }
+            .catch(() => {
                 handleAuthError();
             })
     };

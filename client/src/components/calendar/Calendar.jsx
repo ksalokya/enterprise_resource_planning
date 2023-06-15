@@ -31,7 +31,7 @@ function Calendar() {
             <ScheduleComponent
                 style={{ visibility: loader ? 'hidden' : '' }}
                 height="85%"
-                selectedDate={new Date(2021, 0, 10)}
+                selectedDate={new Date()}
                 eventSettings={eventSettings}
                 dragStart={onDragStart}
                 enablePersistence={true}

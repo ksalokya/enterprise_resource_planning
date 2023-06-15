@@ -6,13 +6,6 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "../chart.css"
 
-// const data = [
-//   { name: 'Wholesale', value: 400 },
-//   { name: 'Retail', value: 300 },
-//   { name: 'B2B', value: 300 },
-//   { name: 'DTC', value: 200 },
-// ];
-
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const RADIAN = Math.PI / 180;

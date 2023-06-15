@@ -4,7 +4,7 @@ import { UserContext } from '../../App';
 import { DataManager, UrlAdaptor } from '@syncfusion/ej2-data';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import { Button, Grid } from "@mui/material";
-import { kanbanData, kanbanGrid } from './datasource';
+import { kanbanGrid } from './datasource';
 import ComponentLoader from "../loader/ComponentLoader"
 import Header from "../header/Header";
 import './kanban.css'

@@ -55,7 +55,6 @@ export default function Signin(props) {
     };
 
     const handleAuthError = () => {
-        setSignInError("Something went wrong");
         setSignInBtnText("Sign In");
         setIsSignInBtnEnable(false);
     }
@@ -72,17 +71,19 @@ export default function Signin(props) {
         })
             .then((res) => {
                 if (res.status === 200) {
-                    let userInfo = res.data;
+                    let userInfo = res?.data;
                     // if (remembeMe) {
                     //     localStorage.setItem('token', userInfo.isLoggedIn);
                     // }
                     props.handleUserContext(userInfo.id, userInfo.username, userInfo.token, userInfo.isLoggedIn);
                     navigate("/home");
                 } else {
+                    setSignInError("Something went wrong");
                     handleAuthError();
                 }
             })
-            .catch(() => {
+            .catch((err) => {
+                setSignInError(err.response?.data?.message);
                 handleAuthError();
             })
     };
@@ -102,14 +103,14 @@ export default function Signin(props) {
                         </Grid>
                         <Grid item lg={6} md={6} xs={12} sx={{ padding: 4, bgcolor: "#fff" }}>
                             <div className='top-box'>
-                                <h2>Hello Again!</h2>
+                                <h2>Hello Again...</h2>
                                 <Typography>
                                     Don't have an account?{" "}
                                     <Link to="/signup">Sign Up</Link>
                                 </Typography>
                             </div>
                             <form onSubmit={submitSignIn}>
-                                <Grid container spacing={4} sx={{ marginTop: 5 }}>
+                                <Grid container spacing={4} sx={{ marginTop: 2 }}>
                                     <Grid item xs={12}>
                                         <h4 className='top-header'>
                                             Enter your credentials to continue...
@@ -126,6 +127,7 @@ export default function Signin(props) {
                                             name="email"
                                             autoComplete="off"
                                             onChange={e => userTyping("email", e)}
+                                            helperText="Use for demo = johndoe@erp.com"
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -139,6 +141,7 @@ export default function Signin(props) {
                                             id="password"
                                             autoComplete="off"
                                             onChange={e => userTyping("password", e)}
+                                            helperText="Use for demo = erp@john"
                                         />
                                     </Grid>
                                     {/* <Grid item xs={12}>
@@ -146,7 +149,7 @@ export default function Signin(props) {
                                         <span>&nbsp; Remember me</span>
                                     </Grid> */}
                                     {signInError ? (
-                                        <Grid container justifyContent="center">
+                                        <Grid container justifyContent="center" sx={{ mt: 1 }}>
                                             <Grid item>
                                                 <Alert severity="error">
                                                     <span
@@ -156,7 +159,7 @@ export default function Signin(props) {
                                             </Grid>
                                         </Grid>
                                     ) : null}
-                                    <Grid item xs={12} sx={{ paddingTop: "40px !important" }}>
+                                    <Grid item xs={12} sx={{ paddingTop: "20px !important" }}>
                                         <Button
                                             type="submit"
                                             fullWidth

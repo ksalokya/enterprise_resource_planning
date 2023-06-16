@@ -1,10 +1,32 @@
 import Header from "../../components/header/Header"
+import { Button, Grid } from "@mui/material";
+import GitHubIcon from '@mui/icons-material/GitHub';
 import "./about.css"
 
 export default function About() {
     return (
         <>
-            <Header title="About" />
+            <Grid
+                container
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+            >
+                <Grid item lg={6} xs={8}>
+                    <Header title='About' />
+                </Grid>
+                <Grid item lg={6} xs={4} style={{ textAlign: 'end', paddingRight: '40px' }}>
+                    <Button
+                        variant="contained"
+                        sx={{ backgroundColor: 'rgb(26, 115, 232)', marginRight: '3%' }}
+                        startIcon={<GitHubIcon />}
+                        href="https://github.com/ksalokya/enterprise_resource_planning"
+                        target="_blank"
+                    >
+                        GitHub
+                    </Button>
+                </Grid>
+            </Grid>
             <div class="description">
                 <div class="about">
                     <h3>

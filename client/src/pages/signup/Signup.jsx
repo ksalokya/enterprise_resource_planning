@@ -107,7 +107,6 @@ export default function Signup() {
                 }
             })
             .catch((err) => {
-                console.log(err);
                 handleServerError();
             })
     };

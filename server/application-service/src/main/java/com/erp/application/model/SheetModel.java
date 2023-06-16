@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document(collection = "sheet")
 public class SheetModel {
-    @Id
     private String email;
     @JsonProperty("JSONData")
     private Object jsonData;

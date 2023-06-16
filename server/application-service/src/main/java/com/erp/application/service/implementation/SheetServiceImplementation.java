@@ -34,7 +34,7 @@ public class SheetServiceImplementation implements SheetService {
                 .addCriteria(Criteria.where("email").is(sheetModel.getEmail()));
 
         Update update = new Update();
-        update.setOnInsert("jsonData", sheetModel.getJsonData());
+        update.set("jsonData", sheetModel.getJsonData());
 
         FindAndModifyOptions options = new FindAndModifyOptions();
         options.upsert(true);

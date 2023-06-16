@@ -17,23 +17,25 @@ function Spreadsheet() {
 
     let baseUrl = process.env.REACT_APP_APPLICATION_SERVICE_URL;
     useEffect(() => {
-        fetch(`${baseUrl}/sheet/get`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ Email: userContext?.username, Name: spreadsheet.sheets[0].name }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                spreadsheet.openFromJson({ file: data.JSONData });
-                setLoader(false);
+        if (spreadsheet) {
+            fetch(`${baseUrl}/sheet/get`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ Email: userContext?.username }),
             })
-            .catch((err) => {
-                spreadsheet.openFromJson({ file: metadata });
-                setLoader(false);
-            })
-    }, [])
+                .then((response) => response.json())
+                .then((data) => {
+                    spreadsheet.openFromJson({ file: data.JSONData });
+                    setLoader(false);
+                })
+                .catch((err) => {
+                    spreadsheet.openFromJson({ file: metadata });
+                    setLoader(false);
+                })
+        }
+    }, [spreadsheet])
 
 
     const saveSheetToDB = debounce(() => {
@@ -44,11 +46,10 @@ function Spreadsheet() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ Email: userContext?.username, Name: spreadsheet.sheets[0].name, JSONData: JSON.stringify(Json.jsonObject), ContentType: "Xlsx", VersionType: "Xlsx" }),
+                body: JSON.stringify({ Email: userContext?.username, Name: Json.jsonObject?.Workbook.sheets[0]?.name, JSONData: JSON.stringify(Json.jsonObject), ContentType: "Xlsx", VersionType: "Xlsx" }),
             })
-                .then((res) => {
-                    openSnackBar();
-                })))
+                .then(() => openSnackBar())
+            ))
         }
     }, 2000)
 

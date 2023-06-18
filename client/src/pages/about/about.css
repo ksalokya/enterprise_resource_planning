@@ -1,0 +1,71 @@
+.description {
+    padding: 15px;
+}
+
+.description h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.description p {
+    color: #666;
+}
+
+.about h3 {
+    color: #666;
+}
+
+.feature {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.feature h2 {
+    color: rgb(26, 115, 232);
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    color: #666;
+}
+
+.feature ul {
+    list-style-type: disc;
+    margin-left: 10px;
+}
+
+.feature li {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.benefits {
+    margin-top: 40px;
+}
+
+.benefits h2 {
+    color: rgb(26, 115, 232);
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.benefits ul {
+    list-style-type: disc;
+    margin-left: 10px;
+}
+
+.benefits li {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width:800px) {
+    .feature ul {
+        padding-left: 9px;
+    }
+
+    .benefits ul {
+        padding-left: 9px;
+    }
+}

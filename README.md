@@ -4,9 +4,9 @@
 #### 💡 It's not a bug - it's an undocumented feature.        [Production](https://github.com/ksalokya/enterprise_resource_planning)
 #### 🔧 Software is written by humans and therefore has bugs  [Staging](https://github.com/ksalokya/enterprise_resource_planning/tree/staging)
 
-## Backend Design - WIP
+## Backend Design
 <p align="center" width="100%">
-    <img width="80%" src="https://user-images.githubusercontent.com/72447529/236610869-a973a388-94c6-4caa-ad24-315894f1d7ae.jpg"> 
+    <img width="80%" src="https://github.com/ksalokya/enterprise_resource_planning/assets/72447529/7c1da2a9-3de4-4e48-8581-71847c85262f"> 
 </p>
 
 ## Screens

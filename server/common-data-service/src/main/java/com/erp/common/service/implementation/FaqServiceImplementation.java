@@ -10,16 +10,23 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class FaqServiceImplementation implements FaqService {
 
     @Autowired
     private FaqRepository faqRepository;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Bean
     public ModelMapper faqModelMapper() {
@@ -28,13 +35,32 @@ public class FaqServiceImplementation implements FaqService {
 
     @Override
     public List<FaqResponsePayload> getAllFaqs(long userId) {
-        List<FaqModel> faqModelList = faqRepository.findAllByUserId(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("FaqModel", "userId", userId));
-        return mapToDtoList(faqModelList);
+        final String key = "post_" + userId;
+        final ValueOperations<String, List<FaqModel>> operations = redisTemplate.opsForValue();
+        final boolean hasKey = Boolean.TRUE.equals(redisTemplate.hasKey(key));
+
+        if (hasKey) {
+            List<FaqModel> faqModelList = operations.get(key);
+            return mapToDtoList(faqModelList);
+        }
+
+        Optional<List<FaqModel>> faqModelList = faqRepository.findAllByUserId(userId);
+
+        if (faqModelList.isPresent()) {
+            operations.set(key, faqModelList.get(), 15, TimeUnit.MINUTES);
+            return mapToDtoList(faqModelList.get());
+        } else {
+            throw new ResourceNotFoundException("FaqModel", "userId", userId);
+        }
     }
 
     @Override
     public FaqResponsePayload insertFaq(FaqRequestPayload faqRequestPayload) {
+        final String key = "post_" + faqRequestPayload.getUserId();
+        final boolean hasKey = redisTemplate.hasKey(key);
+        if (hasKey) {
+            redisTemplate.delete(key);
+        }
         FaqModel faqModel = mapToEntity(faqRequestPayload);
         FaqModel insertedFaqModel = faqRepository.save(faqModel);
         return mapToDto(insertedFaqModel);
@@ -42,12 +68,22 @@ public class FaqServiceImplementation implements FaqService {
 
     @Override
     public void updateFaq(long faqId, FaqRequestPayload faqRequestPayload) {
+        final String key = "post_" + faqRequestPayload.getUserId();
+        final boolean hasKey = redisTemplate.hasKey(key);
+        if (hasKey) {
+            redisTemplate.delete(key);
+        }
         faqRepository.saveByIdAndUserId(faqId, faqRequestPayload.getUserId(),
                 faqRequestPayload.getQuestion(), faqRequestPayload.getAnswer());
     }
 
     @Override
     public void deleteFaq(long userId, long faqId) {
+        final String key = "post_" + userId;
+        final boolean hasKey = redisTemplate.hasKey(key);
+        if (hasKey) {
+            redisTemplate.delete(key);
+        }
         faqRepository.removeByIdAndUserId(faqId, userId);
     }
 

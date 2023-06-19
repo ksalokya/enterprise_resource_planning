@@ -41,7 +41,6 @@ public class FaqServiceImplementation implements FaqService {
 
         if (hasKey) {
             List<FaqModel> faqModelList = operations.get(key);
-            System.out.println("Fetching cached FaqModels >> " + faqModelList);
             return mapToDtoList(faqModelList);
         }
 
@@ -49,7 +48,6 @@ public class FaqServiceImplementation implements FaqService {
 
         if (faqModelList.isPresent()) {
             operations.set(key, faqModelList.get(), 15, TimeUnit.MINUTES);
-            System.out.println("Caching FaqModels >> " + faqModelList.get());
             return mapToDtoList(faqModelList.get());
         } else {
             throw new ResourceNotFoundException("FaqModel", "userId", userId);
@@ -62,7 +60,6 @@ public class FaqServiceImplementation implements FaqService {
         final boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
             redisTemplate.delete(key);
-            System.out.println("Deleting FaqModels >> " + faqRequestPayload.getUserId());
         }
         FaqModel faqModel = mapToEntity(faqRequestPayload);
         FaqModel insertedFaqModel = faqRepository.save(faqModel);
@@ -75,7 +72,6 @@ public class FaqServiceImplementation implements FaqService {
         final boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
             redisTemplate.delete(key);
-            System.out.println("Deleting FaqModels >> " + faqRequestPayload.getUserId());
         }
         faqRepository.saveByIdAndUserId(faqId, faqRequestPayload.getUserId(),
                 faqRequestPayload.getQuestion(), faqRequestPayload.getAnswer());
@@ -87,7 +83,6 @@ public class FaqServiceImplementation implements FaqService {
         final boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
             redisTemplate.delete(key);
-            System.out.println("Deleting FaqModels >> " + userId);
         }
         faqRepository.removeByIdAndUserId(faqId, userId);
     }

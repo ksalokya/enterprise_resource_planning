@@ -1,29 +1,28 @@
 package com.erp.common.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.util.Objects;
+
 @Configuration
 public class RedisConfig {
-
-    @Value("${spring.redis.host}")
-    private String redisHost;
-
-    @Value("${spring.redis.port}")
-    private int redisPort;
+    @Autowired
+    private Environment env;
 
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
-        redisStandaloneConfiguration.setHostName(redisHost);
-        redisStandaloneConfiguration.setPort(redisPort);
-        //redisStandaloneConfiguration.setPassword("password");
+        redisStandaloneConfiguration.setHostName(Objects.requireNonNull(env.getProperty("ERP_REDIS_HOST")));
+        redisStandaloneConfiguration.setPort(Integer.parseInt(Objects.requireNonNull(env.getProperty("ERP_REDIS_PORT"))));
+        redisStandaloneConfiguration.setPassword(Objects.requireNonNull(env.getProperty("ERP_REDIS_PASSWORD")));
         return new JedisConnectionFactory(redisStandaloneConfiguration);
     }
 

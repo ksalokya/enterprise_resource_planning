@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, forwardRef } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -8,6 +8,9 @@ import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Lottie from 'react-lottie';
 import Typography from '@mui/material/Typography';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import { IconButton } from '@mui/material';
 import * as animationData from "./animation.json"
 import { Link } from "react-router-dom";
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -64,6 +67,7 @@ export default function Signin(props) {
 
         setSignInBtnText("Please Wait...");
         setIsSignInBtnEnable(true);
+        openSnackBar(true);
 
         axios.post(`${process.env.REACT_APP_AUTHENTICATION_SERVICE_URL}/authenticate`, {
             "email": email,
@@ -76,6 +80,7 @@ export default function Signin(props) {
                     //     localStorage.setItem('token', userInfo.isLoggedIn);
                     // }
                     props.handleUserContext(userInfo.id, userInfo.username, userInfo.token, userInfo.isLoggedIn);
+                    cloeseSnackBar();
                     navigate("/home");
                 } else {
                     setSignInError("Something went wrong");
@@ -87,6 +92,33 @@ export default function Signin(props) {
                 handleAuthError();
             })
     };
+
+    const [state, setState] = useState({
+        open: false,
+        vertical: 'bottom',
+        horizontal: 'center',
+    });
+    const { vertical, horizontal, open } = state;
+    const openSnackBar = () => setState({ ...state, open: true });
+    const cloeseSnackBar = () => setState({ ...state, open: false })
+
+    const SnackAlert = forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+
+    const CustomSnackBar = (
+        <div>
+            <Snackbar open={open} autoHideDuration={10000} onClose={cloeseSnackBar} key={vertical + horizontal} anchorOrigin={{ vertical, horizontal }}>
+                <Alert severity="info" sx={{ width: '100%' }}
+                    action={
+                        <IconButton style={{ display: 'none' }} />
+                    }
+                >
+                    Waking Up Servers...
+                </Alert>
+            </Snackbar>
+        </div >
+    )
 
     return (
         <div className={`main ${isDarkModeEnabled ? 'main-dark' : 'main-light'}`}>
@@ -184,6 +216,7 @@ export default function Signin(props) {
                     </Grid>
                 </Box >
             </Container>
+            {CustomSnackBar}
         </div>
     )
 }

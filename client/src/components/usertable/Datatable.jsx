@@ -5,7 +5,7 @@ import { UserContext } from '../../App';
 import { Link } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
 import Button from '@mui/material/Button';
-import { userColumns } from './datasource.js';
+import { userColumns } from './metadata.js';
 import NewUserModal from './NewUserModal'
 import ComponentLoader from "../loader/ComponentLoader"
 import './datatable.css'

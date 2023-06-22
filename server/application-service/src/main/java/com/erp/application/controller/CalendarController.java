@@ -33,6 +33,6 @@ public class CalendarController {
         logger.info("saveCalendarController method invoked with email :: " + calendarRequestPayload.getEmail());
         calendarService.modifySchedules(calendarRequestPayload);
         CalendarResponsePayload calendarResponsePayload = calendarService.getSchedules(calendarRequestPayload);
-        return new ResponseEntity<>(calendarResponsePayload.getCalendarDataList(), HttpStatus.OK);
+        return new ResponseEntity<>(calendarResponsePayload.getCalendarDataList(), HttpStatus.CREATED);
     }
 }

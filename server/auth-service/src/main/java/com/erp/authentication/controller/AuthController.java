@@ -15,7 +15,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +60,7 @@ public class AuthController {
     public ResponseEntity<String> addUser(@RequestBody UserInfo userInfo) {
         logger.info("addUser method invoked with username :: " + userInfo.getUsername());
         userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
+//        userInfo.setStatus("NEW");
         userInfoRepository.save(userInfo);
         return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
     }

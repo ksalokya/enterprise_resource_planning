@@ -36,7 +36,7 @@ public class UserController {
                                                    @RequestParam("image") MultipartFile file) {
         logger.info("insertUsersController method invoked with user id :: " + userRequestPayload.getUserId());
         UserResponsePayload userResponsePayload = userService.insertUserData(userRequestPayload, file);
-        return new ResponseEntity<>("", HttpStatus.CREATED);
+        return new ResponseEntity<>(userResponsePayload, HttpStatus.CREATED);
     }
 
     @PutMapping("/update/image/{id}")

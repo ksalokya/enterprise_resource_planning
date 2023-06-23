@@ -2,14 +2,18 @@ package com.erp.common.service.implementation;
 
 import com.erp.common.exception.ResourceNotFoundException;
 import com.erp.common.model.UserModel;
+import com.erp.common.payload.request.UserInfoRequestPayload;
 import com.erp.common.payload.request.UserRequestPayload;
 import com.erp.common.payload.response.UserResponsePayload;
 import com.erp.common.repository.UserRepository;
 import com.erp.common.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,11 +26,35 @@ public class UserServiceImplementation implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private WebClient webClient;
+
     @Override
     public UserResponsePayload insertUserData(UserRequestPayload userRequestPayload, MultipartFile file) {
-        UserModel userModel = mapToEntity(userRequestPayload, file);
-        UserModel insertedUserModel = userRepository.save(userModel);
-        return mapToDto(insertedUserModel);
+        UserInfoRequestPayload userInfoRequestPayload = UserInfoRequestPayload.builder()
+                .name(userRequestPayload.getUsername())
+                .email(userRequestPayload.getEmail())
+                .password("defaultpassword")
+                .role("USER")
+                .status("NEW")
+                .build();
+
+        // Call Auth Service to save User's Detail
+        Boolean result = webClient.post()
+                .uri("http://localhost:8002/api/v1/auth/new")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(userInfoRequestPayload))
+                .retrieve()
+                .bodyToMono(Boolean.class)
+                .block();
+
+        if (Boolean.TRUE.equals(result)) {
+            UserModel userModel = mapToEntity(userRequestPayload, file);
+            UserModel insertedUserModel = userRepository.save(userModel);
+            return mapToDto(insertedUserModel);
+        } else {
+            throw new IllegalArgumentException("Unable to create user");
+        }
     }
 
     @Override

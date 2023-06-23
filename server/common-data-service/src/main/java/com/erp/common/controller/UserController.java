@@ -1,7 +1,7 @@
 package com.erp.common.controller;
 
 import com.erp.common.payload.request.UserRequestPayload;
-import com.erp.common.payload.response.UserResponsePayload;
+import com.erp.common.payload.response.UserInfoResponsePayload;
 import com.erp.common.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,28 +22,28 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/get/{userId}")
-    public ResponseEntity<?> getAllUsersController(@PathVariable(name = "userId") long userId) {
-        logger.info("getAllUsersController method invoked with user id :: " + userId);
-        List<UserResponsePayload> userResponsePayloadList = userService.findAllUsersByEmail(userId);
+    @GetMapping("/get/{adminId}")
+    public ResponseEntity<?> getAllUsersController(@PathVariable(name = "adminId") long adminId) {
+        logger.info("getAllUsersController method invoked with admin id :: " + adminId);
+        List<UserInfoResponsePayload> userInfoResponsePayloadList = userService.findAllUsersByEmail(adminId);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(userResponsePayloadList);
+                .body(userInfoResponsePayloadList);
     }
 
     @PostMapping("/insert")
     public ResponseEntity<?> insertUsersController(@ModelAttribute UserRequestPayload userRequestPayload,
                                                    @RequestParam("image") MultipartFile file) {
-        logger.info("insertUsersController method invoked with user id :: " + userRequestPayload.getUserId());
-        UserResponsePayload userResponsePayload = userService.insertUserData(userRequestPayload, file);
-        return new ResponseEntity<>(userResponsePayload, HttpStatus.CREATED);
+        logger.info("insertUsersController method invoked with admin id :: " + userRequestPayload.getAdminId());
+        UserInfoResponsePayload userInfoResponsePayload = userService.insertUserData(userRequestPayload, file);
+        return new ResponseEntity<>(userInfoResponsePayload, HttpStatus.CREATED);
     }
 
     @PutMapping("/update/image/{id}")
     public ResponseEntity<?> updateUserController(@PathVariable(name = "id") long id,
                                                   @ModelAttribute UserRequestPayload userRequestPayload,
                                                   @RequestParam("image") MultipartFile file) {
-        logger.info("updateUserController method invoked with id & user id :: " + id + " " + userRequestPayload.getUserId());
+        logger.info("updateUserController method invoked with id & admin id :: " + id + " " + userRequestPayload.getAdminId());
         userService.updateUser(id, userRequestPayload, file);
         return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
     }
@@ -51,16 +51,16 @@ public class UserController {
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updatedUserWithOutImageController(@PathVariable(name = "id") long id,
                                                                @ModelAttribute UserRequestPayload userRequestPayload) {
-        logger.info("updatedUserWithOutImageController method invoked with id & user id :: " + id + " " + userRequestPayload.getUserId());
+        logger.info("updatedUserWithOutImageController method invoked with id & admin id :: " + id + " " + userRequestPayload.getAdminId());
         userService.updateUserWithOutImage(id, userRequestPayload);
         return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping("/delete/{id}/{userId}")
+    @DeleteMapping("/delete/{id}/{adminId}")
     public ResponseEntity<?> deleteUsersController(@PathVariable(name = "id") long id,
-                                                   @PathVariable(name = "userId") long userId) {
-        logger.info("deleteUsersController method invoked with id & user id :: " + id + " " + userId);
-        userService.deleteUser(id, userId);
+                                                   @PathVariable(name = "adminId") long adminId) {
+        logger.info("deleteUsersController method invoked with id & admin id :: " + id + " " + adminId);
+        userService.deleteUser(id, adminId);
         return new ResponseEntity<>("success", HttpStatus.OK);
     }
 }

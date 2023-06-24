@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping("/insert")
-    @CircuitBreaker(name = "user", fallbackMethod = "fallbackMethod")
+    @CircuitBreaker(name = "auth-service", fallbackMethod = "fallbackMethod")
     public ResponseEntity<?> insertUsersController(@ModelAttribute UserRequestPayload userRequestPayload,
                                                    @RequestParam("image") MultipartFile file) {
         logger.info("insertUsersController method invoked with admin id :: " + userRequestPayload.getAdminId());

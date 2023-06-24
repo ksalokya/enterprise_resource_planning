@@ -20,6 +20,7 @@
         <module>common-data-service</module>
         <module>system-service</module>
         <module>discovery-server</module>
+        <module>api-gateway</module>
     </modules>
 
     <properties>

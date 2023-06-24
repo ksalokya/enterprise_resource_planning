@@ -3,6 +3,7 @@ package com.erp.common.controller;
 import com.erp.common.payload.request.UserRequestPayload;
 import com.erp.common.payload.response.UserInfoResponsePayload;
 import com.erp.common.service.UserService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +33,16 @@ public class UserController {
     }
 
     @PostMapping("/insert")
+    @CircuitBreaker(name = "user", fallbackMethod = "fallbackMethod")
     public ResponseEntity<?> insertUsersController(@ModelAttribute UserRequestPayload userRequestPayload,
                                                    @RequestParam("image") MultipartFile file) {
         logger.info("insertUsersController method invoked with admin id :: " + userRequestPayload.getAdminId());
         UserInfoResponsePayload userInfoResponsePayload = userService.insertUserData(userRequestPayload, file);
         return new ResponseEntity<>(userInfoResponsePayload, HttpStatus.CREATED);
+    }
+
+    public ResponseEntity<?> fallbackMethod(UserRequestPayload userRequestPayload, MultipartFile file, RuntimeException runtimeException) {
+        return new ResponseEntity<>("OOPS! Something went wrong.", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PutMapping("/update/image/{id}")

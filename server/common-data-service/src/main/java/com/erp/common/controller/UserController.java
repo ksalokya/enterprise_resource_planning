@@ -49,7 +49,9 @@ public class UserController {
     }
 
     // TODO :: Move circuit breaker to service impl
-    public CompletableFuture<String> futureFallback(UserRequestPayload userRequestPayload, RuntimeException runtimeException) {
+    public CompletableFuture<String> futureFallback(UserRequestPayload userRequestPayload,
+                                                    MultipartFile file,
+                                                    RuntimeException runtimeException) {
         return CompletableFuture.supplyAsync(() -> "Oops! Something went wrong");
     }
 

@@ -48,12 +48,12 @@ public class UserServiceImplementation implements UserService {
                 .status("NEW")
                 .build();
 
-        Observation inventoryServiceObservation = Observation.createNotStarted("auth-service-lookup",
+        Observation authServiceObservation = Observation.createNotStarted("auth-service-lookup",
                 this.observationRegistry);
-        inventoryServiceObservation.lowCardinalityKeyValue("call", "auth-service");
+        authServiceObservation.lowCardinalityKeyValue("call", "auth-service");
 
         // Call Auth Service to save User's Detail
-        return inventoryServiceObservation.observe(() -> {
+        return authServiceObservation.observe(() -> {
             String result = webClientBuilder.build().post()
                     .uri("http://auth-service/api/v1/auth/new")
                     .contentType(MediaType.APPLICATION_JSON)

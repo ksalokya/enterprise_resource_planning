@@ -59,7 +59,7 @@ public class AuthController {
     @PostMapping("/new")
     public ResponseEntity<String> addUser(@RequestBody UserInfo userInfo) {
         logger.info("addUser method invoked with username :: " + userInfo.getUsername());
-        userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
+//        userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
 //        userInfo.setStatus("NEW");
         userInfoRepository.save(userInfo);
         return new ResponseEntity<>("User registered successfully", HttpStatus.OK);

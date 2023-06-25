@@ -7,7 +7,10 @@ import com.erp.common.payload.request.UserRequestPayload;
 import com.erp.common.payload.response.UserInfoResponsePayload;
 import com.erp.common.repository.UserRepository;
 import com.erp.common.service.UserService;
+import io.micrometer.observation.Observation;
+import io.micrometer.observation.ObservationRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -29,6 +32,12 @@ public class UserServiceImplementation implements UserService {
     @Autowired
     private WebClient.Builder webClientBuilder;
 
+    @Autowired
+    private ObservationRegistry observationRegistry;
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
+
     @Override
     public String insertUserData(UserRequestPayload userRequestPayload, MultipartFile file) {
         UserInfoRequestPayload userInfoRequestPayload = UserInfoRequestPayload.builder()
@@ -39,22 +48,28 @@ public class UserServiceImplementation implements UserService {
                 .status("NEW")
                 .build();
 
-        // Call Auth Service to save User's Detail
-        String result = webClientBuilder.build().post()
-                .uri("http://auth-service/api/v1/auth/new")
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(userInfoRequestPayload))
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
+        Observation inventoryServiceObservation = Observation.createNotStarted("auth-service-lookup",
+                this.observationRegistry);
+        inventoryServiceObservation.lowCardinalityKeyValue("call", "auth-service");
 
-        if (Objects.equals(result, "User registered successfully")) {
-            UserModel userModel = mapToEntity(userRequestPayload, file);
-            userRepository.save(userModel);
-            return "User registered successfully";
-        } else {
-            throw new IllegalArgumentException("Unable to create user");
-        }
+        // Call Auth Service to save User's Detail
+        return inventoryServiceObservation.observe(() -> {
+            String result = webClientBuilder.build().post()
+                    .uri("http://auth-service/api/v1/auth/new")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(userInfoRequestPayload))
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+
+            if (Objects.equals(result, "User registered successfully")) {
+                UserModel userModel = mapToEntity(userRequestPayload, file);
+                userRepository.save(userModel);
+                return "User registered successfully";
+            } else {
+                throw new IllegalArgumentException("Unable to create user");
+            }
+        });
     }
 
     @Override

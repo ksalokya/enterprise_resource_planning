@@ -3,7 +3,10 @@ package com.erp.common.controller;
 import com.erp.common.payload.request.UserRequestPayload;
 import com.erp.common.payload.response.UserInfoResponsePayload;
 import com.erp.common.service.UserService;
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
+import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/api/v1/common/user")
@@ -33,16 +37,20 @@ public class UserController {
     }
 
     @PostMapping("/insert")
-    @CircuitBreaker(name = "auth-service", fallbackMethod = "fallbackMethod")
-    public ResponseEntity<?> insertUsersController(@ModelAttribute UserRequestPayload userRequestPayload,
-                                                   @RequestParam("image") MultipartFile file) {
+    @TimeLimiter(name = "auth-service")
+    @CircuitBreaker(name = "auth-service", fallbackMethod = "futureFallback")
+    @Bulkhead(name = "auth-service", type = Bulkhead.Type.THREADPOOL)
+    @Retry(name = "auth-service")
+    public CompletableFuture<String> insertUsersController(@ModelAttribute UserRequestPayload userRequestPayload,
+                                                           @RequestParam("image") MultipartFile file) {
         logger.info("insertUsersController method invoked with admin id :: " + userRequestPayload.getAdminId());
-        UserInfoResponsePayload userInfoResponsePayload = userService.insertUserData(userRequestPayload, file);
-        return new ResponseEntity<>(userInfoResponsePayload, HttpStatus.CREATED);
+        String result = userService.insertUserData(userRequestPayload, file);
+        return CompletableFuture.supplyAsync(() -> result);
     }
 
-    public ResponseEntity<?> fallbackMethod(UserRequestPayload userRequestPayload, MultipartFile file, RuntimeException runtimeException) {
-        return new ResponseEntity<>("OOPS! Something went wrong.", HttpStatus.INTERNAL_SERVER_ERROR);
+    // TODO :: Move circuit breaker to service impl
+    public CompletableFuture<String> futureFallback(UserRequestPayload userRequestPayload, RuntimeException runtimeException) {
+        return CompletableFuture.supplyAsync(() -> "Oops! Something went wrong");
     }
 
     @PutMapping("/update/image/{id}")

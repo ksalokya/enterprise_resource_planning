@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface UserService {
-    UserInfoResponsePayload insertUserData(UserRequestPayload userRequestPayload, MultipartFile file);
+    String insertUserData(UserRequestPayload userRequestPayload, MultipartFile file);
 
     List<UserInfoResponsePayload> findAllUsersByEmail(long userId);
 

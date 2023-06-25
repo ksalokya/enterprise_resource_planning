@@ -30,7 +30,7 @@ public class UserServiceImplementation implements UserService {
     private WebClient.Builder webClientBuilder;
 
     @Override
-    public UserInfoResponsePayload insertUserData(UserRequestPayload userRequestPayload, MultipartFile file) {
+    public String insertUserData(UserRequestPayload userRequestPayload, MultipartFile file) {
         UserInfoRequestPayload userInfoRequestPayload = UserInfoRequestPayload.builder()
                 .name(userRequestPayload.getUsername())
                 .email(userRequestPayload.getEmail())
@@ -50,8 +50,8 @@ public class UserServiceImplementation implements UserService {
 
         if (Objects.equals(result, "User registered successfully")) {
             UserModel userModel = mapToEntity(userRequestPayload, file);
-            UserModel insertedUserModel = userRepository.save(userModel);
-            return mapToDto(insertedUserModel);
+            userRepository.save(userModel);
+            return "User registered successfully";
         } else {
             throw new IllegalArgumentException("Unable to create user");
         }

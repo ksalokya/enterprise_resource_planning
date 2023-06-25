@@ -20,14 +20,13 @@ public class SimpleLoggingHandler implements ObservationHandler<Observation.Cont
     }
 
     @Override
-    public void onStart(Observation.Context context) {
-        log.info("Starting " + context.getName());
-        context.put("time", System.currentTimeMillis());
-    }
+    public void onStart(Observation.Context context) {}
 
     @Override
     public void onScopeOpened(Observation.Context context) {
-        log.info("Scope opened  " + context.getName());
+        if(context.getName().equals("auth-service-lookup")){
+            log.info("Scope opened  " + context.getName());
+        }
     }
 
     @Override

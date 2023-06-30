@@ -60,8 +60,8 @@ public class UserController {
                                                   @ModelAttribute UserRequestPayload userRequestPayload,
                                                   @RequestParam("image") MultipartFile file) {
         logger.info("updateUserController method invoked with id & admin id :: " + id + " " + userRequestPayload.getAdminId());
-        userService.updateUser(id, userRequestPayload, file);
-        return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
+        String res = userService.updateUser(id, userRequestPayload, file);
+        return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/update/{id}")

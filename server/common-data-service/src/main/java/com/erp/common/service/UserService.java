@@ -11,7 +11,7 @@ public interface UserService {
 
     List<UserInfoResponsePayload> findAllUsersByEmail(long userId);
 
-    void updateUser(long id, UserRequestPayload userRequestPayload, MultipartFile file);
+    String updateUser(long id, UserRequestPayload userRequestPayload, MultipartFile file);
 
     void updateUserWithOutImage(long id, UserRequestPayload userRequestPayload);
 

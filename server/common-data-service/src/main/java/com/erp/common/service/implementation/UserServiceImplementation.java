@@ -1,5 +1,6 @@
 package com.erp.common.service.implementation;
 
+import com.erp.common.event.UserInfoEvent;
 import com.erp.common.exception.ResourceNotFoundException;
 import com.erp.common.model.UserModel;
 import com.erp.common.payload.request.UserInfoRequestPayload;
@@ -80,11 +81,13 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void updateUser(long id, UserRequestPayload userRequestPayload, MultipartFile file) {
+    public String updateUser(long id, UserRequestPayload userRequestPayload, MultipartFile file) {
         userRepository.saveByIdAndAdminId(id, userRequestPayload.getUsername(),
                 convertImage(file), userRequestPayload.getStatus(),
                 userRequestPayload.getEmail(), userRequestPayload.getAge(),
                 userRequestPayload.getContact(), userRequestPayload.getAdminId());
+        applicationEventPublisher.publishEvent(new UserInfoEvent(this, userRequestPayload.getUsername()));
+        return "User updated successfully";
     }
 
     @Override

@@ -1,8 +1,12 @@
 package com.erp.common.controller;
 
 import com.erp.common.payload.request.UserRequestPayload;
-import com.erp.common.payload.response.UserResponsePayload;
+import com.erp.common.payload.response.UserInfoResponsePayload;
 import com.erp.common.service.UserService;
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
+import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/api/v1/common/user")
@@ -22,45 +27,56 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/get/{userId}")
-    public ResponseEntity<?> getAllUsersController(@PathVariable(name = "userId") long userId) {
-        logger.info("getAllUsersController method invoked with user id :: " + userId);
-        List<UserResponsePayload> userResponsePayloadList = userService.findAllUsersByEmail(userId);
+    @GetMapping("/get/{adminId}")
+    public ResponseEntity<?> getAllUsersController(@PathVariable(name = "adminId") long adminId) {
+        logger.info("getAllUsersController method invoked with admin id :: " + adminId);
+        List<UserInfoResponsePayload> userInfoResponsePayloadList = userService.findAllUsersByEmail(adminId);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(userResponsePayloadList);
+                .body(userInfoResponsePayloadList);
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<?> insertUsersController(@ModelAttribute UserRequestPayload userRequestPayload,
-                                                   @RequestParam("image") MultipartFile file) {
-        logger.info("insertUsersController method invoked with user id :: " + userRequestPayload.getUserId());
-        UserResponsePayload userResponsePayload = userService.insertUserData(userRequestPayload, file);
-        return new ResponseEntity<>("", HttpStatus.CREATED);
+    @TimeLimiter(name = "auth-service")
+    @CircuitBreaker(name = "auth-service", fallbackMethod = "futureFallback")
+    @Bulkhead(name = "auth-service", type = Bulkhead.Type.THREADPOOL)
+    @Retry(name = "auth-service")
+    public CompletableFuture<String> insertUsersController(@ModelAttribute UserRequestPayload userRequestPayload,
+                                                           @RequestParam("image") MultipartFile file) {
+        logger.info("insertUsersController method invoked with admin id :: " + userRequestPayload.getAdminId());
+        String result = userService.insertUserData(userRequestPayload, file);
+        return CompletableFuture.supplyAsync(() -> result);
+    }
+
+    // TODO :: Move circuit breaker to service impl
+    public CompletableFuture<String> futureFallback(UserRequestPayload userRequestPayload,
+                                                    MultipartFile file,
+                                                    RuntimeException runtimeException) {
+        return CompletableFuture.supplyAsync(() -> "Oops! Something went wrong");
     }
 
     @PutMapping("/update/image/{id}")
     public ResponseEntity<?> updateUserController(@PathVariable(name = "id") long id,
                                                   @ModelAttribute UserRequestPayload userRequestPayload,
                                                   @RequestParam("image") MultipartFile file) {
-        logger.info("updateUserController method invoked with id & user id :: " + id + " " + userRequestPayload.getUserId());
-        userService.updateUser(id, userRequestPayload, file);
-        return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
+        logger.info("updateUserController method invoked with id & admin id :: " + id + " " + userRequestPayload.getAdminId());
+        String res = userService.updateUser(id, userRequestPayload, file);
+        return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updatedUserWithOutImageController(@PathVariable(name = "id") long id,
                                                                @ModelAttribute UserRequestPayload userRequestPayload) {
-        logger.info("updatedUserWithOutImageController method invoked with id & user id :: " + id + " " + userRequestPayload.getUserId());
+        logger.info("updatedUserWithOutImageController method invoked with id & admin id :: " + id + " " + userRequestPayload.getAdminId());
         userService.updateUserWithOutImage(id, userRequestPayload);
         return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
     }
 
-    @DeleteMapping("/delete/{id}/{userId}")
+    @DeleteMapping("/delete/{id}/{adminId}")
     public ResponseEntity<?> deleteUsersController(@PathVariable(name = "id") long id,
-                                                   @PathVariable(name = "userId") long userId) {
-        logger.info("deleteUsersController method invoked with id & user id :: " + id + " " + userId);
-        userService.deleteUser(id, userId);
+                                                   @PathVariable(name = "adminId") long adminId) {
+        logger.info("deleteUsersController method invoked with id & admin id :: " + id + " " + adminId);
+        userService.deleteUser(id, adminId);
         return new ResponseEntity<>("success", HttpStatus.OK);
     }
 }

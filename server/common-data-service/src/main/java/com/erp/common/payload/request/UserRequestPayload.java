@@ -10,5 +10,5 @@ public class UserRequestPayload {
     private String email;
     private String age;
     private String contact;
-    private long userId;
+    private long adminId;
 }

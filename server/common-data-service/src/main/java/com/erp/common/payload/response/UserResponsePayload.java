@@ -4,9 +4,7 @@ import lombok.Data;
 
 @Data
 public class UserResponsePayload {
-    private long id;
     private String username;
-    private String image;
     private String status;
     private String email;
     private String age;

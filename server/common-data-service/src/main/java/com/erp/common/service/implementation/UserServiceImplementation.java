@@ -1,15 +1,23 @@
 package com.erp.common.service.implementation;
 
+import com.erp.common.event.UserInfoEvent;
 import com.erp.common.exception.ResourceNotFoundException;
 import com.erp.common.model.UserModel;
+import com.erp.common.payload.request.UserInfoRequestPayload;
 import com.erp.common.payload.request.UserRequestPayload;
-import com.erp.common.payload.response.UserResponsePayload;
+import com.erp.common.payload.response.UserInfoResponsePayload;
 import com.erp.common.repository.UserRepository;
 import com.erp.common.service.UserService;
+import io.micrometer.observation.Observation;
+import io.micrometer.observation.ObservationRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,38 +30,77 @@ public class UserServiceImplementation implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private WebClient.Builder webClientBuilder;
+
+    @Autowired
+    private ObservationRegistry observationRegistry;
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
+
     @Override
-    public UserResponsePayload insertUserData(UserRequestPayload userRequestPayload, MultipartFile file) {
-        UserModel userModel = mapToEntity(userRequestPayload, file);
-        UserModel insertedUserModel = userRepository.save(userModel);
-        return mapToDto(insertedUserModel);
+    public String insertUserData(UserRequestPayload userRequestPayload, MultipartFile file) {
+        UserInfoRequestPayload userInfoRequestPayload = UserInfoRequestPayload.builder()
+                .name(userRequestPayload.getUsername())
+                .email(userRequestPayload.getEmail())
+                .password("defaultpassword")
+                .role("USER")
+                .status("NEW")
+                .build();
+
+        Observation authServiceObservation = Observation.createNotStarted("auth-service-lookup",
+                this.observationRegistry);
+        authServiceObservation.lowCardinalityKeyValue("call", "auth-service");
+
+        // Call Auth Service to save User's Detail
+        return authServiceObservation.observe(() -> {
+            String result = webClientBuilder.build().post()
+                    .uri("http://auth-service/api/v1/auth/new")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(userInfoRequestPayload))
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+
+            if (Objects.equals(result, "User registered successfully")) {
+                UserModel userModel = mapToEntity(userRequestPayload, file);
+                userRepository.save(userModel);
+                return "User registered successfully";
+            } else {
+                throw new IllegalArgumentException("Unable to create user");
+            }
+        });
     }
 
     @Override
-    public List<UserResponsePayload> findAllUsersByEmail(long userId) {
-        List<UserModel> userModelList = userRepository.findAllByUserId(userId)
+    public List<UserInfoResponsePayload> findAllUsersByEmail(long userId) {
+        List<UserModel> userModelList = userRepository.findAllByAdminId(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("UserModel", "userId", userId));
         return mapToListEntity(userModelList);
     }
 
     @Override
-    public void updateUser(long id, UserRequestPayload userRequestPayload, MultipartFile file) {
-        userRepository.saveByIdAndUserId(id, userRequestPayload.getUsername(),
+    public String updateUser(long id, UserRequestPayload userRequestPayload, MultipartFile file) {
+        userRepository.saveByIdAndAdminId(id, userRequestPayload.getUsername(),
                 convertImage(file), userRequestPayload.getStatus(),
                 userRequestPayload.getEmail(), userRequestPayload.getAge(),
-                userRequestPayload.getContact(), userRequestPayload.getUserId());
+                userRequestPayload.getContact(), userRequestPayload.getAdminId());
+        applicationEventPublisher.publishEvent(new UserInfoEvent(this, userRequestPayload.getUsername()));
+        return "User updated successfully";
     }
 
     @Override
     public void updateUserWithOutImage(long id, UserRequestPayload userRequestPayload) {
-        userRepository.saveByIdAndUserIdWithOutImage(id, userRequestPayload.getUsername(),
+        userRepository.saveByIdAndAdminIdWithOutImage(id, userRequestPayload.getUsername(),
                 userRequestPayload.getStatus(), userRequestPayload.getEmail(), userRequestPayload.getAge(),
-                userRequestPayload.getContact(), userRequestPayload.getUserId());
+                userRequestPayload.getContact(), userRequestPayload.getAdminId());
     }
 
     @Override
     public void deleteUser(long id, long userId) {
-        userRepository.removeByIdAndUserId(id, userId);
+        // TODO :: Add Auth call to mark status as DELETED
+        userRepository.removeByIdAndAdminId(id, userId);
     }
 
     private String convertImage(MultipartFile file) {
@@ -78,27 +125,27 @@ public class UserServiceImplementation implements UserService {
         userModel.setEmail(userRequestPayload.getEmail());
         userModel.setAge(userRequestPayload.getAge());
         userModel.setContact(userRequestPayload.getContact());
-        userModel.setUserId(userRequestPayload.getUserId());
+        userModel.setAdminId(userRequestPayload.getAdminId());
         return userModel;
     }
 
-    private UserResponsePayload mapToDto(UserModel userModel) {
-        UserResponsePayload userResponsePayload = new UserResponsePayload();
-        userResponsePayload.setId(userModel.getId());
-        userResponsePayload.setUsername(userModel.getUsername());
-        userResponsePayload.setImage(userModel.getImage());
-        userResponsePayload.setStatus(userModel.getStatus());
-        userResponsePayload.setEmail(userModel.getEmail());
-        userResponsePayload.setAge(userModel.getAge());
-        userResponsePayload.setContact(userModel.getContact());
-        return userResponsePayload;
+    private UserInfoResponsePayload mapToDto(UserModel userModel) {
+        UserInfoResponsePayload userInfoResponsePayload = new UserInfoResponsePayload();
+        userInfoResponsePayload.setId(userModel.getId());
+        userInfoResponsePayload.setUsername(userModel.getUsername());
+        userInfoResponsePayload.setImage(userModel.getImage());
+        userInfoResponsePayload.setStatus(userModel.getStatus());
+        userInfoResponsePayload.setEmail(userModel.getEmail());
+        userInfoResponsePayload.setAge(userModel.getAge());
+        userInfoResponsePayload.setContact(userModel.getContact());
+        return userInfoResponsePayload;
     }
 
-    private List<UserResponsePayload> mapToListEntity(List<UserModel> userModelList) {
-        List<UserResponsePayload> userResponsePayloadList = new ArrayList<>();
+    private List<UserInfoResponsePayload> mapToListEntity(List<UserModel> userModelList) {
+        List<UserInfoResponsePayload> userInfoResponsePayloadList = new ArrayList<>();
         for (UserModel userModel : userModelList) {
-            userResponsePayloadList.add(mapToDto(userModel));
+            userInfoResponsePayloadList.add(mapToDto(userModel));
         }
-        return userResponsePayloadList;
+        return userInfoResponsePayloadList;
     }
 }

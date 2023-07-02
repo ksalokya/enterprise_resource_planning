@@ -32,6 +32,18 @@
 
 ![editor](https://user-images.githubusercontent.com/72447529/233855880-bbd3d527-d089-463a-af2e-91888396c01f.jpg)
 
+### Services and Monitoring
+![grafana](https://github.com/ksalokya/enterprise_resource_planning/assets/72447529/361e52ca-5291-4d38-afa8-f99a2d4a8e2e)
+
+![kibana](https://github.com/ksalokya/enterprise_resource_planning/assets/72447529/8e23d4cb-d132-420c-be0d-4deea16bf4f4)
+
+![prometheus](https://github.com/ksalokya/enterprise_resource_planning/assets/72447529/b39369fe-0bf1-4c14-8894-b58553a702d3)
+
+![keycloak](https://github.com/ksalokya/enterprise_resource_planning/assets/72447529/36d7f1af-cf38-4c36-ba5e-87c0c0cea743)
+
+![zipkin](https://github.com/ksalokya/enterprise_resource_planning/assets/72447529/91225502-bb11-4d4b-b0ec-43e3c6a1ee03)
+
+
 ### Refernces
 - https://spring.io/blog/2015/06/08/cors-support-in-spring-framework
 - https://mui.com/

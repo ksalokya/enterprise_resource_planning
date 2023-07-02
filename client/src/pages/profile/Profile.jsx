@@ -3,49 +3,6 @@ import ProfileChart from '../../components/chart/ProfileChart'
 import List from '../../components/order/Order'
 import './profile.css'
 
-const rows = [
-  {
-    id: 1143155,
-    product: "Acer Nitro 5",
-    img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-    type: "Primary",
-    date: "1 March",
-    amount: 785,
-    method: "Cash on Delivery",
-    status: "Approved",
-  },
-  {
-    id: 2235235,
-    product: "Playstation 5",
-    img: "https://m.media-amazon.com/images/I/31JaiPXYI8L._AC_UY327_FMwebp_QL65_.jpg",
-    type: "Office",
-    date: "1 March",
-    amount: 900,
-    method: "Online Payment",
-    status: "Pending",
-  },
-  {
-    id: 2342353,
-    product: "Redragon S101",
-    img: "https://m.media-amazon.com/images/I/71kr3WAj1FL._AC_UY327_FMwebp_QL65_.jpg",
-    type: "Other",
-    date: "1 March",
-    amount: 35,
-    method: "Cash on Delivery",
-    status: "Pending",
-  },
-  {
-    id: 2357741,
-    product: "Razer Blade 15",
-    img: "https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_UY327_FMwebp_QL65_.jpg",
-    type: "Primary",
-    date: "1 March",
-    amount: 920,
-    method: "Online",
-    status: "Approved",
-  }
-];
-
 function Profile() {
   return (
     <Grid container rowSpacing={5} sx={{ paddingLeft: 2, paddingRight: 2 }} >

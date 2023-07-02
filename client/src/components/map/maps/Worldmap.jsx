@@ -1,6 +1,5 @@
 import { MapsComponent, LayersDirective, LayerDirective } from '@syncfusion/ej2-react-maps';
 import { world_map } from '../metadata/world_map.js';
-// import { population_density } from '../metadata/data.js';
 import '../map.css'
 
 function Worldmap(props) {

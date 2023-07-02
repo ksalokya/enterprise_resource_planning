@@ -1,7 +1,6 @@
 import { MapsComponent, LayersDirective, LayerDirective, Inject } from '@syncfusion/ej2-react-maps';
 import { BubblesDirective, BubbleDirective, Bubble } from '@syncfusion/ej2-react-maps';
 import { world_map } from '../metadata/world_map';
-// import { population_density } from '../metadata/data.js';
 import '../map.css'
 
 function Country(props) {

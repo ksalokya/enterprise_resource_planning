@@ -38,3 +38,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Docker ###
+mongo-data/
+mysql_data/
+

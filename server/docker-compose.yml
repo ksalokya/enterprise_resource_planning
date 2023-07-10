@@ -2,15 +2,18 @@ version: '3'
 services:
   ## MySQL Docker Compose Config
   mysql:
-    container_name: erp-mysql
-    image: mysql:5.7
+    container_name: mysql
+    image: mysql:8
+    restart: unless-stopped
     volumes:
-      - ./mysql_erp_data:/var/lib/mysql
+      - ./mysql-db/user.sql:/docker-entrypoint-initdb.d/user.sql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: erp
       MYSQL_USER: user
       MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
 
   ## Mongo Docker Compose Config
   mongo:
@@ -23,6 +26,13 @@ services:
       - "27017"
     volumes:
       - ./mongo-data:/data/db
+
+  redis:
+    image: redis:alpine
+    container_name: redis-cache-container
+    command: redis-server --requirepass root
+    ports:
+      - 6379:6379
 
   keycloak:
     container_name: keycloak
@@ -41,7 +51,7 @@ services:
     volumes:
       - ./realms/:/opt/keycloak/data/import/
     depends_on:
-      - keycloak-mysql
+      - mysql
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.1

@@ -1,12 +1,12 @@
 version: '3'
 services:
   ## MySQL Docker Compose Config
-  mysql:
-    container_name: mysql
+  mysql-db:
+    container_name: mysql-db
     image: mysql:8
     restart: unless-stopped
     volumes:
-      - ./mysql-db/user.sql:/docker-entrypoint-initdb.d/user.sql
+      - ./mysql_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: erp
@@ -83,18 +83,7 @@ services:
     ports:
       - "9411:9411"
 
-  ## Eureka Server
-  discovery-server:
-    image: ksalokya/discovery-server:latest
-    container_name: discovery-server
-    pull_policy: always
-    ports:
-      - "8761:8761"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - zipkin
-
+## API Gateway Docker Compose Config
   api-gateway:
     image: ksalokya/api-gateway:latest
     container_name: api-gateway
@@ -124,6 +113,31 @@ services:
       - api-gateway
       - zipkin
 
+  ## Chart-Service Docker Compose Config
+  chart-service:
+    container_name: chart-service
+    image: ksalokya/chart-data-service:latest
+    pull_policy: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+      - discovery-server
+      - api-gateway
+      - mysql-db
+      -
+  ## Eureka Server Docker Compose Config
+  discovery-server:
+    image: ksalokya/discovery-server:latest
+    container_name: discovery-server
+    pull_policy: always
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+
   ## Notification-Service Docker Compose Config
   notification-service:
     container_name: notification-service
@@ -134,5 +148,17 @@ services:
     depends_on:
       - zipkin
       - broker
+      - discovery-server
+      - api-gateway
+
+  ## System-Service Docker Compose Config
+  system-service:
+    container_name: system-service
+    image: ksalokya/system-service:latest
+    pull_policy: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
       - discovery-server
       - api-gateway

@@ -34,25 +34,6 @@ services:
     ports:
       - 6379:6379
 
-  keycloak:
-    container_name: keycloak
-    image: quay.io/keycloak/keycloak:18.0.0
-    command: [ "start-dev", "--import-realm" ]
-    environment:
-      DB_VENDOR: MYSQL
-      DB_ADDR: mysql
-      DB_DATABASE: erp
-      DB_USER: user
-      DB_PASSWORD: password
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./realms/:/opt/keycloak/data/import/
-    depends_on:
-      - mysql
-
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.1
     container_name: zookeeper
@@ -98,7 +79,6 @@ services:
     depends_on:
       - zipkin
       - discovery-server
-      - keycloak
 
   ## Application-Service Docker Compose Config
   application-service:

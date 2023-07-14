@@ -4,7 +4,7 @@ import com.erp.authentication.config.UserInfoUserDetails;
 import com.erp.authentication.entity.UserInfo;
 import com.erp.authentication.payload.AuthRequest;
 import com.erp.authentication.payload.AuthResponse;
-import com.erp.authentication.repository.UserInfoRepository;
+import com.erp.authentication.service.AuthenticationService;
 import com.erp.authentication.service.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,22 +16,18 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
+    Logger logger = LoggerFactory.getLogger(AuthController.class);
+
+    @Autowired
+    private AuthenticationService authenticationService;
+
     @Autowired
     private JwtService jwtService;
-
-    @Autowired
-    private UserInfoRepository userInfoRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -56,13 +52,17 @@ public class AuthController {
         return "You are authorized as a admin!";
     }
 
+    @GetMapping("/validate")
+    public String validateToken(@RequestParam("token") String token) {
+        authenticationService.validateToken(token);
+        return "Token is valid";
+    }
+
     @PostMapping("/new")
     public ResponseEntity<String> addUser(@RequestBody UserInfo userInfo) {
         logger.info("addUser method invoked with username :: " + userInfo.getUsername());
-        userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
-//        userInfo.setStatus("NEW");
-        userInfoRepository.save(userInfo);
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+        String response = authenticationService.saveUser(userInfo);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/authenticate")

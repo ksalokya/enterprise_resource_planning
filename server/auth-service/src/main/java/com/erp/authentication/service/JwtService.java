@@ -57,6 +57,15 @@ public class JwtService {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
+    public void validateToken(String token) {
+        Jwts
+                .parserBuilder()
+                .setSigningKey(getSignKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
     private String createToken(Map<String, Object> claims, String userName) {
         return Jwts.builder()
                 .setClaims(claims)

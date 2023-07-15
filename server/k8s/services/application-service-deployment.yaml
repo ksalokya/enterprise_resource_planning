@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: application-service
+  name: application-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: application-service
+  strategy: {}
+  template:
+    metadata:
+
+      labels:
+        app: application-service
+    spec:
+      containers:
+        - env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+          image: ksalokya/application-service:latest
+          name: application-service
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: application-service
+  name: application-service
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 9194
+  selector:
+    app: application-service
+status:
+  loadBalancer: {}

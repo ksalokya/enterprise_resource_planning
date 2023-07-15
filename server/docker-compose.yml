@@ -1,6 +1,6 @@
 version: '3'
 services:
-  ## MySQL Docker Compose Config
+  ## MySQL
   mysql-db:
     container_name: mysql-db
     image: mysql:8
@@ -15,7 +15,7 @@ services:
     ports:
       - "3306:3306"
 
-  ## Mongo Docker Compose Config
+  ## Mongo 
   mongo:
     container_name: mongo
     image: mongo:4.4.14-rc0-focal
@@ -27,6 +27,7 @@ services:
     volumes:
       - ./mongo-data:/data/db
 
+  ## Redis 
   redis:
     image: redis:alpine
     container_name: redis-cache-container
@@ -34,6 +35,7 @@ services:
     ports:
       - 6379:6379
 
+  ## Zookeeper
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.1
     container_name: zookeeper
@@ -41,6 +43,7 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
 
+  ## Broker
   broker:
     image: confluentinc/cp-kafka:7.0.1
     container_name: broker
@@ -64,15 +67,15 @@ services:
     ports:
       - "9411:9411"
 
-## API Gateway Docker Compose Config
+ ## API-Gateway
   api-gateway:
     image: ksalokya/api-gateway:latest
     container_name: api-gateway
     pull_policy: always
     ports:
-      - "8181:8080"
+      - "8080:8080"
     expose:
-      - "8181"
+      - "8080"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY= TRACE
@@ -80,7 +83,7 @@ services:
       - zipkin
       - discovery-server
 
-  ## Application-Service Docker Compose Config
+  ## Application-Service
   application-service:
     container_name: application-service
     image: ksalokya/application-service:latest
@@ -93,7 +96,20 @@ services:
       - api-gateway
       - zipkin
 
-  ## Chart-Service Docker Compose Config
+  ## Auth-Service
+  auth-service:
+    container_name: auth-service
+    image: ksalokya/auth-service:latest
+    pull_policy: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+      - discovery-server
+      - api-gateway
+      - mysql-db
+
+  ## Chart-Service
   chart-service:
     container_name: chart-service
     image: ksalokya/chart-data-service:latest
@@ -105,8 +121,8 @@ services:
       - discovery-server
       - api-gateway
       - mysql-db
-      -
-  ## Eureka Server Docker Compose Config
+
+  ## Eureka-Server
   discovery-server:
     image: ksalokya/discovery-server:latest
     container_name: discovery-server
@@ -118,7 +134,7 @@ services:
     depends_on:
       - zipkin
 
-  ## Notification-Service Docker Compose Config
+  ## Notification-Service
   notification-service:
     container_name: notification-service
     image: ksalokya/notification-service:latest
@@ -131,7 +147,7 @@ services:
       - discovery-server
       - api-gateway
 
-  ## System-Service Docker Compose Config
+  ## System-Service
   system-service:
     container_name: system-service
     image: ksalokya/system-service:latest
@@ -142,3 +158,36 @@ services:
       - zipkin
       - discovery-server
       - api-gateway
+
+  ## Prometheus
+  prometheus:
+    image: prom/prometheus:v2.37.1
+    container_name: prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - api-gateway
+      - application-service
+      - auth-service
+      - chart-service
+      - discovery-server
+      - notification-service
+      - system-service
+
+  ## Grafana
+  grafana:
+    image: grafana/grafana-oss:8.5.2
+    container_name: grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    links:
+      - prometheus:prometheus
+    volumes:
+      - ./grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=password

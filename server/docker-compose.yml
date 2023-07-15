@@ -73,9 +73,9 @@ services:
     container_name: api-gateway
     pull_policy: always
     ports:
-      - "8181:8080"
+      - "8080:8080"
     expose:
-      - "8181"
+      - "8080"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY= TRACE
@@ -96,6 +96,19 @@ services:
       - api-gateway
       - zipkin
 
+  ## Auth-Service
+  auth-service:
+    container_name: auth-service
+    image: ksalokya/auth-service:latest
+    pull_policy: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+      - discovery-server
+      - api-gateway
+      - mysql-db
+
   ## Chart-Service
   chart-service:
     container_name: chart-service
@@ -108,7 +121,7 @@ services:
       - discovery-server
       - api-gateway
       - mysql-db
-      -
+
   ## Eureka-Server
   discovery-server:
     image: ksalokya/discovery-server:latest
@@ -145,3 +158,36 @@ services:
       - zipkin
       - discovery-server
       - api-gateway
+
+  ## Prometheus
+  prometheus:
+    image: prom/prometheus:v2.37.1
+    container_name: prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - api-gateway
+      - application-service
+      - auth-service
+      - chart-service
+      - discovery-server
+      - notification-service
+      - system-service
+
+  ## Grafana
+  grafana:
+    image: grafana/grafana-oss:8.5.2
+    container_name: grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    links:
+      - prometheus:prometheus
+    volumes:
+      - ./grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=password

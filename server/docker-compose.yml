@@ -122,6 +122,20 @@ services:
       - api-gateway
       - mysql-db
 
+  ## Common-Data-Service 
+  common-data-service:
+    container_name: common-data-service
+    image: ksalokya/common-data-service:latest
+    pull_policy: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+      - discovery-server
+      - api-gateway
+      - mysql-db
+      - redis
+
   ## Eureka-Server
   discovery-server:
     image: ksalokya/discovery-server:latest

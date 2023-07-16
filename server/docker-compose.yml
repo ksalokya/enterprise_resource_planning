@@ -187,6 +187,7 @@ services:
       - application-service
       - auth-service
       - chart-service
+      - common-data-service
       - discovery-server
       - notification-service
       - system-service

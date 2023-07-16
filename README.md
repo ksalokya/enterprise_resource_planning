@@ -39,8 +39,6 @@
 
 ![prometheus](https://github.com/ksalokya/enterprise_resource_planning/assets/72447529/b39369fe-0bf1-4c14-8894-b58553a702d3)
 
-![keycloak](https://github.com/ksalokya/enterprise_resource_planning/assets/72447529/36d7f1af-cf38-4c36-ba5e-87c0c0cea743)
-
 ![zipkin](https://github.com/ksalokya/enterprise_resource_planning/assets/72447529/91225502-bb11-4d4b-b0ec-43e3c6a1ee03)
 
 

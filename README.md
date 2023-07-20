@@ -33,6 +33,8 @@
 ![editor](https://user-images.githubusercontent.com/72447529/233855880-bbd3d527-d089-463a-af2e-91888396c01f.jpg)
 
 ### Services and Monitoring
+![k8s](https://github.com/ksalokya/enterprise_resource_planning/assets/72447529/249b2c59-fd16-46ca-804f-eae6387a5769)
+
 ![grafana](https://github.com/ksalokya/enterprise_resource_planning/assets/72447529/361e52ca-5291-4d38-afa8-f99a2d4a8e2e)
 
 ![kibana](https://github.com/ksalokya/enterprise_resource_planning/assets/72447529/8e23d4cb-d132-420c-be0d-4deea16bf4f4)

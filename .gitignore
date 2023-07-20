@@ -42,4 +42,5 @@ build/
 ### Docker ###
 mongo-data/
 mysql_data/
+grafana/
 

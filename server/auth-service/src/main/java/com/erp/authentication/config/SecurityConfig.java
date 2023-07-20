@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/health", "/api/v1/auth/new", "/api/v1/auth/authenticate").permitAll()
+                .requestMatchers("/api/v1/auth/health", "/api/v1/auth/new", "/api/v1/auth/authenticate", "/actuator/prometheus").permitAll()
                 .and().authorizeHttpRequests().requestMatchers("/auth/v1/**").authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

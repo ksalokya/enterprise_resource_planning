@@ -14,14 +14,14 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
+        <module>api-gateway</module>
         <module>application-service</module>
         <module>auth-service</module>
         <module>chart-data-service</module>
         <module>common-data-service</module>
-        <module>system-service</module>
         <module>discovery-server</module>
-        <module>api-gateway</module>
         <module>notification-service</module>
+        <module>system-service</module>
     </modules>
 
     <properties>
